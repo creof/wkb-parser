@@ -52,6 +52,15 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $result);
     }
 
+    public function testReadingPrefixedHexByteOrder()
+    {
+        $value  = '0x01';
+        $reader = new Reader($value);
+        $result = $reader->byteOrder();
+
+        $this->assertEquals(1, $result);
+    }
+
     /**
      * @expectedException        \CrEOF\WKB\Exception\UnexpectedValueException
      * @expectedExceptionMessage Invalid byte order "unset"
