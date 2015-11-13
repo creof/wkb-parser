@@ -185,14 +185,8 @@ class Parser
      */
     private function srid()
     {
-        $srid = $this->reader->long();
-
-        if ($srid < 0) {
-            throw new UnexpectedValueException(sprintf('Invalid SRID "%d"', $srid));
-        }
-
         $this->type = $this->type ^ self::WKB_SRID;
-        $this->srid = $srid;
+        $this->srid = $this->reader->long();
     }
 
     /**
