@@ -61,12 +61,7 @@ class Reader
      */
     public function unpackInput($format)
     {
-        if (version_compare(PHP_VERSION, '5.5.0-dev', '>=')) {
-            $code = 'a';
-        } else {
-            $code = 'A';
-        }
-
+        $code        = version_compare(PHP_VERSION, '5.5.0-dev', '>=') ? 'a' : 'A';
         $result      = unpack(sprintf('%sresult/%s*input', $format, $code), $this->input);
         $this->input = $result['input'];
 
