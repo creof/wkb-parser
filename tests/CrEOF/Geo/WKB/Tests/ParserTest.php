@@ -21,9 +21,9 @@
  * SOFTWARE.
  */
 
-namespace CrEOF\WKB\Tests;
+namespace CrEOF\Geo\WKB\Tests;
 
-use CrEOF\WKB\Parser;
+use CrEOF\Geo\WKB\Parser;
 
 /**
  * Parser tests
@@ -34,7 +34,7 @@ use CrEOF\WKB\Parser;
 class ParserTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException        \CrEOF\WKB\Exception\UnexpectedValueException
+     * @expectedException        \CrEOF\Geo\WKB\Exception\UnexpectedValueException
      * @expectedExceptionMessage Invalid byte order "3"
      */
     public function testParsingBadByteOrder()
@@ -47,7 +47,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        \CrEOF\WKB\Exception\UnexpectedValueException
+     * @expectedException        \CrEOF\Geo\WKB\Exception\UnexpectedValueException
      * @expectedExceptionMessage Unsupported WKB type "21"
      */
     public function testParsingBadType()

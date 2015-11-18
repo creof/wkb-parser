@@ -21,15 +21,15 @@
  * SOFTWARE.
  */
 
-namespace CrEOF\WKB\Exception;
+namespace CrEOF\Geo\WKB\Exception;
 
 /**
- * RangeException
+ * Exception interface for library exceptions
  *
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-class RangeException extends \RangeException implements ExceptionInterface
+interface ExceptionInterface
 {
 
 }

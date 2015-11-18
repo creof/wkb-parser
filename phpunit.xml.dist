@@ -6,7 +6,7 @@
 
     <testsuites>
         <testsuite>
-            <directory>./tests/CrEOF/WKB/Tests</directory>
+            <directory>./tests/CrEOF/Geo/WKB/Tests</directory>
         </testsuite>
     </testsuites>
 

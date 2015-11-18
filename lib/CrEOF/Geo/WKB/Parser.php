@@ -21,9 +21,9 @@
  * SOFTWARE.
  */
 
-namespace CrEOF\WKB;
+namespace CrEOF\Geo\WKB;
 
-use CrEOF\WKB\Exception\UnexpectedValueException;
+use CrEOF\Geo\WKB\Exception\UnexpectedValueException;
 
 /**
  * Parser for WKB/EWKB spatial object data
