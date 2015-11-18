@@ -21,15 +21,15 @@
  * SOFTWARE.
  */
 
-namespace CrEOF\WKB\Exception;
+namespace CrEOF\Geo\WKB\Exception;
 
 /**
- * UnexpectedValueException
+ * RangeException
  *
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
+class RangeException extends \RangeException implements ExceptionInterface
 {
 
 }

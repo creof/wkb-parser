@@ -21,15 +21,15 @@
  * SOFTWARE.
  */
 
-namespace CrEOF\WKB\Exception;
+namespace CrEOF\Geo\WKB\Exception;
 
 /**
- * Exception interface for library exceptions
+ * UnexpectedValueException
  *
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-interface ExceptionInterface
+class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
 {
 
 }

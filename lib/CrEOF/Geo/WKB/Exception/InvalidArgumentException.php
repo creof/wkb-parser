@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-namespace CrEOF\WKB\Exception;
+namespace CrEOF\Geo\WKB\Exception;
 
 /**
  * InvalidArgumentException

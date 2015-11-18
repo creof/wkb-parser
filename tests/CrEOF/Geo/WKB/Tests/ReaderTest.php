@@ -21,9 +21,9 @@
  * SOFTWARE.
  */
 
-namespace CrEOF\WKB\Tests;
+namespace CrEOF\Geo\WKB\Tests;
 
-use CrEOF\WKB\Reader;
+use CrEOF\Geo\WKB\Reader;
 
 /**
  * Reader tests
@@ -62,7 +62,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        \CrEOF\WKB\Exception\UnexpectedValueException
+     * @expectedException        \CrEOF\Geo\WKB\Exception\UnexpectedValueException
      * @expectedExceptionMessage Invalid byte order "unset"
      */
     public function testReadingBinaryWithoutByteOrder()
@@ -75,7 +75,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        \CrEOF\WKB\Exception\UnexpectedValueException
+     * @expectedException        \CrEOF\Geo\WKB\Exception\UnexpectedValueException
      * @expectedExceptionMessage Invalid byte order "unset"
      */
     public function testReadingHexWithoutByteOrder()
