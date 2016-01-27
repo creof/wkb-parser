@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2015 Derek J. Lambert
+ * Copyright (C) 2016 Derek J. Lambert
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -67,23 +67,33 @@ class Parser
     /**
      * @var Reader
      */
-    private $reader;
+    private static $reader;
 
     /**
      * @param string $input
      */
-    public function __construct($input)
+    public function __construct($input = null)
     {
-        $this->reader = new Reader($input);
+        self::$reader = new Reader();
+
+        if (null !== $input) {
+            self::$reader->read($input);
+        }
     }
 
     /**
      * Parse input data
      *
+     * @param string $input
+     *
      * @return array
      */
-    public function parse()
+    public function parse($input = null)
     {
+        if (null !== $input) {
+            self::$reader->read($input);
+        }
+
         $value         = $this->geometry();
         $value['srid'] = $this->srid;
 
@@ -167,7 +177,7 @@ class Parser
      */
     private function byteOrder()
     {
-        $this->reader->byteOrder();
+        self::$reader->byteOrder();
     }
 
     /**
@@ -175,7 +185,7 @@ class Parser
      */
     private function type()
     {
-        $this->type = $this->reader->long();
+        $this->type = self::$reader->long();
     }
 
     /**
@@ -186,7 +196,7 @@ class Parser
     private function srid()
     {
         $this->type = $this->type ^ self::WKB_SRID;
-        $this->srid = $this->reader->long();
+        $this->srid = self::$reader->long();
     }
 
     /**
@@ -197,8 +207,8 @@ class Parser
     private function point()
     {
         return array(
-            $this->reader->double(),
-            $this->reader->double()
+            self::$reader->double(),
+            self::$reader->double()
         );
     }
 
@@ -267,7 +277,7 @@ class Parser
      */
     private function valueArray($type)
     {
-        $count  = $this->reader->long();
+        $count  = self::$reader->long();
         $values = array();
 
         for ($i = 0; $i < $count; $i++) {
