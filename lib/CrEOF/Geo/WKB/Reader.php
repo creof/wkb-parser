@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2012, 2014 Derek J. Lambert
+ * Copyright (C) 2016 Derek J. Lambert
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -49,9 +49,33 @@ class Reader
     /**
      * @param string $input
      */
-    public function __construct($input)
+    public function __construct($input = null)
     {
-        $this->setInput($input);
+        if (null !== $input) {
+            $this->read($input);
+        }
+    }
+
+    /**
+     * @param string $input
+     */
+    public function read($input)
+    {
+        if (ord($input) < 31) {
+            $this->input = $input;
+
+            return;
+        }
+
+        $position = strpos($input, 'x');
+
+        if (false !== $position) {
+            $input = substr($input, $position + 1);
+        }
+
+        $this->input = pack('H*', $input);
+
+        return;
     }
 
     /**
@@ -110,28 +134,6 @@ class Reader
         }
 
         return $this->byteOrder = $byteOrder;
-    }
-
-    /**
-     * @param string $input
-     */
-    private function setInput($input)
-    {
-        if (ord($input) < 31) {
-            $this->input = $input;
-
-            return;
-        }
-
-        $position = strpos($input, 'x');
-
-        if (false !== $position) {
-            $input = substr($input, $position + 1);
-        }
-
-        $this->input = pack('H*', $input);
-
-        return;
     }
 
     /**
