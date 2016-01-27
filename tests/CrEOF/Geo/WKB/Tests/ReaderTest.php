@@ -185,4 +185,45 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(34.23, $result);
     }
+
+    public function testReaderReuse()
+    {
+        $reader = new Reader();
+
+        $value  = '01';
+        $value  = pack('H*', $value);
+
+        $reader->read($value);
+
+        $result = $reader->byteOrder();
+
+        $this->assertEquals(1, $result);
+
+        $value  = '01';
+
+        $reader->read($value);
+
+        $result = $reader->byteOrder();
+
+        $this->assertEquals(1, $result);
+
+        $value  = '0x01';
+
+        $reader->read($value);
+
+        $result = $reader->byteOrder();
+
+        $this->assertEquals(1, $result);
+
+        $value  = '0040411D70A3D70A3D';
+        $value  = pack('H*', $value);
+
+        $reader->read($value);
+
+        $reader->byteOrder();
+
+        $result = $reader->double();
+
+        $this->assertEquals(34.23, $result);
+    }
 }
