@@ -298,7 +298,9 @@ class Parser
     {
         $values = $this->valueArray(self::TYPE_GEOMETRY);
 
-        array_walk($values, create_function('&$a', '$a = $a["value"];'));
+        array_walk($values, function (&$value) {
+            $value = $value['value'];
+        });
 
         return $values;
     }
