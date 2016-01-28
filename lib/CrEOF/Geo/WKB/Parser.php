@@ -239,7 +239,7 @@ class Parser
      */
     private function multiPoint()
     {
-        return $this->valueArrayValues(self::TYPE_GEOMETRY);
+        return $this->valueGeometryArray();
     }
 
     /**
@@ -249,7 +249,7 @@ class Parser
      */
     private function multiLineString()
     {
-        return $this->valueArrayValues(self::TYPE_GEOMETRY);
+        return $this->valueGeometryArray();
     }
 
     /**
@@ -259,7 +259,7 @@ class Parser
      */
     private function multiPolygon()
     {
-        return $this->valueArrayValues(self::TYPE_GEOMETRY);
+        return $this->valueGeometryArray();
     }
 
     /**
@@ -288,13 +288,11 @@ class Parser
     }
 
     /**
-     * @param string $type
-     *
      * @return array[]
      */
-    private function valueArrayValues($type)
+    private function valueGeometryArray()
     {
-        $values = $this->valueArray($type);
+        $values = $this->valueArray(self::TYPE_GEOMETRY);
 
         array_walk($values, create_function('&$a', '$a = $a["value"];'));
 
