@@ -131,7 +131,7 @@ class Parser
      */
     private function hasFlag($flag)
     {
-        return ($this->type & $flag) == $flag;
+        return ($this->type & $flag) === $flag;
     }
 
     /**
