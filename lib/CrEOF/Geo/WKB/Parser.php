@@ -92,6 +92,8 @@ class Parser
     public function parse($input = null)
     {
         if (null !== $input) {
+            $this->srid = null;
+
             self::$reader->read($input);
         }
 
