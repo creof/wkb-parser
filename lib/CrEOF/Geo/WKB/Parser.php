@@ -202,7 +202,7 @@ class Parser
     private function srid()
     {
         $this->type ^= self::WKB_SRID;
-        $this->srid =  self::$reader->long();
+        $this->srid  = self::$reader->long();
     }
 
     /**
@@ -269,6 +269,8 @@ class Parser
     }
 
     /**
+     * Parse GEOMETRYCOLLECTION value
+     *
      * @return array[]
      */
     private function geometryCollection()

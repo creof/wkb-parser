@@ -58,6 +58,8 @@ class Reader
 
     /**
      * @param string $input
+     *
+     * @throws UnexpectedValueException
      */
     public function read($input)
     {
