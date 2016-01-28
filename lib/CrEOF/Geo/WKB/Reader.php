@@ -61,7 +61,7 @@ class Reader
      */
     public function read($input)
     {
-        if (ord($input) < 31) {
+        if (ord($input) < 32) {
             $this->input = $input;
 
             return;
