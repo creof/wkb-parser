@@ -87,6 +87,7 @@ class Parser
      * @param string $input
      *
      * @return array
+     * @throws UnexpectedValueException
      */
     public function parse($input = null)
     {
@@ -104,6 +105,7 @@ class Parser
      * Parse geometry data
      *
      * @return array
+     * @throws UnexpectedValueException
      */
     private function geometry()
     {
@@ -174,6 +176,8 @@ class Parser
 
     /**
      * Parse data byte order
+     *
+     * @throws UnexpectedValueException
      */
     private function byteOrder()
     {
@@ -195,8 +199,8 @@ class Parser
      */
     private function srid()
     {
-        $this->type = $this->type ^ self::WKB_SRID;
-        $this->srid = self::$reader->long();
+        $this->type ^= self::WKB_SRID;
+        $this->srid =  self::$reader->long();
     }
 
     /**
