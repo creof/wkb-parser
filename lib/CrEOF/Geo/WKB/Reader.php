@@ -76,8 +76,6 @@ class Reader
         }
 
         $this->input = pack('H*', $input);
-
-        return;
     }
 
     /**
