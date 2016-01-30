@@ -79,20 +79,6 @@ class Reader
     }
 
     /**
-     * @param string $format
-     *
-     * @return array
-     */
-    public function unpackInput($format)
-    {
-        $code        = version_compare(PHP_VERSION, '5.5.0-dev', '>=') ? 'a' : 'A';
-        $result      = unpack(sprintf('%sresult/%s*input', $format, $code), $this->input);
-        $this->input = $result['input'];
-
-        return $result['result'];
-    }
-
-    /**
      * @return int
      */
     public function long()
@@ -147,5 +133,19 @@ class Reader
         }
 
         return $this->byteOrder;
+    }
+
+    /**
+     * @param string $format
+     *
+     * @return array
+     */
+    private function unpackInput($format)
+    {
+        $code        = version_compare(PHP_VERSION, '5.5.0-dev', '>=') ? 'a' : 'A';
+        $result      = unpack(sprintf('%sresult/%s*input', $format, $code), $this->input);
+        $this->input = $result['input'];
+
+        return $result['result'];
     }
 }
