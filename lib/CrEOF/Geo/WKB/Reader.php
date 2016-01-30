@@ -128,7 +128,7 @@ class Reader
      */
     private function getByteOrder()
     {
-        if (! isset($this->byteOrder)) {
+        if (null === $this->byteOrder) {
             throw new UnexpectedValueException('Invalid byte order "unset"');
         }
 
