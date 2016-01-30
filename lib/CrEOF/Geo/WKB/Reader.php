@@ -52,7 +52,7 @@ class Reader
     public function __construct($input = null)
     {
         if (null !== $input) {
-            $this->read($input);
+            $this->load($input);
         }
     }
 
@@ -61,7 +61,7 @@ class Reader
      *
      * @throws UnexpectedValueException
      */
-    public function read($input)
+    public function load($input)
     {
         if (ord($input) < 32) {
             $this->input = $input;

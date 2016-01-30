@@ -193,7 +193,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = '01';
         $value  = pack('H*', $value);
 
-        $reader->read($value);
+        $reader->load($value);
 
         $result = $reader->byteOrder();
 
@@ -201,7 +201,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
         $value  = '01';
 
-        $reader->read($value);
+        $reader->load($value);
 
         $result = $reader->byteOrder();
 
@@ -209,7 +209,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
         $value  = '0x01';
 
-        $reader->read($value);
+        $reader->load($value);
 
         $result = $reader->byteOrder();
 
@@ -218,7 +218,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = '0040411D70A3D70A3D';
         $value  = pack('H*', $value);
 
-        $reader->read($value);
+        $reader->load($value);
 
         $reader->byteOrder();
 

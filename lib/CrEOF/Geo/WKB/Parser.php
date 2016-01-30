@@ -77,7 +77,7 @@ class Parser
         self::$reader = new Reader();
 
         if (null !== $input) {
-            self::$reader->read($input);
+            self::$reader->load($input);
         }
     }
 
@@ -94,7 +94,7 @@ class Parser
         if (null !== $input) {
             $this->srid = null;
 
-            self::$reader->read($input);
+            self::$reader->load($input);
         }
 
         $value         = $this->geometry();
