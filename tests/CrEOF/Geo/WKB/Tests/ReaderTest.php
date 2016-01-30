@@ -38,7 +38,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = '01';
         $value  = pack('H*', $value);
         $reader = new Reader($value);
-        $result = $reader->byteOrder();
+        $result = $reader->readByteOrder();
 
         $this->assertEquals(1, $result);
     }
@@ -47,7 +47,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     {
         $value  = '01';
         $reader = new Reader($value);
-        $result = $reader->byteOrder();
+        $result = $reader->readByteOrder();
 
         $this->assertEquals(1, $result);
     }
@@ -56,7 +56,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     {
         $value  = '0x01';
         $reader = new Reader($value);
-        $result = $reader->byteOrder();
+        $result = $reader->readByteOrder();
 
         $this->assertEquals(1, $result);
     }
@@ -71,7 +71,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = pack('H*', $value);
         $reader = new Reader($value);
 
-        $reader->long();
+        $reader->readLong();
     }
 
     /**
@@ -83,7 +83,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = '0101000000';
         $reader = new Reader($value);
 
-        $reader->long();
+        $reader->readLong();
     }
 
     public function testReadingNDRBinaryLong()
@@ -92,9 +92,9 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = pack('H*', $value);
         $reader = new Reader($value);
 
-        $reader->byteOrder();
+        $reader->readByteOrder();
 
-        $result = $reader->long();
+        $result = $reader->readLong();
 
         $this->assertEquals(1, $result);
     }
@@ -105,9 +105,9 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = pack('H*', $value);
         $reader = new Reader($value);
 
-        $reader->byteOrder();
+        $reader->readByteOrder();
 
-        $result = $reader->long();
+        $result = $reader->readLong();
 
         $this->assertEquals(1, $result);
     }
@@ -117,9 +117,9 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = '0101000000';
         $reader = new Reader($value);
 
-        $reader->byteOrder();
+        $reader->readByteOrder();
 
-        $result = $reader->long();
+        $result = $reader->readLong();
 
         $this->assertEquals(1, $result);
     }
@@ -129,9 +129,9 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = '0000000001';
         $reader = new Reader($value);
 
-        $reader->byteOrder();
+        $reader->readByteOrder();
 
-        $result = $reader->long();
+        $result = $reader->readLong();
 
         $this->assertEquals(1, $result);
     }
@@ -142,9 +142,9 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = pack('H*', $value);
         $reader = new Reader($value);
 
-        $reader->byteOrder();
+        $reader->readByteOrder();
 
-        $result = $reader->double();
+        $result = $reader->readDouble();
 
         $this->assertEquals(34.23, $result);
     }
@@ -155,9 +155,9 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = pack('H*', $value);
         $reader = new Reader($value);
 
-        $reader->byteOrder();
+        $reader->readByteOrder();
 
-        $result = $reader->double();
+        $result = $reader->readDouble();
 
         $this->assertEquals(34.23, $result);
     }
@@ -167,9 +167,9 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = '013D0AD7A3701D4140';
         $reader = new Reader($value);
 
-        $reader->byteOrder();
+        $reader->readByteOrder();
 
-        $result = $reader->double();
+        $result = $reader->readDouble();
 
         $this->assertEquals(34.23, $result);
     }
@@ -179,9 +179,9 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $value  = '0040411D70A3D70A3D';
         $reader = new Reader($value);
 
-        $reader->byteOrder();
+        $reader->readByteOrder();
 
-        $result = $reader->double();
+        $result = $reader->readDouble();
 
         $this->assertEquals(34.23, $result);
     }
@@ -195,7 +195,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
         $reader->load($value);
 
-        $result = $reader->byteOrder();
+        $result = $reader->readByteOrder();
 
         $this->assertEquals(1, $result);
 
@@ -203,7 +203,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
         $reader->load($value);
 
-        $result = $reader->byteOrder();
+        $result = $reader->readByteOrder();
 
         $this->assertEquals(1, $result);
 
@@ -211,7 +211,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
         $reader->load($value);
 
-        $result = $reader->byteOrder();
+        $result = $reader->readByteOrder();
 
         $this->assertEquals(1, $result);
 
@@ -220,9 +220,9 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
         $reader->load($value);
 
-        $reader->byteOrder();
+        $reader->readByteOrder();
 
-        $result = $reader->double();
+        $result = $reader->readDouble();
 
         $this->assertEquals(34.23, $result);
     }

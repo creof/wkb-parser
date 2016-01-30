@@ -81,7 +81,7 @@ class Reader
     /**
      * @return int
      */
-    public function long()
+    public function readLong()
     {
         if (self::WKB_NDR === $this->getByteOrder()) {
             return $this->unpackInput('V');
@@ -93,7 +93,7 @@ class Reader
     /**
      * @return float
      */
-    public function double()
+    public function readDouble()
     {
         $double = $this->unpackInput('d');
 
@@ -111,7 +111,7 @@ class Reader
      * @return int
      * @throws UnexpectedValueException
      */
-    public function byteOrder()
+    public function readByteOrder()
     {
         $byteOrder = $this->unpackInput('C');
 

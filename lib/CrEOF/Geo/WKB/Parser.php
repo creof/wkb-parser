@@ -183,7 +183,7 @@ class Parser
      */
     private function byteOrder()
     {
-        self::$reader->byteOrder();
+        self::$reader->readByteOrder();
     }
 
     /**
@@ -191,7 +191,7 @@ class Parser
      */
     private function type()
     {
-        $this->type = self::$reader->long();
+        $this->type = self::$reader->readLong();
     }
 
     /**
@@ -202,7 +202,7 @@ class Parser
     private function srid()
     {
         $this->type ^= self::WKB_SRID;
-        $this->srid  = self::$reader->long();
+        $this->srid  = self::$reader->readLong();
     }
 
     /**
@@ -213,8 +213,8 @@ class Parser
     private function point()
     {
         return array(
-            self::$reader->double(),
-            self::$reader->double()
+            self::$reader->readDouble(),
+            self::$reader->readDouble()
         );
     }
 
@@ -285,7 +285,7 @@ class Parser
      */
     private function valueArray($type)
     {
-        $count  = self::$reader->long();
+        $count  = self::$reader->readLong();
         $values = array();
 
         for ($i = 0; $i < $count; $i++) {
