@@ -80,6 +80,7 @@ class Reader
 
     /**
      * @return int
+     * @throws UnexpectedValueException
      */
     public function readLong()
     {
@@ -92,6 +93,7 @@ class Reader
 
     /**
      * @return float
+     * @throws UnexpectedValueException
      */
     public function readDouble()
     {
@@ -105,7 +107,6 @@ class Reader
 
         return $double['value'];
     }
-
 
     /**
      * @return int
