@@ -109,6 +109,23 @@ class Reader
     }
 
     /**
+     * @param int $count
+     *
+     * @return float[]
+     * @throws UnexpectedValueException
+     */
+    public function readDoubles($count)
+    {
+        $doubles = array();
+
+        for ($i = 0; $i < $count; $i++) {
+            $doubles[] = $this->readDouble();
+        }
+
+        return $doubles;
+    }
+
+    /**
      * @return int
      * @throws UnexpectedValueException
      */
