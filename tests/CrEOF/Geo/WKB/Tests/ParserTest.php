@@ -1777,6 +1777,222 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ),
+            'testParsingNDRGeometryCollectionZValue' => array(
+                'value' => '0107000080030000000101000080000000000000000000000000000000000000000000000000010200008002000000000000000000000000000000000000000000000000000000000000000000f03f000000000000f03f000000000000f03f0107000080020000000101000080000000000000000000000000000000000000000000000000010200008002000000000000000000000000000000000000000000000000000000000000000000f03f000000000000f03f000000000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'GEOMETRYCOLLECTION Z',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array(0, 0, 0)
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(0, 0, 0),
+                                array(1, 1, 1)
+                            )
+                        ),
+                        array(
+                            'type'  => 'GEOMETRYCOLLECTION',
+                            'value' => array(
+                                array(
+                                    'type'  => 'POINT',
+                                    'value' => array(0, 0, 0)
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(0, 0, 0),
+                                        array(1, 1, 1)
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRGeometryCollectionZValue' => array(
+                'value' => '00800000070000000300800000010000000000000000000000000000000000000000000000000080000002000000020000000000000000000000000000000000000000000000003ff00000000000003ff00000000000003ff000000000000000800000070000000200800000010000000000000000000000000000000000000000000000000080000002000000020000000000000000000000000000000000000000000000003ff00000000000003ff00000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'GEOMETRYCOLLECTION Z',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array(0, 0, 0)
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(0, 0, 0),
+                                array(1, 1, 1)
+                            )
+                        ),
+                        array(
+                            'type'  => 'GEOMETRYCOLLECTION',
+                            'value' => array(
+                                array(
+                                    'type'  => 'POINT',
+                                    'value' => array(0, 0, 0)
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(0, 0, 0),
+                                        array(1, 1, 1)
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingNDRGeometryCollectionMValue' => array(
+                'value' => '0107000040030000000101000040000000000000000000000000000000000000000000000000010200004002000000000000000000000000000000000000000000000000000000000000000000f03f000000000000f03f000000000000f03f0107000040020000000101000040000000000000000000000000000000000000000000000000010200004002000000000000000000000000000000000000000000000000000000000000000000f03f000000000000f03f000000000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'GEOMETRYCOLLECTION M',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array(0, 0, 0)
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(0, 0, 0),
+                                array(1, 1, 1)
+                            )
+                        ),
+                        array(
+                            'type'  => 'GEOMETRYCOLLECTION',
+                            'value' => array(
+                                array(
+                                    'type'  => 'POINT',
+                                    'value' => array(0, 0, 0)
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(0, 0, 0),
+                                        array(1, 1, 1)
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRGeometryCollectionMValue' => array(
+                'value' => '00400000070000000300400000010000000000000000000000000000000000000000000000000040000002000000020000000000000000000000000000000000000000000000003ff00000000000003ff00000000000003ff000000000000000400000070000000200400000010000000000000000000000000000000000000000000000000040000002000000020000000000000000000000000000000000000000000000003ff00000000000003ff00000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'GEOMETRYCOLLECTION M',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array(0, 0, 0)
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(0, 0, 0),
+                                array(1, 1, 1)
+                            )
+                        ),
+                        array(
+                            'type'  => 'GEOMETRYCOLLECTION',
+                            'value' => array(
+                                array(
+                                    'type'  => 'POINT',
+                                    'value' => array(0, 0, 0)
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(0, 0, 0),
+                                        array(1, 1, 1)
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingNDRGeometryCollectionZMValue' => array(
+                'value' => '01070000c00300000001010000c0000000000000000000000000000000000000000000000000000000000000f03f01020000c0020000000000000000000000000000000000000000000000000000000000000000000040000000000000f03f000000000000f03f000000000000f03f000000000000084001070000c00200000001010000c0000000000000000000000000000000000000000000000000000000000000104001020000c0020000000000000000000000000000000000000000000000000000000000000000001440000000000000f03f000000000000f03f000000000000f03f0000000000001840',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'GEOMETRYCOLLECTION ZM',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array(0, 0, 0, 1)
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(0, 0, 0, 2),
+                                array(1, 1, 1, 3)
+                            )
+                        ),
+                        array(
+                            'type'  => 'GEOMETRYCOLLECTION',
+                            'value' => array(
+                                array(
+                                    'type'  => 'POINT',
+                                    'value' => array(0, 0, 0, 4)
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(0, 0, 0, 5),
+                                        array(1, 1, 1, 6)
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRGeometryCollectionZMValue' => array(
+                'value' => '00c00000070000000300c00000010000000000000000000000000000000000000000000000003ff000000000000000c00000020000000200000000000000000000000000000000000000000000000040000000000000003ff00000000000003ff00000000000003ff0000000000000400800000000000000c00000070000000200c0000001000000000000000000000000000000000000000000000000401000000000000000c00000020000000200000000000000000000000000000000000000000000000040140000000000003ff00000000000003ff00000000000003ff00000000000004018000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'GEOMETRYCOLLECTION ZM',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array(0, 0, 0, 1)
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(0, 0, 0, 2),
+                                array(1, 1, 1, 3)
+                            )
+                        ),
+                        array(
+                            'type'  => 'GEOMETRYCOLLECTION',
+                            'value' => array(
+                                array(
+                                    'type'  => 'POINT',
+                                    'value' => array(0, 0, 0, 4)
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(0, 0, 0, 5),
+                                        array(1, 1, 1, 6)
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
             'testParsingNDRGeometryCollectionValueWithSrid' => array(
                 'value' => '0107000020E61000000300000001010000000000000000002440000000000000244001010000000000000000003E400000000000003E400102000000020000000000000000002E400000000000002E4000000000000034400000000000003440',
                 'expected' => array(
@@ -1824,7 +2040,223 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                         )
                     )
                 )
-            )
+            ),
+            'testParsingNDRGeometryCollectionZValueWithSrid' => array(
+                'value' => '01070000a0e6100000030000000101000080000000000000000000000000000000000000000000000000010200008002000000000000000000000000000000000000000000000000000000000000000000f03f000000000000f03f000000000000f03f0107000080020000000101000080000000000000000000000000000000000000000000000000010200008002000000000000000000000000000000000000000000000000000000000000000000f03f000000000000f03f000000000000f03f',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'GEOMETRYCOLLECTION Z',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array(0, 0, 0)
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(0, 0, 0),
+                                array(1, 1, 1)
+                            )
+                        ),
+                        array(
+                            'type'  => 'GEOMETRYCOLLECTION',
+                            'value' => array(
+                                array(
+                                    'type'  => 'POINT',
+                                    'value' => array(0, 0, 0)
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(0, 0, 0),
+                                        array(1, 1, 1)
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRGeometryCollectionZValueWithSrid' => array(
+                'value' => '00a0000007000010e60000000300800000010000000000000000000000000000000000000000000000000080000002000000020000000000000000000000000000000000000000000000003ff00000000000003ff00000000000003ff000000000000000800000070000000200800000010000000000000000000000000000000000000000000000000080000002000000020000000000000000000000000000000000000000000000003ff00000000000003ff00000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'GEOMETRYCOLLECTION Z',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array(0, 0, 0)
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(0, 0, 0),
+                                array(1, 1, 1)
+                            )
+                        ),
+                        array(
+                            'type'  => 'GEOMETRYCOLLECTION',
+                            'value' => array(
+                                array(
+                                    'type'  => 'POINT',
+                                    'value' => array(0, 0, 0)
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(0, 0, 0),
+                                        array(1, 1, 1)
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingNDRGeometryCollectionMValueWithSrid' => array(
+                'value' => '0107000060e6100000030000000101000040000000000000000000000000000000000000000000000000010200004002000000000000000000000000000000000000000000000000000000000000000000f03f000000000000f03f000000000000f03f0107000040020000000101000040000000000000000000000000000000000000000000000000010200004002000000000000000000000000000000000000000000000000000000000000000000f03f000000000000f03f000000000000f03f',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'GEOMETRYCOLLECTION M',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array(0, 0, 0)
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(0, 0, 0),
+                                array(1, 1, 1)
+                            )
+                        ),
+                        array(
+                            'type'  => 'GEOMETRYCOLLECTION',
+                            'value' => array(
+                                array(
+                                    'type'  => 'POINT',
+                                    'value' => array(0, 0, 0)
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(0, 0, 0),
+                                        array(1, 1, 1)
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRGeometryCollectionMValueWithSrid' => array(
+                'value' => '0060000007000010e60000000300400000010000000000000000000000000000000000000000000000000040000002000000020000000000000000000000000000000000000000000000003ff00000000000003ff00000000000003ff000000000000000400000070000000200400000010000000000000000000000000000000000000000000000000040000002000000020000000000000000000000000000000000000000000000003ff00000000000003ff00000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'GEOMETRYCOLLECTION M',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array(0, 0, 0)
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(0, 0, 0),
+                                array(1, 1, 1)
+                            )
+                        ),
+                        array(
+                            'type'  => 'GEOMETRYCOLLECTION',
+                            'value' => array(
+                                array(
+                                    'type'  => 'POINT',
+                                    'value' => array(0, 0, 0)
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(0, 0, 0),
+                                        array(1, 1, 1)
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingNDRGeometryCollectionZMValueWithSrid' => array(
+                'value' => '01070000e0e61000000300000001010000c0000000000000000000000000000000000000000000000000000000000000f03f01020000c0020000000000000000000000000000000000000000000000000000000000000000000040000000000000f03f000000000000f03f000000000000f03f000000000000084001070000c00200000001010000c0000000000000000000000000000000000000000000000000000000000000104001020000c0020000000000000000000000000000000000000000000000000000000000000000001440000000000000f03f000000000000f03f000000000000f03f0000000000001840',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'GEOMETRYCOLLECTION ZM',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array(0, 0, 0, 1)
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(0, 0, 0, 2),
+                                array(1, 1, 1, 3)
+                            )
+                        ),
+                        array(
+                            'type'  => 'GEOMETRYCOLLECTION',
+                            'value' => array(
+                                array(
+                                    'type'  => 'POINT',
+                                    'value' => array(0, 0, 0, 4)
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(0, 0, 0, 5),
+                                        array(1, 1, 1, 6)
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRGeometryCollectionZMValueWithSrid' => array(
+                'value' => '00e0000007000010e60000000300c00000010000000000000000000000000000000000000000000000003ff000000000000000c00000020000000200000000000000000000000000000000000000000000000040000000000000003ff00000000000003ff00000000000003ff0000000000000400800000000000000c00000070000000200c0000001000000000000000000000000000000000000000000000000401000000000000000c00000020000000200000000000000000000000000000000000000000000000040140000000000003ff00000000000003ff00000000000003ff00000000000004018000000000000',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'GEOMETRYCOLLECTION ZM',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array(0, 0, 0, 1)
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(0, 0, 0, 2),
+                                array(1, 1, 1, 3)
+                            )
+                        ),
+                        array(
+                            'type'  => 'GEOMETRYCOLLECTION',
+                            'value' => array(
+                                array(
+                                    'type'  => 'POINT',
+                                    'value' => array(0, 0, 0, 4)
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(0, 0, 0, 5),
+                                        array(1, 1, 1, 6)
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
         );
     }
 
