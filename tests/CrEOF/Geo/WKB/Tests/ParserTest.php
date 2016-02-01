@@ -235,6 +235,72 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ),
+            'testParsingNDRLineStringZValue' => array(
+                'value' => '010200008002000000000000000000000000000000000000000000000000000040000000000000f03f000000000000f03f0000000000000840',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'LINESTRING Z',
+                    'value' => array(
+                        array(0, 0, 2),
+                        array(1, 1, 3)
+                    )
+                )
+            ),
+            'testParsingXDRLineStringZValue' => array(
+                'value' => '0080000002000000020000000000000000000000000000000040000000000000003ff00000000000003ff00000000000004008000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'LINESTRING Z',
+                    'value' => array(
+                        array(0, 0, 2),
+                        array(1, 1, 3)
+                    )
+                )
+            ),
+            'testParsingNDRLineStringMValue' => array(
+                'value' => '010200004002000000000000000000000000000000000000000000000000000040000000000000f03f000000000000f03f0000000000000840',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'LINESTRING M',
+                    'value' => array(
+                        array(0, 0, 2),
+                        array(1, 1, 3)
+                    )
+                )
+            ),
+            'testParsingXDRLineStringMValue' => array(
+                'value' => '0040000002000000020000000000000000000000000000000040000000000000003ff00000000000003ff00000000000004008000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'LINESTRING M',
+                    'value' => array(
+                        array(0, 0, 2),
+                        array(1, 1, 3)
+                    )
+                )
+            ),
+            'testParsingNDRLineStringZMValue' => array(
+                'value' => '01020000c0020000000000000000000000000000000000000000000000000000400000000000000840000000000000f03f000000000000f03f00000000000010400000000000001440',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'LINESTRING ZM',
+                    'value' => array(
+                        array(0, 0, 2, 3),
+                        array(1, 1, 4, 5)
+                    )
+                )
+            ),
+            'testParsingXDRLineStringZMValue' => array(
+                'value' => '00c00000020000000200000000000000000000000000000000400000000000000040080000000000003ff00000000000003ff000000000000040100000000000004014000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'LINESTRING ZM',
+                    'value' => array(
+                        array(0, 0, 2, 3),
+                        array(1, 1, 4, 5)
+                    )
+                )
+            ),
             'testParsingNDRLineStringValueWithSrid' => array(
                 'value' => '0102000020E6100000020000003D0AD7A3701D41400000000000C055C06666666666A6464000000000000057C0',
                 'expected' => array(
@@ -254,6 +320,72 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'value' => array(
                         array(34.23, -87),
                         array(45.3, -92)
+                    )
+                )
+            ),
+            'testParsingNDRLineStringZValueWithSrid' => array(
+                'value' => '01020000a0e610000002000000000000000000000000000000000000000000000000000040000000000000f03f000000000000f03f0000000000000840',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'LINESTRING Z',
+                    'value' => array(
+                        array(0, 0, 2),
+                        array(1, 1, 3)
+                    )
+                )
+            ),
+            'testParsingXDRLineStringZValueWithSrid' => array(
+                'value' => '00a0000002000010e6000000020000000000000000000000000000000040000000000000003ff00000000000003ff00000000000004008000000000000',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'LINESTRING Z',
+                    'value' => array(
+                        array(0, 0, 2),
+                        array(1, 1, 3)
+                    )
+                )
+            ),
+            'testParsingNDRLineStringMValueWithSrid' => array(
+                'value' => '0102000060e610000002000000000000000000000000000000000000000000000000000040000000000000f03f000000000000f03f0000000000000840',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'LINESTRING M',
+                    'value' => array(
+                        array(0, 0, 2),
+                        array(1, 1, 3)
+                    )
+                )
+            ),
+            'testParsingXDRLineStringMValueWithSrid' => array(
+                'value' => '0060000002000010e6000000020000000000000000000000000000000040000000000000003ff00000000000003ff00000000000004008000000000000',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'LINESTRING M',
+                    'value' => array(
+                        array(0, 0, 2),
+                        array(1, 1, 3)
+                    )
+                )
+            ),
+            'testParsingNDRLineStringZMValueWithSrid' => array(
+                'value' => '01020000e0e6100000020000000000000000000000000000000000000000000000000000400000000000000840000000000000f03f000000000000f03f00000000000010400000000000001440',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'LINESTRING ZM',
+                    'value' => array(
+                        array(0, 0, 2, 3),
+                        array(1, 1, 4, 5)
+                    )
+                )
+            ),
+            'testParsingXDRLineStringZMValueWithSrid' => array(
+                'value' => '00e0000002000010e60000000200000000000000000000000000000000400000000000000040080000000000003ff00000000000003ff000000000000040100000000000004014000000000000',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'LINESTRING ZM',
+                    'value' => array(
+                        array(0, 0, 2, 3),
+                        array(1, 1, 4, 5)
                     )
                 )
             ),
