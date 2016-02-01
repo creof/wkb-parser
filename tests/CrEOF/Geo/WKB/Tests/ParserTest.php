@@ -847,6 +847,72 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ),
+            'testParsingNDRMultiPointZValue' => array(
+                'value' => '0104000080020000000101000080000000000000000000000000000000000000000000000000010100008000000000000000400000000000000000000000000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'MULTIPOINT Z',
+                    'value' => array(
+                        array(0, 0, 0),
+                        array(2, 0, 1)
+                    )
+                )
+            ),
+            'testParsingXDRMultiPointZValue' => array(
+                'value' => '00800000040000000200800000010000000000000000000000000000000000000000000000000080000001400000000000000000000000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'MULTIPOINT Z',
+                    'value' => array(
+                        array(0, 0, 0),
+                        array(2, 0, 1)
+                    )
+                )
+            ),
+            'testParsingNDRMultiPointMValue' => array(
+                'value' => '0104000040020000000101000040000000000000000000000000000000000000000000000040010100004000000000000000400000000000000000000000000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'MULTIPOINT M',
+                    'value' => array(
+                        array(0, 0, 2),
+                        array(2, 0, 1)
+                    )
+                )
+            ),
+            'testParsingXDRMultiPointMValue' => array(
+                'value' => '00400000040000000200400000010000000000000000000000000000000040000000000000000040000001400000000000000000000000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'MULTIPOINT M',
+                    'value' => array(
+                        array(0, 0, 2),
+                        array(2, 0, 1)
+                    )
+                )
+            ),
+            'testParsingNDRMultiPointZMValue' => array(
+                'value' => '01040000c00200000001010000c00000000000000000000000000000f03f0000000000000040000000000000084001010000c000000000000008400000000000000040000000000000f03f0000000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'MULTIPOINT ZM',
+                    'value' => array(
+                        array(0, 1, 2, 3),
+                        array(3, 2, 1, 0)
+                    )
+                )
+            ),
+            'testParsingXDRMultiPointZMValue' => array(
+                'value' => '00c00000040000000200c000000100000000000000003ff00000000000004000000000000000400800000000000000c0000001400800000000000040000000000000003ff00000000000000000000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'MULTIPOINT ZM',
+                    'value' => array(
+                        array(0, 1, 2, 3),
+                        array(3, 2, 1, 0)
+                    )
+                )
+            ),
             'testParsingNDRMultiPointValueWithSrid' => array(
                 'value' => '0104000020E610000004000000010100000000000000000000000000000000000000010100000000000000000024400000000000000000010100000000000000000024400000000000002440010100000000000000000000000000000000002440',
                 'expected' => array(
@@ -870,6 +936,72 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                         array(10, 0),
                         array(10, 10),
                         array(0, 10)
+                    )
+                )
+            ),
+            'testParsingNDRMultiPointZValueWithSrid' => array(
+                'value' => '0104000080020000000101000080000000000000000000000000000000000000000000000000010100008000000000000000400000000000000000000000000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'MULTIPOINT Z',
+                    'value' => array(
+                        array(0, 0, 0),
+                        array(2, 0, 1)
+                    )
+                )
+            ),
+            'testParsingXDRMultiPointZValueWithSrid' => array(
+                'value' => '00800000040000000200800000010000000000000000000000000000000000000000000000000080000001400000000000000000000000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'MULTIPOINT Z',
+                    'value' => array(
+                        array(0, 0, 0),
+                        array(2, 0, 1)
+                    )
+                )
+            ),
+            'testParsingNDRMultiPointMValueWithSrid' => array(
+                'value' => '0104000040020000000101000040000000000000000000000000000000000000000000000040010100004000000000000000400000000000000000000000000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'MULTIPOINT M',
+                    'value' => array(
+                        array(0, 0, 2),
+                        array(2, 0, 1)
+                    )
+                )
+            ),
+            'testParsingXDRMultiPointMValueWithSrid' => array(
+                'value' => '00400000040000000200400000010000000000000000000000000000000040000000000000000040000001400000000000000000000000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'MULTIPOINT M',
+                    'value' => array(
+                        array(0, 0, 2),
+                        array(2, 0, 1)
+                    )
+                )
+            ),
+            'testParsingNDRMultiPointZMValueWithSrid' => array(
+                'value' => '01040000c00200000001010000c00000000000000000000000000000f03f0000000000000040000000000000084001010000c000000000000008400000000000000040000000000000f03f0000000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'MULTIPOINT ZM',
+                    'value' => array(
+                        array(0, 1, 2, 3),
+                        array(3, 2, 1, 0)
+                    )
+                )
+            ),
+            'testParsingXDRMultiPointZMValueWithSrid' => array(
+                'value' => '00c00000040000000200c000000100000000000000003ff00000000000004000000000000000400800000000000000c0000001400800000000000040000000000000003ff00000000000000000000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'MULTIPOINT ZM',
+                    'value' => array(
+                        array(0, 1, 2, 3),
+                        array(3, 2, 1, 0)
                     )
                 )
             ),
