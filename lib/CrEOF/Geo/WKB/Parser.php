@@ -433,12 +433,8 @@ class Parser
 
         for ($i = 0; $i < $count; $i++) {
             $this->byteOrder();
-            $type = $this->readType();
 
-            if ($this->hasTypeFlag($type, self::WKB_FLAG_SRID)) {
-                $srid = $this->readSrid();
-            }
-
+            $type     = $this->readType();
             $typeName = $this->getBaseTypeName($type);
 
             $values[] = array(
