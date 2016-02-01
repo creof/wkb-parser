@@ -101,6 +101,54 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                         'value' => array(34.23, -87)
                 )
             ),
+            'testParsingNDRPointZValue' => array(
+                'value' => '0101000080000000000000F03F00000000000000400000000000000840',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'POINT Z',
+                    'value' => array(1, 2, 3)
+                )
+            ),
+            'testParsingXDRPointZValue' => array(
+                'value' => '00800000013FF000000000000040000000000000004008000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'POINT Z',
+                    'value' => array(1, 2, 3)
+                )
+            ),
+            'testParsingNDRPointMValue' => array(
+                'value' => '0101000040000000000000F03F00000000000000400000000000000840',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'POINT M',
+                    'value' => array(1, 2, 3)
+                )
+            ),
+            'testParsingXDRPointMValue' => array(
+                'value' => '00400000013FF000000000000040000000000000004008000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'POINT M',
+                    'value' => array(1, 2, 3)
+                )
+            ),
+            'testParsingNDRPointZMValue' => array(
+                'value' => '01010000C0000000000000F03F000000000000004000000000000008400000000000001040',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'POINT ZM',
+                    'value' => array(1, 2, 3, 4)
+                )
+            ),
+            'testParsingXDRPointZMValue' => array(
+                'value' => '00C00000013FF0000000000000400000000000000040080000000000004010000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'POINT ZM',
+                    'value' => array(1, 2, 3, 4)
+                )
+            ),
             'testParsingNDRPointValueWithSrid' => array(
                 'value' => '01010000003D0AD7A3701D41400000000000C055C0',
                 'expected' => array(
@@ -115,6 +163,54 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'srid'  => 4326,
                     'type'  => 'POINT',
                     'value' => array(34.23, -87)
+                )
+            ),
+            'testParsingNDRPointZValueWithSrid' => array(
+                'value' => '01010000A0E6100000000000000000F03F00000000000000400000000000000840',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'POINT Z',
+                    'value' => array(1, 2, 3)
+                )
+            ),
+            'testParsingXDRPointZValueWithSrid' => array(
+                'value' => '00A0000001000010E63FF000000000000040000000000000004008000000000000',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'POINT Z',
+                    'value' => array(1, 2, 3)
+                )
+            ),
+            'testParsingNDRPointMValueWithSrid' => array(
+                'value' => '0101000060e6100000000000000000f03f00000000000000400000000000000840',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'POINT M',
+                    'value' => array(1, 2, 3)
+                )
+            ),
+            'testParsingXDRPointMValueWithSrid' => array(
+                'value' => '0060000001000010e63ff000000000000040000000000000004008000000000000',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'POINT M',
+                    'value' => array(1, 2, 3)
+                )
+            ),
+            'testParsingNDRPointZMValueWithSrid' => array(
+                'value' => '01010000e0e6100000000000000000f03f000000000000004000000000000008400000000000001040',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'POINT ZM',
+                    'value' => array(1, 2, 3, 4)
+                )
+            ),
+            'testParsingXDRPointZMValueWithSrid' => array(
+                'value' => '00e0000001000010e63ff0000000000000400000000000000040080000000000004010000000000000',
+                'expected' => array(
+                    'srid'  => 4326,
+                    'type'  => 'POINT ZM',
+                    'value' => array(1, 2, 3, 4)
                 )
             ),
             'testParsingNDRLineStringValue' => array(
