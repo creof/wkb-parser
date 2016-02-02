@@ -68,6 +68,7 @@ class Parser
     const TYPE_COMPOUNDCURVE      = 'CompoundCurve';
     const TYPE_CURVEPOLYGON       = 'CurvePolygon';
     const TYPE_MULTICURVE         = 'MultiCurve';
+    const TYPE_MULTISURFACE       = 'MultiSurface';
 
     /**
      * @var int
@@ -205,6 +206,9 @@ class Parser
                 break;
             case (self::WKB_TYPE_MULTICURVE):
                 $typeName = self::TYPE_MULTICURVE;
+                break;
+            case (self::WKB_TYPE_MULTISURFACE):
+                $typeName = self::TYPE_MULTISURFACE;
                 break;
             default:
                 throw new UnexpectedValueException(sprintf('Unsupported WKB type "%s".', $this->type));
@@ -543,6 +547,42 @@ class Parser
                     break;
                 case (self::WKB_TYPE_COMPOUNDCURVE):
                     $value = $this->compoundCurve();
+                    break;
+                default:
+                    throw new UnexpectedValueException();
+            }
+
+            $values[] = array(
+                'type'  => $this->getBaseTypeName($type),
+                'value' => $value,
+            );
+        }
+
+        return $values;
+    }
+
+    /**
+     * Parse MULTISURFACE value
+     *
+     * @return array
+     * @throws UnexpectedValueException
+     */
+    private function multiSurface()
+    {
+        $values = array();
+        $count  = $this->readCount();
+
+        for ($i = 0; $i < $count; $i++) {
+            $this->readByteOrder();
+
+            $type = $this->readType();
+
+            switch ($type & 0xFFFF) {
+                case (self::WKB_TYPE_POLYGON):
+                    $value = $this->polygon();
+                    break;
+                case (self::WKB_TYPE_CURVEPOLYGON):
+                    $value = $this->curvePolygon();
                     break;
                 default:
                     throw new UnexpectedValueException();
