@@ -33,6 +33,7 @@ use CrEOF\Geo\WKB\Exception\UnexpectedValueException;
  */
 class Parser
 {
+    const WKB_TYPE_GEOMETRY           = 0;
     const WKB_TYPE_POINT              = 1;
     const WKB_TYPE_LINESTRING         = 2;
     const WKB_TYPE_POLYGON            = 3;
@@ -45,6 +46,8 @@ class Parser
     const WKB_TYPE_CURVEPOLYGON       = 10;
     const WKB_TYPE_MULTICURVE         = 11;
     const WKB_TYPE_MULTISURFACE       = 12;
+    const WKB_TYPE_CURVE              = 13;
+    const WKB_TYPE_SURFACE            = 14;
     const WKB_TYPE_POLYHEDRALSURFACE  = 15;
     const WKB_TYPE_TIN                = 16;
     const WKB_TYPE_TRIANGLE           = 17;
@@ -64,6 +67,7 @@ class Parser
     const TYPE_CIRCULARSTRING     = 'CircularString';
     const TYPE_COMPOUNDCURVE      = 'CompoundCurve';
     const TYPE_CURVEPOLYGON       = 'CurvePolygon';
+    const TYPE_MULTICURVE         = 'MultiCurve';
 
     /**
      * @var int
@@ -78,7 +82,12 @@ class Parser
     /**
      * @var int
      */
-    private $cords;
+    private $pointSize;
+
+    /**
+     * @var int
+     */
+    private $byteOrder;
 
     /**
      * @var Reader
@@ -111,7 +120,7 @@ class Parser
             self::$reader->load($input);
         }
 
-        return $this->geometry();
+        return $this->readGeometry();
     }
 
     /**
@@ -120,13 +129,12 @@ class Parser
      * @return array
      * @throws UnexpectedValueException
      */
-    private function geometry()
+    private function readGeometry()
     {
-        $this->byteOrder();
-
-        $this->type  = $this->readType();
-        $this->cords = $this->getCoordCount($this->type);
-        $this->srid  = null;
+        $this->srid      = null;
+        $this->byteOrder = $this->readByteOrder();
+        $this->type      = $this->readType();
+        $this->pointSize = $this->getPointSize($this->type);
 
         if ($this->hasTypeFlag($this->type, self::WKB_FLAG_SRID)) {
             $this->srid = $this->readSrid();
@@ -195,6 +203,9 @@ class Parser
             case (self::WKB_TYPE_CURVEPOLYGON):
                 $typeName = self::TYPE_CURVEPOLYGON;
                 break;
+            case (self::WKB_TYPE_MULTICURVE):
+                $typeName = self::TYPE_MULTICURVE;
+                break;
             default:
                 throw new UnexpectedValueException(sprintf('Unsupported WKB type "%s".', $this->type));
                 break;
@@ -235,7 +246,7 @@ class Parser
      *
      * @throws UnexpectedValueException
      */
-    private function byteOrder()
+    private function readByteOrder()
     {
         return self::$reader->readByteOrder();
     }
@@ -274,111 +285,9 @@ class Parser
      *
      * @return int
      */
-    private function getCoordCount($type)
+    private function getPointSize($type)
     {
-        return 2 + (int) $this->hasTypeFlag($type, self::WKB_FLAG_M) + (int) $this->hasTypeFlag($type, self::WKB_FLAG_Z);
-    }
-    /**
-     * Parse POINT values
-     *
-     * @return float[]
-     * @throws UnexpectedValueException
-     */
-    private function point()
-    {
-        return self::$reader->readDoubles($this->cords);
-    }
-
-    /**
-     * Parse LINESTRING value
-     *
-     * @return array
-     * @throws UnexpectedValueException
-     */
-    private function lineString()
-    {
-        return $this->readPoints($this->readCount());
-    }
-
-    /**
-     * Parse CIRCULARSTRING value
-     *
-     * @return array
-     * @throws UnexpectedValueException
-     */
-    private function circularString()
-    {
-        return $this->readPoints($this->readCount());
-    }
-
-    /**
-     * Parse POLYGON value
-     *
-     * @return array[]
-     */
-    private function polygon()
-    {
-        return $this->readLinearRings($this->readCount());
-    }
-
-    /**
-     * Parse MULTIPOINT value
-     *
-     * @return array[]
-     */
-    private function multiPoint()
-    {
-        return $this->readWKBPoints($this->readCount());
-    }
-
-    /**
-     * Parse MULTILINESTRING value
-     *
-     * @return array[]
-     */
-    private function multiLineString()
-    {
-        return $this->readWKBLineStrings($this->readCount());
-    }
-
-    /**
-     * Parse MULTIPOLYGON value
-     *
-     * @return array[]
-     */
-    private function multiPolygon()
-    {
-        return $this->readWKBPolygons($this->readCount());
-    }
-
-    /**
-     * Parse GEOMETRYCOLLECTION value
-     *
-     * @return array[]
-     */
-    private function geometryCollection()
-    {
-        return $this->readWKBGeometries($this->readCount());
-    }
-
-    /**
-     * Parse COMPOUNDCURVE value
-     *
-     * @return array
-     */
-    private function compoundCurve()
-    {
-        return $this->readWKBGeometries($this->readCount());
-    }
-
-    /**
-     * Parse CURVEPOLYGON value
-     *
-     * @return array
-     */
-    private function curvePolygon()
-    {
-        return $this->readWKBGeometries($this->readCount());
+        return 2 + $this->hasTypeFlag($type, self::WKB_FLAG_M) + $this->hasTypeFlag($type, self::WKB_FLAG_Z);
     }
 
     /**
@@ -416,15 +325,68 @@ class Parser
     }
 
     /**
-     * @return array
+     * Parse POINT values
+     *
+     * @return float[]
+     * @throws UnexpectedValueException
      */
-    private function readWKBPoints($count)
+    private function point()
+    {
+        return self::$reader->readDoubles($this->pointSize);
+    }
+
+    /**
+     * Parse LINESTRING value
+     *
+     * @return array
+     * @throws UnexpectedValueException
+     */
+    private function lineString()
+    {
+        return $this->readPoints($this->readCount());
+    }
+
+    /**
+     * Parse CIRCULARSTRING value
+     *
+     * @return array
+     * @throws UnexpectedValueException
+     */
+    private function circularString()
+    {
+        return $this->readPoints($this->readCount());
+    }
+
+    /**
+     * Parse POLYGON value
+     *
+     * @return array[]
+     * @throws UnexpectedValueException
+     */
+    private function polygon()
+    {
+        return $this->readLinearRings($this->readCount());
+    }
+
+    /**
+     * Parse MULTIPOINT value
+     *
+     * @return array[]
+     * @throws UnexpectedValueException
+     */
+    private function multiPoint()
     {
         $values = array();
+        $count  = $this->readCount();
 
         for ($i = 0; $i < $count; $i++) {
-            $this->byteOrder();
-            $this->readType();
+            $this->readByteOrder();
+
+            $type = $this->readType();
+
+            if (self::WKB_TYPE_POINT !== ($type & 0xFFFF)) {
+                throw new UnexpectedValueException();
+            }
 
             $values[] = $this->point();
         }
@@ -433,15 +395,24 @@ class Parser
     }
 
     /**
-     * @return array
+     * Parse MULTILINESTRING value
+     *
+     * @return array[]
+     * @throws UnexpectedValueException
      */
-    private function readWKBLineStrings($count)
+    private function multiLineString()
     {
         $values = array();
+        $count  = $this->readCount();
 
         for ($i = 0; $i < $count; $i++) {
-            $this->byteOrder();
-            $this->readType();
+            $this->readByteOrder();
+
+            $type = $this->readType();
+
+            if (self::WKB_TYPE_LINESTRING !== ($type & 0xFFFF)) {
+                throw new UnexpectedValueException();
+            }
 
             $values[] = $this->readPoints($this->readCount());
         }
@@ -450,15 +421,24 @@ class Parser
     }
 
     /**
-     * @return array
+     * Parse MULTIPOLYGON value
+     *
+     * @return array[]
+     * @throws UnexpectedValueException
      */
-    private function readWKBPolygons($count)
+    private function multiPolygon()
     {
+        $count  = $this->readCount();
         $values = array();
 
         for ($i = 0; $i < $count; $i++) {
-            $this->byteOrder();
-            $this->readType();
+            $this->readByteOrder();
+
+            $type = $this->readType();
+
+            if (self::WKB_TYPE_POLYGON !== ($type & 0xFFFF)) {
+                throw new UnexpectedValueException();
+            }
 
             $values[] = $this->readLinearRings($this->readCount());
         }
@@ -467,15 +447,91 @@ class Parser
     }
 
     /**
+     * Parse COMPOUNDCURVE value
+     *
      * @return array
      * @throws UnexpectedValueException
      */
-    private function readWKBGeometries($count)
+    private function compoundCurve()
     {
         $values = array();
+        $count  = $this->readCount();
 
         for ($i = 0; $i < $count; $i++) {
-            $this->byteOrder();
+            $this->readByteOrder();
+
+            $type = $this->readType();
+
+            switch ($type & 0xFFFF) {
+                case (self::WKB_TYPE_LINESTRING):
+                    // no break
+                case (self::WKB_TYPE_CIRCULARSTRING):
+                    $value = $this->readPoints($this->readCount());
+                    break;
+                default:
+                    throw new UnexpectedValueException();
+            }
+
+            $values[] = array(
+                'type'  => $this->getBaseTypeName($type),
+                'value' => $value,
+            );
+        }
+
+        return $values;
+    }
+
+    /**
+     * Parse CURVEPOLYGON value
+     *
+     * @return array
+     * @throws UnexpectedValueException
+     */
+    private function curvePolygon()
+    {
+        $values = array();
+        $count  = $this->readCount();
+
+        for ($i = 0; $i < $count; $i++) {
+            $this->readByteOrder();
+
+            $type = $this->readType();
+
+            switch ($type & 0xFFFF) {
+                case (self::WKB_TYPE_LINESTRING):
+                    // no break
+                case (self::WKB_TYPE_CIRCULARSTRING):
+                    $value = $this->readPoints($this->readCount());
+                    break;
+                case (self::WKB_TYPE_COMPOUNDCURVE):
+                    $value = $this->compoundCurve();
+                    break;
+                default:
+                    throw new UnexpectedValueException();
+            }
+
+            $values[] = array(
+                'type'  => $this->getBaseTypeName($type),
+                'value' => $value,
+            );
+        }
+
+        return $values;
+    }
+
+    /**
+     * Parse GEOMETRYCOLLECTION value
+     *
+     * @return array[]
+     * @throws UnexpectedValueException
+     */
+    private function geometryCollection()
+    {
+        $values = array();
+        $count  = $this->readCount();
+
+        for ($i = 0; $i < $count; $i++) {
+            $this->readByteOrder();
 
             $type     = $this->readType();
             $typeName = $this->getBaseTypeName($type);
