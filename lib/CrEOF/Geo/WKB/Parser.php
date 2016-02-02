@@ -69,6 +69,9 @@ class Parser
     const TYPE_CURVEPOLYGON       = 'CurvePolygon';
     const TYPE_MULTICURVE         = 'MultiCurve';
     const TYPE_MULTISURFACE       = 'MultiSurface';
+    const TYPE_POLYHEDRALSURFACE  = 'PolyhedralSurface';
+    const TYPE_TIN                = 'Tin';
+    const TYPE_TRIANGLE           = 'Triangle';
 
     /**
      * @var int
@@ -209,6 +212,9 @@ class Parser
                 break;
             case (self::WKB_TYPE_MULTISURFACE):
                 $typeName = self::TYPE_MULTISURFACE;
+                break;
+            case (self::WKB_TYPE_POLYHEDRALSURFACE):
+                $typeName = self::TYPE_POLYHEDRALSURFACE;
                 break;
             default:
                 throw new UnexpectedValueException(sprintf('Unsupported WKB type "%s".', $this->type));
@@ -583,6 +589,39 @@ class Parser
                     break;
                 case (self::WKB_TYPE_CURVEPOLYGON):
                     $value = $this->curvePolygon();
+                    break;
+                default:
+                    throw new UnexpectedValueException();
+            }
+
+            $values[] = array(
+                'type'  => $this->getBaseTypeName($type),
+                'value' => $value,
+            );
+        }
+
+        return $values;
+    }
+
+    /**
+     * Parse POLYHEDRALSURFACE value
+     *
+     * @return array
+     * @throws UnexpectedValueException
+     */
+    private function polyhedralSurface()
+    {
+        $values = array();
+        $count  = $this->readCount();
+
+        for ($i = 0; $i < $count; $i++) {
+            $this->readByteOrder();
+
+            $type = $this->readType();
+
+            switch ($type & 0xFFFF) {
+                case (self::WKB_TYPE_POLYGON):
+                    $value = $this->polygon();
                     break;
                 default:
                     throw new UnexpectedValueException();
