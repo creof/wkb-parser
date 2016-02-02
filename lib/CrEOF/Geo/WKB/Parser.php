@@ -520,6 +520,44 @@ class Parser
     }
 
     /**
+     * Parse MULTICURVE value
+     *
+     * @return array
+     * @throws UnexpectedValueException
+     */
+    private function multiCurve()
+    {
+        $values = array();
+        $count  = $this->readCount();
+
+        for ($i = 0; $i < $count; $i++) {
+            $this->readByteOrder();
+
+            $type = $this->readType();
+
+            switch ($type & 0xFFFF) {
+                case (self::WKB_TYPE_LINESTRING):
+                    // no break
+                case (self::WKB_TYPE_CIRCULARSTRING):
+                    $value = $this->readPoints($this->readCount());
+                    break;
+                case (self::WKB_TYPE_COMPOUNDCURVE):
+                    $value = $this->compoundCurve();
+                    break;
+                default:
+                    throw new UnexpectedValueException();
+            }
+
+            $values[] = array(
+                'type'  => $this->getBaseTypeName($type),
+                'value' => $value,
+            );
+        }
+
+        return $values;
+    }
+
+    /**
      * Parse GEOMETRYCOLLECTION value
      *
      * @return array[]
