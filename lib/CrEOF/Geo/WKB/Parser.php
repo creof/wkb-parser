@@ -62,6 +62,7 @@ class Parser
     const TYPE_MULTIPOLYGON       = 'MultiPolygon';
     const TYPE_GEOMETRYCOLLECTION = 'GeometryCollection';
     const TYPE_CIRCULARSTRING     = 'CircularString';
+    const TYPE_COMPOUNDCURVE      = 'CompoundCurve';
 
     /**
      * @var int
@@ -186,6 +187,9 @@ class Parser
                 break;
             case (self::WKB_TYPE_CIRCULARSTRING):
                 $typeName = self::TYPE_CIRCULARSTRING;
+                break;
+            case (self::WKB_TYPE_COMPOUNDCURVE):
+                $typeName = self::TYPE_COMPOUNDCURVE;
                 break;
             default:
                 throw new UnexpectedValueException(sprintf('Unsupported WKB type "%s".', $this->type));
@@ -349,6 +353,16 @@ class Parser
      * @return array[]
      */
     private function geometryCollection()
+    {
+        return $this->readWKBGeometries($this->readCount());
+    }
+
+    /**
+     * Parse COMPOUNDCURVE value
+     *
+     * @return array
+     */
+    private function compoundCurve()
     {
         return $this->readWKBGeometries($this->readCount());
     }
