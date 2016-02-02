@@ -623,6 +623,7 @@ class Parser
                 case (self::WKB_TYPE_POLYGON):
                     $value = $this->polygon();
                     break;
+                // is polygon the only one?
                 default:
                     throw new UnexpectedValueException();
             }
