@@ -61,6 +61,7 @@ class Parser
     const TYPE_MULTILINESTRING    = 'MultiLineString';
     const TYPE_MULTIPOLYGON       = 'MultiPolygon';
     const TYPE_GEOMETRYCOLLECTION = 'GeometryCollection';
+    const TYPE_CIRCULARSTRING     = 'CircularString';
 
     /**
      * @var int
@@ -183,6 +184,9 @@ class Parser
             case (self::WKB_TYPE_GEOMETRYCOLLECTION):
                 $typeName = self::TYPE_GEOMETRYCOLLECTION;
                 break;
+            case (self::WKB_TYPE_CIRCULARSTRING):
+                $typeName = self::TYPE_CIRCULARSTRING;
+                break;
             default:
                 throw new UnexpectedValueException(sprintf('Unsupported WKB type "%s".', $this->type));
                 break;
@@ -284,6 +288,17 @@ class Parser
      * @throws UnexpectedValueException
      */
     private function lineString()
+    {
+        return $this->readPoints($this->readCount());
+    }
+
+    /**
+     * Parse CIRCULARSTRING value
+     *
+     * @return array
+     * @throws UnexpectedValueException
+     */
+    private function circularString()
     {
         return $this->readPoints($this->readCount());
     }
