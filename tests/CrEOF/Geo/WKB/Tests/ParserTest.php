@@ -2879,6 +2879,270 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ),
+            'testParsingNDRCurvePolygonValue' => array(
+                'value' => '010a000000010000000109000000020000000108000000030000000000000000000000000000000000000000000'
+                    . '0000000f03f000000000000f03f000000000000004000000000000000000102000000030000000000000000000040000'
+                    . '0000000000000000000000000f03f000000000000f0bf00000000000000000000000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CURVEPOLYGON',
+                    'value' => array(
+                        array(
+                            'type'  => 'COMPOUNDCURVE',
+                            'value' => array(
+                                array(
+                                    'type'  => 'CIRCULARSTRING',
+                                    'value' => array(
+                                        array(0, 0),
+                                        array(1, 1),
+                                        array(2, 0)
+                                    )
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(2, 0),
+                                        array(1, -1),
+                                        array(0, 0)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRCurvePolygonValue' => array(
+                'value' => '000000000a00000001000000000900000002000000000800000003000000000000000000000000000000003ff00'
+                    . '000000000003ff0000000000000400000000000000000000000000000000000000002000000034000000000000000000'
+                    . '00000000000003ff0000000000000bff000000000000000000000000000000000000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CURVEPOLYGON',
+                    'value' => array(
+                        array(
+                            'type'  => 'COMPOUNDCURVE',
+                            'value' => array(
+                                array(
+                                    'type'  => 'CIRCULARSTRING',
+                                    'value' => array(
+                                        array(0, 0),
+                                        array(1, 1),
+                                        array(2, 0)
+                                    )
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(2, 0),
+                                        array(1, -1),
+                                        array(0, 0)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingNDRCurvePolygonZValue' => array(
+                'value' => '010a000080010000000109000080020000000108000080030000000000000000000000000000000000000000000'
+                    . '0000000f03f000000000000f03f000000000000f03f000000000000f03f0000000000000040000000000000000000000'
+                    . '0000000f03f01020000800300000000000000000000400000000000000000000000000000f03f000000000000f03f000'
+                    . '000000000f0bf000000000000f03f00000000000000000000000000000000000000000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CURVEPOLYGON Z',
+                    'value' => array(
+                        array(
+                            'type'  => 'COMPOUNDCURVE',
+                            'value' => array(
+                                array(
+                                    'type'  => 'CIRCULARSTRING',
+                                    'value' => array(
+                                        array(0, 0, 1),
+                                        array(1, 1, 1),
+                                        array(2, 0, 1)
+                                    )
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(2, 0, 1),
+                                        array(1, -1, 1),
+                                        array(0, 0, 1)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRCurvePolygonZValue' => array(
+                'value' => '008000000a00000001008000000900000002008000000800000003000000000000000000000000000000003ff00'
+                    . '000000000003ff00000000000003ff00000000000003ff0000000000000400000000000000000000000000000003ff00'
+                    . '00000000000008000000200000003400000000000000000000000000000003ff00000000000003ff0000000000000bff'
+                    . '00000000000003ff0000000000000000000000000000000000000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CURVEPOLYGON Z',
+                    'value' => array(
+                        array(
+                            'type'  => 'COMPOUNDCURVE',
+                            'value' => array(
+                                array(
+                                    'type'  => 'CIRCULARSTRING',
+                                    'value' => array(
+                                        array(0, 0, 1),
+                                        array(1, 1, 1),
+                                        array(2, 0, 1)
+                                    )
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(2, 0, 1),
+                                        array(1, -1, 1),
+                                        array(0, 0, 1)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingNDRCurvePolygonMValue' => array(
+                'value' => '010a000040010000000109000040020000000108000040030000000000000000000000000000000000000000000'
+                    . '0000000f03f000000000000f03f000000000000f03f000000000000f03f0000000000000040000000000000000000000'
+                    . '0000000f03f01020000400300000000000000000000400000000000000000000000000000f03f000000000000f03f000'
+                    . '000000000f0bf000000000000f03f00000000000000000000000000000000000000000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CURVEPOLYGON M',
+                    'value' => array(
+                        array(
+                            'type'  => 'COMPOUNDCURVE',
+                            'value' => array(
+                                array(
+                                    'type'  => 'CIRCULARSTRING',
+                                    'value' => array(
+                                        array(0, 0, 1),
+                                        array(1, 1, 1),
+                                        array(2, 0, 1)
+                                    )
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(2, 0, 1),
+                                        array(1, -1, 1),
+                                        array(0, 0, 1)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRCurvePolygonMValue' => array(
+                'value' => '004000000a00000001004000000900000002004000000800000003000000000000000000000000000000003ff00'
+                    . '000000000003ff00000000000003ff00000000000003ff0000000000000400000000000000000000000000000003ff00'
+                    . '00000000000004000000200000003400000000000000000000000000000003ff00000000000003ff0000000000000bff'
+                    . '00000000000003ff0000000000000000000000000000000000000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CURVEPOLYGON M',
+                    'value' => array(
+                        array(
+                            'type'  => 'COMPOUNDCURVE',
+                            'value' => array(
+                                array(
+                                    'type'  => 'CIRCULARSTRING',
+                                    'value' => array(
+                                        array(0, 0, 1),
+                                        array(1, 1, 1),
+                                        array(2, 0, 1)
+                                    )
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(2, 0, 1),
+                                        array(1, -1, 1),
+                                        array(0, 0, 1)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingNDRCurvePolygonZMValue' => array(
+                'value' => '010a0000c00100000001090000c00200000001080000c0030000000000000000000000000000000000000000000'
+                    . '0000000f03f0000000000000040000000000000f03f000000000000f03f000000000000f03f000000000000004000000'
+                    . '000000000400000000000000000000000000000f03f000000000000004001020000c0030000000000000000000040000'
+                    . '0000000000000000000000000f03f0000000000000040000000000000f03f000000000000f0bf000000000000f03f000'
+                    . '000000000f03f00000000000000000000000000000000000000000000f03f0000000000000040',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CURVEPOLYGON ZM',
+                    'value' => array(
+                        array(
+                            'type'  => 'COMPOUNDCURVE',
+                            'value' => array(
+                                array(
+                                    'type'  => 'CIRCULARSTRING',
+                                    'value' => array(
+                                        array(0, 0, 1, 2),
+                                        array(1, 1, 1, 2),
+                                        array(2, 0, 1, 2)
+                                    )
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(2, 0, 1, 2),
+                                        array(1, -1, 1, 1),
+                                        array(0, 0, 1, 2)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRCurvePolygonZMValue' => array(
+                'value' => '00c000000a0000000100c00000090000000200c000000800000003000000000000000000000000000000003ff00'
+                    . '0000000000040000000000000003ff00000000000003ff00000000000003ff0000000000000400000000000000040000'
+                    . '0000000000000000000000000003ff0000000000000400000000000000000c0000002000000034000000000000000000'
+                    . '00000000000003ff000000000000040000000000000003ff0000000000000bff00000000000003ff00000000000003ff'
+                    . '0000000000000000000000000000000000000000000003ff00000000000004000000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CURVEPOLYGON ZM',
+                    'value' => array(
+                        array(
+                            'type'  => 'COMPOUNDCURVE',
+                            'value' => array(
+                                array(
+                                    'type'  => 'CIRCULARSTRING',
+                                    'value' => array(
+                                        array(0, 0, 1, 2),
+                                        array(1, 1, 1, 2),
+                                        array(2, 0, 1, 2)
+                                    )
+                                ),
+                                array(
+                                    'type'  => 'LINESTRING',
+                                    'value' => array(
+                                        array(2, 0, 1, 2),
+                                        array(1, -1, 1, 1),
+                                        array(0, 0, 1, 2)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
         );
     }
 
