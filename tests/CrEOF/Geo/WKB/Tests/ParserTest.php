@@ -2665,6 +2665,220 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ),
+            'testParsingNDRCompoundCurveValue' => array(
+                'value' => '01090000000200000001080000000300000000000000000000000000000000000000000000000000f03f0000000'
+                    . '00000f03f000000000000004000000000000000000102000000020000000000000000000040000000000000000000000'
+                    . '00000001040000000000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'COMPOUNDCURVE',
+                    'value' => array(
+                        array(
+                            'type'  => 'CIRCULARSTRING',
+                            'value' => array(
+                                array(0, 0),
+                                array(1, 1),
+                                array(2, 0)
+                            )
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(2, 0),
+                                array(4, 1)
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRCompoundCurveValue' => array(
+                'value' => '000000000900000002000000000800000003000000000000000000000000000000003ff00000000000003ff0000'
+                    . '000000000400000000000000000000000000000000000000002000000024000000000000000000000000000000040100'
+                    . '000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'COMPOUNDCURVE',
+                    'value' => array(
+                        array(
+                            'type'  => 'CIRCULARSTRING',
+                            'value' => array(
+                                array(0, 0),
+                                array(1, 1),
+                                array(2, 0)
+                            )
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(2, 0),
+                                array(4, 1)
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingNDRCompoundCurveZValue' => array(
+                'value' => '01090000800200000001080000800300000000000000000000000000000000000000000000000000f03f0000000'
+                    . '00000f03f000000000000f03f000000000000f03f00000000000000400000000000000000000000000000f03f0102000'
+                    . '080020000000000000000000040000000000000000000000000000000000000000000001040000000000000f03f00000'
+                    . '0000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'COMPOUNDCURVE Z',
+                    'value' => array(
+                        array(
+                            'type'  => 'CIRCULARSTRING',
+                            'value' => array(
+                                array(0, 0, 1),
+                                array(1, 1, 1),
+                                array(2, 0, 1)
+                            )
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(2, 0, 0),
+                                array(4, 1, 1)
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRCompoundCurveZValue' => array(
+                'value' => '008000000900000002008000000800000003000000000000000000000000000000003ff00000000000003ff0000'
+                    . '0000000003ff00000000000003ff0000000000000400000000000000000000000000000003ff00000000000000080000'
+                    . '0020000000240000000000000000000000000000000000000000000000040100000000000003ff00000000000003ff00'
+                    . '00000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'COMPOUNDCURVE Z',
+                    'value' => array(
+                        array(
+                            'type'  => 'CIRCULARSTRING',
+                            'value' => array(
+                                array(0, 0, 1),
+                                array(1, 1, 1),
+                                array(2, 0, 1)
+                            )
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(2, 0, 0),
+                                array(4, 1, 1)
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingNDRCompoundCurveMValue' => array(
+                'value' => '01090000400200000001080000400300000000000000000000000000000000000000000000000000f03f0000000'
+                    . '00000f03f000000000000f03f000000000000f03f00000000000000400000000000000000000000000000f03f0102000'
+                    . '040020000000000000000000040000000000000000000000000000000000000000000001040000000000000f03f00000'
+                    . '0000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'COMPOUNDCURVE M',
+                    'value' => array(
+                        array(
+                            'type'  => 'CIRCULARSTRING',
+                            'value' => array(
+                                array(0, 0, 1),
+                                array(1, 1, 1),
+                                array(2, 0, 1)
+                            )
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(2, 0, 0),
+                                array(4, 1, 1)
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRCompoundCurveMValue' => array(
+                'value' => '004000000900000002004000000800000003000000000000000000000000000000003ff00000000000003ff0000'
+                    . '0000000003ff00000000000003ff0000000000000400000000000000000000000000000003ff00000000000000040000'
+                    . '0020000000240000000000000000000000000000000000000000000000040100000000000003ff00000000000003ff00'
+                    . '00000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'COMPOUNDCURVE M',
+                    'value' => array(
+                        array(
+                            'type'  => 'CIRCULARSTRING',
+                            'value' => array(
+                                array(0, 0, 1),
+                                array(1, 1, 1),
+                                array(2, 0, 1)
+                            )
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(2, 0, 0),
+                                array(4, 1, 1)
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingNDRCompoundCurveZMValue' => array(
+                'value' => '01090000c00200000001080000c00300000000000000000000000000000000000000000000000000f03f0000000'
+                    . '000000040000000000000f03f000000000000f03f000000000000f03f000000000000004000000000000000400000000'
+                    . '000000000000000000000f03f000000000000004001020000c0020000000000000000000040000000000000000000000'
+                    . '0000000000000000000000000000000000000001040000000000000f03f000000000000f03f000000000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'COMPOUNDCURVE ZM',
+                    'value' => array(
+                        array(
+                            'type'  => 'CIRCULARSTRING',
+                            'value' => array(
+                                array(0, 0, 1, 2),
+                                array(1, 1, 1, 2),
+                                array(2, 0, 1, 2)
+                            )
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(2, 0, 0, 0),
+                                array(4, 1, 1, 1)
+                            )
+                        )
+                    )
+                )
+            ),
+            'testParsingXDRCompoundCurveZMValue' => array(
+                'value' => '00c00000090000000200c000000800000003000000000000000000000000000000003ff00000000000004000000'
+                    . '0000000003ff00000000000003ff00000000000003ff0000000000000400000000000000040000000000000000000000'
+                    . '0000000003ff0000000000000400000000000000000c0000002000000024000000000000000000000000000000000000'
+                    . '00000000000000000000000000040100000000000003ff00000000000003ff00000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'COMPOUNDCURVE ZM',
+                    'value' => array(
+                        array(
+                            'type'  => 'CIRCULARSTRING',
+                            'value' => array(
+                                array(0, 0, 1, 2),
+                                array(1, 1, 1, 2),
+                                array(2, 0, 1, 2)
+                            )
+                        ),
+                        array(
+                            'type'  => 'LINESTRING',
+                            'value' => array(
+                                array(2, 0, 0, 0),
+                                array(4, 1, 1, 1)
+                            )
+                        )
+                    )
+                )
+            ),
         );
     }
 
