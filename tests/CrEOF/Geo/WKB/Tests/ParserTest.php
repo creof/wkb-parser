@@ -2559,6 +2559,112 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ),
+            'testParsingNDRCircularStringValue' => array(
+                'value' => '01080000000300000000000000000000000000000000000000000000000000f03f000000000000f03f000000000'
+                    . '00000400000000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CIRCULARSTRING',
+                    'value' => array(
+                        array(0, 0),
+                        array(1, 1),
+                        array(2, 0)
+                    )
+                )
+            ),
+            'testParsingXDRCircularStringValue' => array(
+                'value' => '000000000800000003000000000000000000000000000000003ff00000000000003ff0000000000000400000000'
+                    . '00000000000000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CIRCULARSTRING',
+                    'value' => array(
+                        array(0, 0),
+                        array(1, 1),
+                        array(2, 0)
+                    )
+                )
+            ),
+            'testParsingNDRCircularStringZValue' => array(
+                'value' => '01080000800300000000000000000000000000000000000000000000000000f03f000000000000f03f000000000'
+                    . '000f03f000000000000f03f00000000000000400000000000000000000000000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CIRCULARSTRING Z',
+                    'value' => array(
+                        array(0, 0, 1),
+                        array(1, 1, 1),
+                        array(2, 0, 1)
+                    )
+                )
+            ),
+            'testParsingXDRCircularStringZValue' => array(
+                'value' => '008000000800000003000000000000000000000000000000003ff00000000000003ff00000000000003ff000000'
+                    . '00000003ff0000000000000400000000000000000000000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CIRCULARSTRING Z',
+                    'value' => array(
+                        array(0, 0, 1),
+                        array(1, 1, 1),
+                        array(2, 0, 1)
+                    )
+                )
+            ),
+            'testParsingNDRCircularStringMValue' => array(
+                'value' => '01080000400300000000000000000000000000000000000000000000000000f03f000000000000f03f000000000'
+                    . '000f03f000000000000f03f00000000000000400000000000000000000000000000f03f',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CIRCULARSTRING M',
+                    'value' => array(
+                        array(0, 0, 1),
+                        array(1, 1, 1),
+                        array(2, 0, 1)
+                    )
+                )
+            ),
+            'testParsingXDRCircularStringMValue' => array(
+                'value' => '004000000800000003000000000000000000000000000000003ff00000000000003ff00000000000003ff000000'
+                    . '00000003ff0000000000000400000000000000000000000000000003ff0000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CIRCULARSTRING M',
+                    'value' => array(
+                        array(0, 0, 1),
+                        array(1, 1, 1),
+                        array(2, 0, 1)
+                    )
+                )
+            ),
+            'testParsingNDRCircularStringZMValue' => array(
+                'value' => '01080000c00300000000000000000000000000000000000000000000000000f03f0000000000000040000000000'
+                    . '000f03f000000000000f03f000000000000f03f000000000000004000000000000000400000000000000000000000000'
+                    . '000f03f0000000000000040',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CIRCULARSTRING ZM',
+                    'value' => array(
+                        array(0, 0, 1, 2),
+                        array(1, 1, 1, 2),
+                        array(2, 0, 1, 2)
+                    )
+                )
+            ),
+            'testParsingXDRCircularStringZMValue' => array(
+                'value' => '00c000000800000003000000000000000000000000000000003ff000000000000040000000000000003ff000000'
+                    . '00000003ff00000000000003ff00000000000004000000000000000400000000000000000000000000000003ff000000'
+                    . '00000004000000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'CIRCULARSTRING ZM',
+                    'value' => array(
+                        array(0, 0, 1, 2),
+                        array(1, 1, 1, 2),
+                        array(2, 0, 1, 2)
+                    )
+                )
+            ),
         );
     }
 
