@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2012, 2014 Derek J. Lambert
+ * Copyright (C) 2016 Derek J. Lambert
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -49,75 +49,21 @@ class Reader
     /**
      * @param string $input
      */
-    public function __construct($input)
+    public function __construct($input = null)
     {
-        $this->setInput($input);
-    }
-
-    /**
-     * @param string $format
-     *
-     * @return array
-     */
-    public function unpackInput($format)
-    {
-        $code        = version_compare(PHP_VERSION, '5.5.0-dev', '>=') ? 'a' : 'A';
-        $result      = unpack(sprintf('%sresult/%s*input', $format, $code), $this->input);
-        $this->input = $result['input'];
-
-        return $result['result'];
-    }
-
-    /**
-     * @return int
-     */
-    public function long()
-    {
-        if (self::WKB_NDR === $this->getByteOrder()) {
-            return $this->unpackInput('V');
+        if (null !== $input) {
+            $this->load($input);
         }
-
-        return $this->unpackInput('N');
-    }
-
-    /**
-     * @return float
-     */
-    public function double()
-    {
-        $double = $this->unpackInput('d');
-
-        if (self::WKB_NDR === $this->getByteOrder()) {
-            return $double;
-        }
-
-        $double = unpack('dvalue', strrev(pack('d', $double)));
-
-        return $double['value'];
-    }
-
-
-    /**
-     * @return int
-     * @throws UnexpectedValueException
-     */
-    public function byteOrder()
-    {
-        $byteOrder = $this->unpackInput('C');
-
-        if ($byteOrder !== self::WKB_XDR && $byteOrder !== self::WKB_NDR) {
-            throw new UnexpectedValueException(sprintf('Invalid byte order "%s"', $byteOrder));
-        }
-
-        return $this->byteOrder = $byteOrder;
     }
 
     /**
      * @param string $input
+     *
+     * @throws UnexpectedValueException
      */
-    private function setInput($input)
+    public function load($input)
     {
-        if (ord($input) < 31) {
+        if (ord($input) < 32) {
             $this->input = $input;
 
             return;
@@ -130,8 +76,68 @@ class Reader
         }
 
         $this->input = pack('H*', $input);
+    }
 
-        return;
+    /**
+     * @return int
+     * @throws UnexpectedValueException
+     */
+    public function readLong()
+    {
+        if (self::WKB_NDR === $this->getByteOrder()) {
+            return $this->unpackInput('V');
+        }
+
+        return $this->unpackInput('N');
+    }
+
+    /**
+     * @return float
+     * @throws UnexpectedValueException
+     */
+    public function readDouble()
+    {
+        $double = $this->unpackInput('d');
+
+        if (self::WKB_NDR === $this->getByteOrder()) {
+            return $double;
+        }
+
+        $double = unpack('dvalue', strrev(pack('d', $double)));
+
+        return $double['value'];
+    }
+
+    /**
+     * @param int $count
+     *
+     * @return float[]
+     * @throws UnexpectedValueException
+     */
+    public function readDoubles($count)
+    {
+        $doubles = array();
+
+        for ($i = 0; $i < $count; $i++) {
+            $doubles[] = $this->readDouble();
+        }
+
+        return $doubles;
+    }
+
+    /**
+     * @return int
+     * @throws UnexpectedValueException
+     */
+    public function readByteOrder()
+    {
+        $byteOrder = $this->unpackInput('C');
+
+        if ($byteOrder !== self::WKB_XDR && $byteOrder !== self::WKB_NDR) {
+            throw new UnexpectedValueException(sprintf('Invalid byte order "%s"', $byteOrder));
+        }
+
+        return $this->byteOrder = $byteOrder;
     }
 
     /**
@@ -140,10 +146,24 @@ class Reader
      */
     private function getByteOrder()
     {
-        if (! isset($this->byteOrder)) {
+        if (null === $this->byteOrder) {
             throw new UnexpectedValueException('Invalid byte order "unset"');
         }
 
         return $this->byteOrder;
+    }
+
+    /**
+     * @param string $format
+     *
+     * @return array
+     */
+    private function unpackInput($format)
+    {
+        $code        = version_compare(PHP_VERSION, '5.5.0-dev', '>=') ? 'a' : 'A';
+        $result      = unpack(sprintf('%sresult/%s*input', $format, $code), $this->input);
+        $this->input = $result['input'];
+
+        return $result['result'];
     }
 }
