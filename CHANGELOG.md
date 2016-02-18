@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+### Changed
+
+## [2.1.0] - 2016-02-18
+### Added
 - Reader load() method to allow reusing a Reader instance.
 - Parser parse() method to allow reusing a Parser instance.
 - 3DZ, 3DM, and 4DZM support for all types.
