@@ -96,17 +96,17 @@ class Parser
     /**
      * @var Reader
      */
-    private static $reader;
+    private $reader;
 
     /**
      * @param string $input
      */
     public function __construct($input = null)
     {
-        self::$reader = new Reader();
+        $this->reader = new Reader();
 
         if (null !== $input) {
-            self::$reader->load($input);
+            $this->reader->load($input);
         }
     }
 
@@ -121,7 +121,7 @@ class Parser
     public function parse($input = null)
     {
         if (null !== $input) {
-            self::$reader->load($input);
+            $this->reader->load($input);
         }
 
         return $this->readGeometry();
@@ -258,7 +258,7 @@ class Parser
      */
     private function readByteOrder()
     {
-        return self::$reader->readByteOrder();
+        return $this->reader->readByteOrder();
     }
 
     /**
@@ -268,7 +268,7 @@ class Parser
      */
     private function readType()
     {
-        return self::$reader->readLong();
+        return $this->reader->readLong();
     }
 
     /**
@@ -278,7 +278,7 @@ class Parser
      */
     private function readSrid()
     {
-        return self::$reader->readLong();
+        return $this->reader->readLong();
     }
 
     /**
@@ -287,7 +287,7 @@ class Parser
      */
     private function readCount()
     {
-        return self::$reader->readLong();
+        return $this->reader->readLong();
     }
 
     /**
@@ -342,7 +342,7 @@ class Parser
      */
     private function point()
     {
-        return self::$reader->readDoubles($this->pointSize);
+        return $this->reader->readDoubles($this->pointSize);
     }
 
     /**
