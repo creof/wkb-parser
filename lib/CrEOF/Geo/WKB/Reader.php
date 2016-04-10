@@ -161,7 +161,7 @@ class Reader
     private function unpackInput($format)
     {
         $code        = version_compare(PHP_VERSION, '5.5.0-dev', '>=') ? 'a' : 'A';
-        $result      = unpack(sprintf('%sresult/%s*input', $format, $code), $this->input);
+        $result      = unpack($format . 'result/' . $code . '*input', $this->input);
         $this->input = $result['input'];
 
         return $result['result'];
