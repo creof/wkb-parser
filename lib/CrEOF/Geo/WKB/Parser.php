@@ -144,12 +144,13 @@ class Parser
             $this->srid = $this->readSrid();
         }
 
-        $typeName = $this->getBaseTypeName($this->type);
+        $typeName = $this->getTypeName($this->type);
 
         return array(
-            'type'  => $this->getTypeName($this->type),
-            'srid'  => $this->srid,
-            'value' => $this->$typeName()
+            'type'      => $typeName,
+            'srid'      => $this->srid,
+            'value'     => $this->$typeName(),
+            'dimension' => $this->getDimension($this->type)
         );
     }
 
@@ -174,7 +175,7 @@ class Parser
      * @return string
      * @throws UnexpectedValueException
      */
-    private function getBaseTypeName($type)
+    private function getTypeName($type)
     {
         switch ($type & 0xFFFF) {
             case (self::WKB_TYPE_POINT):
@@ -225,31 +226,23 @@ class Parser
     }
 
     /**
-     * @param $type
+     * @param int $type
      *
      * @return string
      * @throws UnexpectedValueException
      */
-    private function getTypeName($type)
+    private function getDimension($type)
     {
-        $typeName = $this->getBaseTypeName($type);
-        $suffix   = '';
-
         switch ($type & (self::WKB_FLAG_Z | self::WKB_FLAG_M)) {
-            case (0):
-                break;
             case (self::WKB_FLAG_Z):
-                $suffix = ' Z';
-                break;
+                return 'Z';
             case (self::WKB_FLAG_M):
-                $suffix = ' M';
-                break;
+                return 'M';
             case (self::WKB_FLAG_Z | self::WKB_FLAG_M):
-                $suffix = ' ZM';
-                break;
+                return 'ZM';
         }
 
-        return $typeName . $suffix;
+        return null;
     }
     /**
      * Parse data byte order
@@ -483,7 +476,7 @@ class Parser
             }
 
             $values[] = array(
-                'type'  => $this->getBaseTypeName($type),
+                'type'  => $this->getTypeName($type),
                 'value' => $value,
             );
         }
@@ -521,7 +514,7 @@ class Parser
             }
 
             $values[] = array(
-                'type'  => $this->getBaseTypeName($type),
+                'type'  => $this->getTypeName($type),
                 'value' => $value,
             );
         }
@@ -559,7 +552,7 @@ class Parser
             }
 
             $values[] = array(
-                'type'  => $this->getBaseTypeName($type),
+                'type'  => $this->getTypeName($type),
                 'value' => $value,
             );
         }
@@ -595,7 +588,7 @@ class Parser
             }
 
             $values[] = array(
-                'type'  => $this->getBaseTypeName($type),
+                'type'  => $this->getTypeName($type),
                 'value' => $value,
             );
         }
@@ -629,7 +622,7 @@ class Parser
             }
 
             $values[] = array(
-                'type'  => $this->getBaseTypeName($type),
+                'type'  => $this->getTypeName($type),
                 'value' => $value,
             );
         }
@@ -652,7 +645,7 @@ class Parser
             $this->readByteOrder();
 
             $type     = $this->readType();
-            $typeName = $this->getBaseTypeName($type);
+            $typeName = $this->getTypeName($type);
 
             $values[] = array(
                 'type'  => $typeName,
