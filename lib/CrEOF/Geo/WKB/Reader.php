@@ -47,6 +47,11 @@ class Reader
     private $input;
 
     /**
+     * @var int
+     */
+    private static $machineByteOrder;
+
+    /**
      * @param string $input
      */
     public function __construct($input = null)
@@ -170,9 +175,16 @@ class Reader
     /**
      * @return bool
      */
-    private function getMachineByteOrder() {
+    private function getMachineByteOrder()
+    {
+        if (null !== self::$machineByteOrder) {
+            return self::$machineByteOrder;
+        }
+
         $result = unpack('S', "\x01\x00");
 
-        return $result[1] === 1 ? self::WKB_NDR : self::WKB_XDR;
+        self::$machineByteOrder = $result[1] === 1 ? self::WKB_NDR : self::WKB_XDR;
+
+        return self::$machineByteOrder;
     }
 }
