@@ -47,6 +47,11 @@ class Reader
     private $input;
 
     /**
+     * @var int
+     */
+    private static $machineByteOrder;
+
+    /**
      * @param string $input
      */
     public function __construct($input = null)
@@ -99,7 +104,7 @@ class Reader
     {
         $double = $this->unpackInput('d');
 
-        if (self::WKB_NDR === $this->getByteOrder()) {
+        if ($this->getMachineByteOrder() === $this->getByteOrder()) {
             return $double;
         }
 
@@ -165,5 +170,21 @@ class Reader
         $this->input = $result['input'];
 
         return $result['result'];
+    }
+
+    /**
+     * @return bool
+     */
+    private function getMachineByteOrder()
+    {
+        if (null !== self::$machineByteOrder) {
+            return self::$machineByteOrder;
+        }
+
+        $result = unpack('S', "\x01\x00");
+
+        self::$machineByteOrder = $result[1] === 1 ? self::WKB_NDR : self::WKB_XDR;
+
+        return self::$machineByteOrder;
     }
 }
