@@ -6,6 +6,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 ### Changed
 
+## [2.2.0] - 2016-xx-xx
+### Added
+- Added Tests namespace to Composer PSR-0 dev autoload.
+- Added 'dimension' key to returned array containing object dimensions (Z, M, or ZM).
+- Reader::getMachineByteOrder method to detect running platform endianness.
+### Changed
+- Parser property with Reader instance no longer static.
+- Replaced sprintf function call in Reader::unpackInput() with string concatenation.
+- Updated PHPUnit config to be compliant with XSD.
+- Updated PHPUnit config to use Composer autoload.
+- Updated documentation with new usage pattern.
+- Type name in returned array now contains only base type without dimensions (Z, M, and ZM).
+- Reader::readDouble() now checks running platform endianness before byte-swapping values instead of assuming little-endian.
+### Removed
+- Removed now unused TestInit
+
 ## [2.1.0] - 2016-02-18
 ### Added
 - Reader load() method to allow reusing a Reader instance.
