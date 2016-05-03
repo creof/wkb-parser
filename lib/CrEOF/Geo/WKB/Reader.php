@@ -124,7 +124,11 @@ class Reader
         $doubles = array();
 
         for ($i = 0; $i < $count; $i++) {
-            $doubles[] = $this->readDouble();
+            $double = $this->readDouble();
+
+            if (! is_nan($double)) {
+                $doubles[] = $double;
+            }
         }
 
         return $doubles;
