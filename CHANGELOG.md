@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 ### Changed
 
-## [2.2.0] - 2016-xx-xx
+## [2.2.0] - 2016-05-03
 ### Added
 - Added Tests namespace to Composer PSR-0 dev autoload.
 - Added 'dimension' key to returned array containing object dimensions (Z, M, or ZM).
