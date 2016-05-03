@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - NaN coordinates are not returned in point value array, empty point value now array().
+- Reader::readDouble() now deprecated and calls Reader::readFloat().
+- Reader::readDoubles() now deprecated and calls Reader::readFloats().
 
 ### Removed
 
