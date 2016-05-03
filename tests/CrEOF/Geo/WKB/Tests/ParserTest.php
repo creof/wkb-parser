@@ -80,11 +80,47 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param       $value
+     * @param array $expected
+     *
+     * @dataProvider goodBinaryData
+     */
+    public function testParser($value, array $expected)
+    {
+        $value  = pack('H*', $value);
+        $parser = new Parser($value);
+        $actual = $parser->parse();
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testReusedParser()
+    {
+        $parser = new Parser();
+
+        foreach ($this->goodBinaryData() as $testData) {
+            $value  = pack('H*', $testData['value']);
+            $actual = $parser->parse($value);
+
+            $this->assertEquals($testData['expected'], $actual);
+        }
+    }
+
+    /**
      * @return array
      */
     public function goodBinaryData()
     {
         return array(
+            'testParsingNDREmptyPointValue' => array(
+                'value' => '0101000000000000000000F87F000000000000F87F',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'POINT',
+                    'value' => array(),
+                    'dimension' => null
+                )
+            ),
             'testParsingNDRPointValue' => array(
                 'value' => '01010000003D0AD7A3701D41400000000000C055C0',
                 'expected' => array(
@@ -97,10 +133,10 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             'testParsingXDRPointValue' => array(
                 'value' => '000000000140411D70A3D70A3DC055C00000000000',
                 'expected' => array(
-                        'srid'  => null,
-                        'type'  => 'POINT',
-                        'value' => array(34.23, -87),
-                        'dimension' => null
+                    'srid'  => null,
+                    'type'  => 'POINT',
+                    'value' => array(34.23, -87),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRPointZValue' => array(
@@ -139,6 +175,24 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'M'
                 )
             ),
+            'testParsingNDREmptyPointZMValue' => array(
+                'value' => '01010000C0000000000000F87F000000000000F87F000000000000F87F000000000000F87F',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'POINT',
+                    'value' => array(),
+                    'dimension' => 'ZM'
+                )
+            ),
+            'testParsingXDREmptyPointZMValue' => array(
+                'value' => '00C00000017FF80000000000007FF80000000000007FF80000000000007FF8000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'POINT',
+                    'value' => array(),
+                    'dimension' => 'ZM'
+                )
+            ),
             'testParsingNDRPointZMValue' => array(
                 'value' => '01010000C0000000000000F03F000000000000004000000000000008400000000000001040',
                 'expected' => array(
@@ -160,10 +214,10 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             'testParsingNDRPointValueWithSrid' => array(
                 'value' => '01010000003D0AD7A3701D41400000000000C055C0',
                 'expected' => array(
-                        'srid'  => null,
-                        'type'  => 'POINT',
-                        'value' => array(34.23, -87),
-                        'dimension' => null
+                    'srid'  => null,
+                    'type'  => 'POINT',
+                    'value' => array(34.23, -87),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRPointValueWithSrid' => array(
@@ -211,6 +265,15 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'M'
                 )
             ),
+            'testParsingNDREmptyPointZMValueWithSrid' => array(
+                'value' => '01010000E08C100000000000000000F87F000000000000F87F000000000000F87F000000000000F87F',
+                'expected' => array(
+                    'srid'  => 4236,
+                    'type'  => 'POINT',
+                    'value' => array(),
+                    'dimension' => 'ZM'
+                )
+            ),
             'testParsingNDRPointZMValueWithSrid' => array(
                 'value' => '01010000e0e6100000000000000000f03f000000000000004000000000000008400000000000001040',
                 'expected' => array(
@@ -227,6 +290,15 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'type'  => 'POINT',
                     'value' => array(1, 2, 3, 4),
                     'dimension' => 'ZM'
+                )
+            ),
+            'testParsingNDREmptyLineStringValue' => array(
+                'value' => '010200000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'LINESTRING',
+                    'value' => array(),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRLineStringValue' => array(
@@ -431,6 +503,15 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                         array(1, 1, 4, 5)
                     ),
                     'dimension' => 'ZM'
+                )
+            ),
+            'testParsingNDREmptyPolygonValue' => array(
+                'value' => '010300000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'POLYGON',
+                    'value' => array(),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRPolygonValue' => array(
@@ -2071,6 +2152,29 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                         )
                     ),
                     'dimension' => 'ZM'
+                )
+            ),
+            'testParsingNDREmptyGeometryCollectionValue' => array(
+                'value' => '010700000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'GEOMETRYCOLLECTION',
+                    'value' => array(),
+                    'dimension' => null
+                )
+            ),
+            'testParsingNDRGeometryCollectionValueWithEmptyPoint' => array(
+                'value' => '0107000000010000000101000000000000000000F87F000000000000F87F',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'GEOMETRYCOLLECTION',
+                    'value' => array(
+                        array(
+                            'type'  => 'POINT',
+                            'value' => array()
+                        ),
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRGeometryCollectionValue' => array(
@@ -4156,34 +4260,5 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                 )
             )
         );
-    }
-
-    /**
-     * @param       $value
-     * @param array $expected
-     *
-     * @dataProvider goodBinaryData
-     */
-    public function testParser($value, array $expected)
-    {
-        $value  = pack('H*', $value);
-        $parser = new Parser($value);
-        $actual = $parser->parse();
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     */
-    public function testReusedParser()
-    {
-        $parser = new Parser();
-
-        foreach ($this->goodBinaryData() as $testData) {
-            $value  = pack('H*', $testData['value']);
-            $actual = $parser->parse($value);
-
-            $this->assertEquals($testData['expected'], $actual);
-        }
     }
 }
