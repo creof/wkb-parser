@@ -90,7 +90,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                 'expected' => array(
                     'srid'  => null,
                     'type'  => 'POINT',
-                    'value' => array(34.23, -87)
+                    'value' => array(34.23, -87),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRPointValue' => array(
@@ -98,55 +99,62 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                 'expected' => array(
                         'srid'  => null,
                         'type'  => 'POINT',
-                        'value' => array(34.23, -87)
+                        'value' => array(34.23, -87),
+                        'dimension' => null
                 )
             ),
             'testParsingNDRPointZValue' => array(
                 'value' => '0101000080000000000000F03F00000000000000400000000000000840',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'POINT Z',
-                    'value' => array(1, 2, 3)
+                    'type'  => 'POINT',
+                    'value' => array(1, 2, 3),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRPointZValue' => array(
                 'value' => '00800000013FF000000000000040000000000000004008000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'POINT Z',
-                    'value' => array(1, 2, 3)
+                    'type'  => 'POINT',
+                    'value' => array(1, 2, 3),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRPointMValue' => array(
                 'value' => '0101000040000000000000F03F00000000000000400000000000000840',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'POINT M',
-                    'value' => array(1, 2, 3)
+                    'type'  => 'POINT',
+                    'value' => array(1, 2, 3),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRPointMValue' => array(
                 'value' => '00400000013FF000000000000040000000000000004008000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'POINT M',
-                    'value' => array(1, 2, 3)
+                    'type'  => 'POINT',
+                    'value' => array(1, 2, 3),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRPointZMValue' => array(
                 'value' => '01010000C0000000000000F03F000000000000004000000000000008400000000000001040',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'POINT ZM',
-                    'value' => array(1, 2, 3, 4)
+                    'type'  => 'POINT',
+                    'value' => array(1, 2, 3, 4),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRPointZMValue' => array(
                 'value' => '00C00000013FF0000000000000400000000000000040080000000000004010000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'POINT ZM',
-                    'value' => array(1, 2, 3, 4)
+                    'type'  => 'POINT',
+                    'value' => array(1, 2, 3, 4),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRPointValueWithSrid' => array(
@@ -154,63 +162,71 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                 'expected' => array(
                         'srid'  => null,
                         'type'  => 'POINT',
-                        'value' => array(34.23, -87)
-                    )
+                        'value' => array(34.23, -87),
+                        'dimension' => null
+                )
             ),
             'testParsingXDRPointValueWithSrid' => array(
                 'value' => '0020000001000010E640411D70A3D70A3DC055C00000000000',
                 'expected' => array(
                     'srid'  => 4326,
                     'type'  => 'POINT',
-                    'value' => array(34.23, -87)
+                    'value' => array(34.23, -87),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRPointZValueWithSrid' => array(
                 'value' => '01010000A0E6100000000000000000F03F00000000000000400000000000000840',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'POINT Z',
-                    'value' => array(1, 2, 3)
+                    'type'  => 'POINT',
+                    'value' => array(1, 2, 3),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRPointZValueWithSrid' => array(
                 'value' => '00A0000001000010E63FF000000000000040000000000000004008000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'POINT Z',
-                    'value' => array(1, 2, 3)
+                    'type'  => 'POINT',
+                    'value' => array(1, 2, 3),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRPointMValueWithSrid' => array(
                 'value' => '0101000060e6100000000000000000f03f00000000000000400000000000000840',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'POINT M',
-                    'value' => array(1, 2, 3)
+                    'type'  => 'POINT',
+                    'value' => array(1, 2, 3),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRPointMValueWithSrid' => array(
                 'value' => '0060000001000010e63ff000000000000040000000000000004008000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'POINT M',
-                    'value' => array(1, 2, 3)
+                    'type'  => 'POINT',
+                    'value' => array(1, 2, 3),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRPointZMValueWithSrid' => array(
                 'value' => '01010000e0e6100000000000000000f03f000000000000004000000000000008400000000000001040',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'POINT ZM',
-                    'value' => array(1, 2, 3, 4)
+                    'type'  => 'POINT',
+                    'value' => array(1, 2, 3, 4),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRPointZMValueWithSrid' => array(
                 'value' => '00e0000001000010e63ff0000000000000400000000000000040080000000000004010000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'POINT ZM',
-                    'value' => array(1, 2, 3, 4)
+                    'type'  => 'POINT',
+                    'value' => array(1, 2, 3, 4),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRLineStringValue' => array(
@@ -221,7 +237,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'value' => array(
                         array(34.23, -87),
                         array(45.3, -92)
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRLineStringValue' => array(
@@ -232,7 +249,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'value' => array(
                         array(34.23, -87),
                         array(45.3, -92)
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRLineStringZValue' => array(
@@ -240,11 +258,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000f03f0000000000000840',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'LINESTRING Z',
+                    'type'  => 'LINESTRING',
                     'value' => array(
                         array(0, 0, 2),
                         array(1, 1, 3)
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRLineStringZValue' => array(
@@ -252,11 +271,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000004008000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'LINESTRING Z',
+                    'type'  => 'LINESTRING',
                     'value' => array(
                         array(0, 0, 2),
                         array(1, 1, 3)
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRLineStringMValue' => array(
@@ -264,11 +284,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000f03f0000000000000840',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'LINESTRING M',
+                    'type'  => 'LINESTRING',
                     'value' => array(
                         array(0, 0, 2),
                         array(1, 1, 3)
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRLineStringMValue' => array(
@@ -276,11 +297,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000004008000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'LINESTRING M',
+                    'type'  => 'LINESTRING',
                     'value' => array(
                         array(0, 0, 2),
                         array(1, 1, 3)
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRLineStringZMValue' => array(
@@ -288,11 +310,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000f03f000000000000f03f00000000000010400000000000001440',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'LINESTRING ZM',
+                    'type'  => 'LINESTRING',
                     'value' => array(
                         array(0, 0, 2, 3),
                         array(1, 1, 4, 5)
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRLineStringZMValue' => array(
@@ -300,11 +323,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000003ff000000000000040100000000000004014000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'LINESTRING ZM',
+                    'type'  => 'LINESTRING',
                     'value' => array(
                         array(0, 0, 2, 3),
                         array(1, 1, 4, 5)
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRLineStringValueWithSrid' => array(
@@ -315,7 +339,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'value' => array(
                         array(34.23, -87),
                         array(45.3, -92)
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRLineStringValueWithSrid' => array(
@@ -326,7 +351,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'value' => array(
                         array(34.23, -87),
                         array(45.3, -92)
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRLineStringZValueWithSrid' => array(
@@ -334,11 +360,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000f03f0000000000000840',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'LINESTRING Z',
+                    'type'  => 'LINESTRING',
                     'value' => array(
                         array(0, 0, 2),
                         array(1, 1, 3)
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRLineStringZValueWithSrid' => array(
@@ -346,11 +373,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . 'ff00000000000004008000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'LINESTRING Z',
+                    'type'  => 'LINESTRING',
                     'value' => array(
                         array(0, 0, 2),
                         array(1, 1, 3)
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRLineStringMValueWithSrid' => array(
@@ -358,11 +386,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000f03f0000000000000840',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'LINESTRING M',
+                    'type'  => 'LINESTRING',
                     'value' => array(
                         array(0, 0, 2),
                         array(1, 1, 3)
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRLineStringMValueWithSrid' => array(
@@ -370,11 +399,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . 'ff00000000000004008000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'LINESTRING M',
+                    'type'  => 'LINESTRING',
                     'value' => array(
                         array(0, 0, 2),
                         array(1, 1, 3)
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRLineStringZMValueWithSrid' => array(
@@ -382,11 +412,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000f03f000000000000f03f00000000000010400000000000001440',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'LINESTRING ZM',
+                    'type'  => 'LINESTRING',
                     'value' => array(
                         array(0, 0, 2, 3),
                         array(1, 1, 4, 5)
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRLineStringZMValueWithSrid' => array(
@@ -394,11 +425,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . 'ff00000000000003ff000000000000040100000000000004014000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'LINESTRING ZM',
+                    'type'  => 'LINESTRING',
                     'value' => array(
                         array(0, 0, 2, 3),
                         array(1, 1, 4, 5)
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRPolygonValue' => array(
@@ -415,7 +447,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(0, 10),
                             array(0, 0)
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRPolygonValue' => array(
@@ -432,7 +465,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(0, 10),
                             array(0, 0)
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRPolygonValueWithSrid' => array(
@@ -450,7 +484,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(0, 10),
                             array(0, 0)
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRPolygonValueWithSrid' => array(
@@ -468,7 +503,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(0, 10),
                             array(0, 0)
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRMultiRingPolygonValue' => array(
@@ -494,7 +530,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 7),
                             array(5, 5)
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRMultiRingPolygonValue' => array(
@@ -520,7 +557,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 7),
                             array(5, 5)
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRMultiRingPolygonZValue' => array(
@@ -532,7 +570,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000004000000000000000400000000000001440',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'POLYGON Z',
+                    'type'  => 'POLYGON',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -548,7 +586,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 2, 3),
                             array(2, 2, 5)
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRMultiRingPolygonZValue' => array(
@@ -560,7 +599,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000040000000000000004014000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'POLYGON Z',
+                    'type'  => 'POLYGON',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -576,7 +615,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 2, 3),
                             array(2, 2, 5)
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRMultiRingPolygonMValue' => array(
@@ -588,7 +628,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000004000000000000000400000000000001440',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'POLYGON M',
+                    'type'  => 'POLYGON',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -604,7 +644,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 2, 3),
                             array(2, 2, 5)
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRMultiRingPolygonMValue' => array(
@@ -616,7 +657,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000040000000000000004014000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'POLYGON M',
+                    'type'  => 'POLYGON',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -632,7 +673,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 2, 3),
                             array(2, 2, 5)
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRMultiRingPolygonZMValue' => array(
@@ -646,7 +688,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'POLYGON ZM',
+                    'type'  => 'POLYGON',
                     'value' => array(
                         array(
                             array(0, 0, 1, -1),
@@ -662,7 +704,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 2, 3, 1),
                             array(2, 2, 5, 0)
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRMultiRingPolygonZMValue' => array(
@@ -676,7 +719,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'POLYGON ZM',
+                    'type'  => 'POLYGON',
                     'value' => array(
                         array(
                             array(0, 0, 1, -1),
@@ -692,7 +735,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 2, 3, 1),
                             array(2, 2, 5, 0)
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRMultiRingPolygonValueWithSrid' => array(
@@ -718,7 +762,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 7),
                             array(5, 5)
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRMultiRingPolygonValueWithSrid' => array(
@@ -744,7 +789,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 7),
                             array(5, 5)
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRMultiRingPolygonZValueWithSrid' => array(
@@ -756,7 +802,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000004000000000000000400000000000001440',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'POLYGON Z',
+                    'type'  => 'POLYGON',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -772,7 +818,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 2, 3),
                             array(2, 2, 5)
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRMultiRingPolygonZValueWithSrid' => array(
@@ -784,7 +831,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000000040000000000000004014000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'POLYGON Z',
+                    'type'  => 'POLYGON',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -800,7 +847,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 2, 3),
                             array(2, 2, 5)
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRMultiRingPolygonMValueWithSrid' => array(
@@ -812,7 +860,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000004000000000000000400000000000001440',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'POLYGON M',
+                    'type'  => 'POLYGON',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -828,7 +876,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 2, 3),
                             array(2, 2, 5)
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRMultiRingPolygonMValueWithSrid' => array(
@@ -840,7 +889,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000000040000000000000004014000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'POLYGON M',
+                    'type'  => 'POLYGON',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -856,7 +905,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 2, 3),
                             array(2, 2, 5)
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRMultiRingPolygonZMValueWithSrid' => array(
@@ -870,7 +920,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'POLYGON ZM',
+                    'type'  => 'POLYGON',
                     'value' => array(
                         array(
                             array(0, 0, 1, -1),
@@ -886,7 +936,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 2, 3, 1),
                             array(2, 2, 5, 0)
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRMultiRingPolygonZMValueWithSrid' => array(
@@ -900,7 +951,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'POLYGON ZM',
+                    'type'  => 'POLYGON',
                     'value' => array(
                         array(
                             array(0, 0, 1, -1),
@@ -916,7 +967,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(5, 2, 3, 1),
                             array(2, 2, 5, 0)
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRMultiPointValue' => array(
@@ -930,7 +982,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                         array(10, 0),
                         array(10, 10),
                         array(0, 10)
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRMultiPointValue' => array(
@@ -944,7 +997,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                         array(10, 0),
                         array(10, 10),
                         array(0, 10)
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRMultiPointZValue' => array(
@@ -952,11 +1006,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000400000000000000000000000000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOINT Z',
+                    'type'  => 'MULTIPOINT',
                     'value' => array(
                         array(0, 0, 0),
                         array(2, 0, 1)
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRMultiPointZValue' => array(
@@ -964,11 +1019,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000000000000000000000003ff0000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOINT Z',
+                    'type'  => 'MULTIPOINT',
                     'value' => array(
                         array(0, 0, 0),
                         array(2, 0, 1)
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRMultiPointMValue' => array(
@@ -976,11 +1032,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000400000000000000000000000000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOINT M',
+                    'type'  => 'MULTIPOINT',
                     'value' => array(
                         array(0, 0, 2),
                         array(2, 0, 1)
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRMultiPointMValue' => array(
@@ -988,11 +1045,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000000000000000000000003ff0000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOINT M',
+                    'type'  => 'MULTIPOINT',
                     'value' => array(
                         array(0, 0, 2),
                         array(2, 0, 1)
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRMultiPointZMValue' => array(
@@ -1000,11 +1058,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '001010000c000000000000008400000000000000040000000000000f03f0000000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOINT ZM',
+                    'type'  => 'MULTIPOINT',
                     'value' => array(
                         array(0, 1, 2, 3),
                         array(3, 2, 1, 0)
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRMultiPointZMValue' => array(
@@ -1012,11 +1071,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000c0000001400800000000000040000000000000003ff00000000000000000000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOINT ZM',
+                    'type'  => 'MULTIPOINT',
                     'value' => array(
                         array(0, 1, 2, 3),
                         array(3, 2, 1, 0)
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRMultiPointValueWithSrid' => array(
@@ -1031,7 +1091,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                         array(10, 0),
                         array(10, 10),
                         array(0, 10)
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRMultiPointValueWithSrid' => array(
@@ -1046,7 +1107,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                         array(10, 0),
                         array(10, 10),
                         array(0, 10)
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRMultiPointZValueWithSrid' => array(
@@ -1054,11 +1116,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000400000000000000000000000000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOINT Z',
+                    'type'  => 'MULTIPOINT',
                     'value' => array(
                         array(0, 0, 0),
                         array(2, 0, 1)
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRMultiPointZValueWithSrid' => array(
@@ -1066,11 +1129,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000000000000000000000003ff0000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOINT Z',
+                    'type'  => 'MULTIPOINT',
                     'value' => array(
                         array(0, 0, 0),
                         array(2, 0, 1)
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRMultiPointMValueWithSrid' => array(
@@ -1078,11 +1142,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000400000000000000000000000000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOINT M',
+                    'type'  => 'MULTIPOINT',
                     'value' => array(
                         array(0, 0, 2),
                         array(2, 0, 1)
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRMultiPointMValueWithSrid' => array(
@@ -1090,11 +1155,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000000000000000000000003ff0000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOINT M',
+                    'type'  => 'MULTIPOINT',
                     'value' => array(
                         array(0, 0, 2),
                         array(2, 0, 1)
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRMultiPointZMValueWithSrid' => array(
@@ -1102,11 +1168,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '001010000c000000000000008400000000000000040000000000000f03f0000000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOINT ZM',
+                    'type'  => 'MULTIPOINT',
                     'value' => array(
                         array(0, 1, 2, 3),
                         array(3, 2, 1, 0)
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRMultiPointZMValueWithSrid' => array(
@@ -1114,11 +1181,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000c0000001400800000000000040000000000000003ff00000000000000000000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOINT ZM',
+                    'type'  => 'MULTIPOINT',
                     'value' => array(
                         array(0, 1, 2, 3),
                         array(3, 2, 1, 0)
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRMultiLineStringValue' => array(
@@ -1142,7 +1210,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(7, 7),
                             array(5, 7),
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRMultiLineStringValue' => array(
@@ -1166,7 +1235,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(7, 7),
                             array(5, 7),
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRMultiLineStringZValue' => array(
@@ -1175,7 +1245,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000840000000000000004000000000000000400000000000001040',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTILINESTRING Z',
+                    'type'  => 'MULTILINESTRING',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -1185,7 +1255,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(1, 1, 3),
                             array(2, 2, 4)
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRMultiLineStringZValue' => array(
@@ -1194,7 +1265,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000400000000000000040000000000000004010000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTILINESTRING Z',
+                    'type'  => 'MULTILINESTRING',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -1204,7 +1275,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(1, 1, 3),
                             array(2, 2, 4)
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRMultiLineStringMValue' => array(
@@ -1213,7 +1285,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000840000000000000004000000000000000400000000000001040',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTILINESTRING M',
+                    'type'  => 'MULTILINESTRING',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -1223,7 +1295,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(1, 1, 3),
                             array(2, 2, 4)
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRMultiLineStringMValue' => array(
@@ -1232,7 +1305,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000400000000000000040000000000000004010000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTILINESTRING M',
+                    'type'  => 'MULTILINESTRING',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -1242,7 +1315,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(1, 1, 3),
                             array(2, 2, 4)
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRMultiLineStringZMValue' => array(
@@ -1252,7 +1326,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000010400000000000000040',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTILINESTRING ZM',
+                    'type'  => 'MULTILINESTRING',
                     'value' => array(
                         array(
                             array(0, 0, 1, 5),
@@ -1262,7 +1336,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(1, 1, 3, 3),
                             array(2, 2, 4, 2)
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRMultiLineStringZMValue' => array(
@@ -1272,7 +1347,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000004000000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTILINESTRING ZM',
+                    'type'  => 'MULTILINESTRING',
                     'value' => array(
                         array(
                             array(0, 0, 1, 5),
@@ -1282,7 +1357,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(1, 1, 3, 3),
                             array(2, 2, 4, 2)
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRMultiLineStringValueWithSrid' => array(
@@ -1306,7 +1382,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(7, 7),
                             array(5, 7),
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRMultiLineStringValueWithSrid' => array(
@@ -1330,7 +1407,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(7, 7),
                             array(5, 7),
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRMultiLineStringZValueWithSrid' => array(
@@ -1339,7 +1417,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '03f0000000000000840000000000000004000000000000000400000000000001040',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'MULTILINESTRING Z',
+                    'type'  => 'MULTILINESTRING',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -1349,7 +1427,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(1, 1, 3),
                             array(2, 2, 4)
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRMultiLineStringZValueWithSrid' => array(
@@ -1358,7 +1437,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000400000000000000040000000000000004010000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTILINESTRING Z',
+                    'type'  => 'MULTILINESTRING',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -1368,7 +1447,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(1, 1, 3),
                             array(2, 2, 4)
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRMultiLineStringMValueWithSrid' => array(
@@ -1377,7 +1457,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '03f0000000000000840000000000000004000000000000000400000000000001040',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'MULTILINESTRING M',
+                    'type'  => 'MULTILINESTRING',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -1387,7 +1467,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(1, 1, 3),
                             array(2, 2, 4)
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRMultiLineStringMValueWithSrid' => array(
@@ -1396,7 +1477,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000400000000000000040000000000000004010000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTILINESTRING M',
+                    'type'  => 'MULTILINESTRING',
                     'value' => array(
                         array(
                             array(0, 0, 1),
@@ -1406,7 +1487,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(1, 1, 3),
                             array(2, 2, 4)
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRMultiLineStringZMValueWithSrid' => array(
@@ -1416,7 +1498,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '04000000000000010400000000000000040',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'MULTILINESTRING ZM',
+                    'type'  => 'MULTILINESTRING',
                     'value' => array(
                         array(
                             array(0, 0, 1, 5),
@@ -1426,7 +1508,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(1, 1, 3, 3),
                             array(2, 2, 4, 2)
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRMultiLineStringZMValueWithSrid' => array(
@@ -1436,7 +1519,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000004000000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTILINESTRING ZM',
+                    'type'  => 'MULTILINESTRING',
                     'value' => array(
                         array(
                             array(0, 0, 1, 5),
@@ -1446,7 +1529,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(1, 1, 3, 3),
                             array(2, 2, 4, 2)
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRMultiPolygonValue' => array(
@@ -1485,7 +1569,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(1, 1)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRMultiPolygonValue' => array(
@@ -1524,7 +1609,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(1, 1)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRMultiPolygonZValue' => array(
@@ -1536,7 +1622,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000840000000000000004000000000000000400000000000000840',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOLYGON Z',
+                    'type'  => 'MULTIPOLYGON',
                     'value' => array(
                         array(
                             array(
@@ -1554,7 +1640,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(2, 2, 3)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRMultiPolygonZValue' => array(
@@ -1566,7 +1653,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000400000000000000040000000000000004008000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOLYGON Z',
+                    'type'  => 'MULTIPOLYGON',
                     'value' => array(
                         array(
                             array(
@@ -1584,7 +1671,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(2, 2, 3)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRMultiPolygonMValue' => array(
@@ -1596,7 +1684,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000840000000000000004000000000000000400000000000000840',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOLYGON M',
+                    'type'  => 'MULTIPOLYGON',
                     'value' => array(
                         array(
                             array(
@@ -1614,7 +1702,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(2, 2, 3)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRMultiPolygonMValue' => array(
@@ -1626,7 +1715,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000400000000000000040000000000000004008000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOLYGON M',
+                    'type'  => 'MULTIPOLYGON',
                     'value' => array(
                         array(
                             array(
@@ -1644,7 +1733,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(2, 2, 3)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRMultiPolygonZMValue' => array(
@@ -1658,7 +1748,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000008400000000000000040',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOLYGON ZM',
+                    'type'  => 'MULTIPOLYGON',
                     'value' => array(
                         array(
                             array(
@@ -1676,7 +1766,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(2, 2, 3, 2)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRMultiPolygonZMValue' => array(
@@ -1690,7 +1781,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000004000000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTIPOLYGON ZM',
+                    'type'  => 'MULTIPOLYGON',
                     'value' => array(
                         array(
                             array(
@@ -1708,7 +1799,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(2, 2, 3, 2)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRMultiPolygonValueWithSrid' => array(
@@ -1747,7 +1839,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(1, 1)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRMultiPolygonValueWithSrid' => array(
@@ -1786,7 +1879,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(1, 1)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRMultiPolygonZValueWithSrid' => array(
@@ -1798,7 +1892,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000000840000000000000004000000000000000400000000000000840',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'MULTIPOLYGON Z',
+                    'type'  => 'MULTIPOLYGON',
                     'value' => array(
                         array(
                             array(
@@ -1816,7 +1910,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(2, 2, 3)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRMultiPolygonZValueWithSrid' => array(
@@ -1828,7 +1923,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '04008000000000000400000000000000040000000000000004008000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'MULTIPOLYGON Z',
+                    'type'  => 'MULTIPOLYGON',
                     'value' => array(
                         array(
                             array(
@@ -1846,7 +1941,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(2, 2, 3)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRMultiPolygonMValueWithSrid' => array(
@@ -1858,7 +1954,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000000840000000000000004000000000000000400000000000000840',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'MULTIPOLYGON M',
+                    'type'  => 'MULTIPOLYGON',
                     'value' => array(
                         array(
                             array(
@@ -1876,7 +1972,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(2, 2, 3)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRMultiPolygonMValueWithSrid' => array(
@@ -1888,7 +1985,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '04008000000000000400000000000000040000000000000004008000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'MULTIPOLYGON M',
+                    'type'  => 'MULTIPOLYGON',
                     'value' => array(
                         array(
                             array(
@@ -1906,7 +2003,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(2, 2, 3)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRMultiPolygonZMValueWithSrid' => array(
@@ -1920,7 +2018,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000000008400000000000000040',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'MULTIPOLYGON ZM',
+                    'type'  => 'MULTIPOLYGON',
                     'value' => array(
                         array(
                             array(
@@ -1938,7 +2036,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(2, 2, 3, 2)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRMultiPolygonZMValueWithSrid' => array(
@@ -1952,7 +2051,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '040080000000000004000000000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'MULTIPOLYGON ZM',
+                    'type'  => 'MULTIPOLYGON',
                     'value' => array(
                         array(
                             array(
@@ -1970,7 +2069,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(2, 2, 3, 2)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRGeometryCollectionValue' => array(
@@ -1995,7 +2095,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(20, 20)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRGeometryCollectionValue' => array(
@@ -2020,7 +2121,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(20, 20)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRGeometryCollectionZValue' => array(
@@ -2031,7 +2133,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . 'f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'GEOMETRYCOLLECTION Z',
+                    'type'  => 'GEOMETRYCOLLECTION',
                     'value' => array(
                         array(
                             'type'  => 'POINT',
@@ -2060,7 +2162,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRGeometryCollectionZValue' => array(
@@ -2071,7 +2174,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'GEOMETRYCOLLECTION Z',
+                    'type'  => 'GEOMETRYCOLLECTION',
                     'value' => array(
                         array(
                             'type'  => 'POINT',
@@ -2100,7 +2203,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRGeometryCollectionMValue' => array(
@@ -2111,7 +2215,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . 'f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'GEOMETRYCOLLECTION M',
+                    'type'  => 'GEOMETRYCOLLECTION',
                     'value' => array(
                         array(
                             'type'  => 'POINT',
@@ -2140,7 +2244,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRGeometryCollectionMValue' => array(
@@ -2151,7 +2256,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'GEOMETRYCOLLECTION M',
+                    'type'  => 'GEOMETRYCOLLECTION',
                     'value' => array(
                         array(
                             'type'  => 'POINT',
@@ -2180,7 +2285,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRGeometryCollectionZMValue' => array(
@@ -2192,7 +2298,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'GEOMETRYCOLLECTION ZM',
+                    'type'  => 'GEOMETRYCOLLECTION',
                     'value' => array(
                         array(
                             'type'  => 'POINT',
@@ -2221,7 +2327,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRGeometryCollectionZMValue' => array(
@@ -2233,7 +2340,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'GEOMETRYCOLLECTION ZM',
+                    'type'  => 'GEOMETRYCOLLECTION',
                     'value' => array(
                         array(
                             'type'  => 'POINT',
@@ -2262,7 +2369,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRGeometryCollectionValueWithSrid' => array(
@@ -2288,7 +2396,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(20, 20)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRGeometryCollectionValueWithSrid' => array(
@@ -2314,7 +2423,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(20, 20)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRGeometryCollectionZValueWithSrid' => array(
@@ -2325,7 +2435,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000f03f',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'GEOMETRYCOLLECTION Z',
+                    'type'  => 'GEOMETRYCOLLECTION',
                     'value' => array(
                         array(
                             'type'  => 'POINT',
@@ -2354,7 +2464,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRGeometryCollectionZValueWithSrid' => array(
@@ -2365,7 +2476,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'GEOMETRYCOLLECTION Z',
+                    'type'  => 'GEOMETRYCOLLECTION',
                     'value' => array(
                         array(
                             'type'  => 'POINT',
@@ -2394,7 +2505,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRGeometryCollectionMValueWithSrid' => array(
@@ -2405,7 +2517,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000f03f',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'GEOMETRYCOLLECTION M',
+                    'type'  => 'GEOMETRYCOLLECTION',
                     'value' => array(
                         array(
                             'type'  => 'POINT',
@@ -2434,7 +2546,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRGeometryCollectionMValueWithSrid' => array(
@@ -2445,7 +2558,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'GEOMETRYCOLLECTION M',
+                    'type'  => 'GEOMETRYCOLLECTION',
                     'value' => array(
                         array(
                             'type'  => 'POINT',
@@ -2474,7 +2587,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRGeometryCollectionZMValueWithSrid' => array(
@@ -2486,7 +2600,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000001840',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'GEOMETRYCOLLECTION ZM',
+                    'type'  => 'GEOMETRYCOLLECTION',
                     'value' => array(
                         array(
                             'type'  => 'POINT',
@@ -2515,7 +2629,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRGeometryCollectionZMValueWithSrid' => array(
@@ -2527,7 +2642,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000',
                 'expected' => array(
                     'srid'  => 4326,
-                    'type'  => 'GEOMETRYCOLLECTION ZM',
+                    'type'  => 'GEOMETRYCOLLECTION',
                     'value' => array(
                         array(
                             'type'  => 'POINT',
@@ -2556,7 +2671,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRCircularStringValue' => array(
@@ -2569,7 +2685,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                         array(0, 0),
                         array(1, 1),
                         array(2, 0)
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRCircularStringValue' => array(
@@ -2582,7 +2699,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                         array(0, 0),
                         array(1, 1),
                         array(2, 0)
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRCircularStringZValue' => array(
@@ -2590,12 +2708,13 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000f03f000000000000f03f00000000000000400000000000000000000000000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'CIRCULARSTRING Z',
+                    'type'  => 'CIRCULARSTRING',
                     'value' => array(
                         array(0, 0, 1),
                         array(1, 1, 1),
                         array(2, 0, 1)
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRCircularStringZValue' => array(
@@ -2603,12 +2722,13 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000003ff0000000000000400000000000000000000000000000003ff0000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'CIRCULARSTRING Z',
+                    'type'  => 'CIRCULARSTRING',
                     'value' => array(
                         array(0, 0, 1),
                         array(1, 1, 1),
                         array(2, 0, 1)
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRCircularStringMValue' => array(
@@ -2616,12 +2736,13 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000f03f000000000000f03f00000000000000400000000000000000000000000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'CIRCULARSTRING M',
+                    'type'  => 'CIRCULARSTRING',
                     'value' => array(
                         array(0, 0, 1),
                         array(1, 1, 1),
                         array(2, 0, 1)
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRCircularStringMValue' => array(
@@ -2629,12 +2750,13 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000003ff0000000000000400000000000000000000000000000003ff0000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'CIRCULARSTRING M',
+                    'type'  => 'CIRCULARSTRING',
                     'value' => array(
                         array(0, 0, 1),
                         array(1, 1, 1),
                         array(2, 0, 1)
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRCircularStringZMValue' => array(
@@ -2643,12 +2765,13 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000f03f0000000000000040',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'CIRCULARSTRING ZM',
+                    'type'  => 'CIRCULARSTRING',
                     'value' => array(
                         array(0, 0, 1, 2),
                         array(1, 1, 1, 2),
                         array(2, 0, 1, 2)
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRCircularStringZMValue' => array(
@@ -2657,12 +2780,13 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000004000000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'CIRCULARSTRING ZM',
+                    'type'  => 'CIRCULARSTRING',
                     'value' => array(
                         array(0, 0, 1, 2),
                         array(1, 1, 1, 2),
                         array(2, 0, 1, 2)
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRCompoundCurveValue' => array(
@@ -2688,7 +2812,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(4, 1)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRCompoundCurveValue' => array(
@@ -2714,7 +2839,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(4, 1)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRCompoundCurveZValue' => array(
@@ -2724,7 +2850,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'COMPOUNDCURVE Z',
+                    'type'  => 'COMPOUNDCURVE',
                     'value' => array(
                         array(
                             'type'  => 'CIRCULARSTRING',
@@ -2741,7 +2867,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(4, 1, 1)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRCompoundCurveZValue' => array(
@@ -2751,7 +2878,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'COMPOUNDCURVE Z',
+                    'type'  => 'COMPOUNDCURVE',
                     'value' => array(
                         array(
                             'type'  => 'CIRCULARSTRING',
@@ -2768,7 +2895,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(4, 1, 1)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRCompoundCurveMValue' => array(
@@ -2778,7 +2906,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'COMPOUNDCURVE M',
+                    'type'  => 'COMPOUNDCURVE',
                     'value' => array(
                         array(
                             'type'  => 'CIRCULARSTRING',
@@ -2795,7 +2923,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(4, 1, 1)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRCompoundCurveMValue' => array(
@@ -2805,7 +2934,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'COMPOUNDCURVE M',
+                    'type'  => 'COMPOUNDCURVE',
                     'value' => array(
                         array(
                             'type'  => 'CIRCULARSTRING',
@@ -2822,7 +2951,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(4, 1, 1)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRCompoundCurveZMValue' => array(
@@ -2832,7 +2962,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000000000000000000000000000000000001040000000000000f03f000000000000f03f000000000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'COMPOUNDCURVE ZM',
+                    'type'  => 'COMPOUNDCURVE',
                     'value' => array(
                         array(
                             'type'  => 'CIRCULARSTRING',
@@ -2849,7 +2979,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(4, 1, 1, 1)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRCompoundCurveZMValue' => array(
@@ -2859,7 +2990,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000000000000000000040100000000000003ff00000000000003ff00000000000003ff0000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'COMPOUNDCURVE ZM',
+                    'type'  => 'COMPOUNDCURVE',
                     'value' => array(
                         array(
                             'type'  => 'CIRCULARSTRING',
@@ -2876,7 +3007,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 array(4, 1, 1, 1)
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRCurvePolygonValue' => array(
@@ -2908,7 +3040,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRCurvePolygonValue' => array(
@@ -2940,7 +3073,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRCurvePolygonZValue' => array(
@@ -2950,7 +3084,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000f0bf000000000000f03f00000000000000000000000000000000000000000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'CURVEPOLYGON Z',
+                    'type'  => 'CURVEPOLYGON',
                     'value' => array(
                         array(
                             'type'  => 'COMPOUNDCURVE',
@@ -2973,7 +3107,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRCurvePolygonZValue' => array(
@@ -2983,7 +3118,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000003ff0000000000000000000000000000000000000000000003ff0000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'CURVEPOLYGON Z',
+                    'type'  => 'CURVEPOLYGON',
                     'value' => array(
                         array(
                             'type'  => 'COMPOUNDCURVE',
@@ -3006,7 +3141,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRCurvePolygonMValue' => array(
@@ -3016,7 +3152,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000f0bf000000000000f03f00000000000000000000000000000000000000000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'CURVEPOLYGON M',
+                    'type'  => 'CURVEPOLYGON',
                     'value' => array(
                         array(
                             'type'  => 'COMPOUNDCURVE',
@@ -3039,7 +3175,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRCurvePolygonMValue' => array(
@@ -3049,7 +3186,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000003ff0000000000000000000000000000000000000000000003ff0000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'CURVEPOLYGON M',
+                    'type'  => 'CURVEPOLYGON',
                     'value' => array(
                         array(
                             'type'  => 'COMPOUNDCURVE',
@@ -3072,7 +3209,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRCurvePolygonZMValue' => array(
@@ -3083,7 +3221,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000f03f00000000000000000000000000000000000000000000f03f0000000000000040',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'CURVEPOLYGON ZM',
+                    'type'  => 'CURVEPOLYGON',
                     'value' => array(
                         array(
                             'type'  => 'COMPOUNDCURVE',
@@ -3106,7 +3244,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRCurvePolygonZMValue' => array(
@@ -3117,7 +3256,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000000000000000000000000000000000000000003ff00000000000004000000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'CURVEPOLYGON ZM',
+                    'type'  => 'CURVEPOLYGON',
                     'value' => array(
                         array(
                             'type'  => 'COMPOUNDCURVE',
@@ -3140,7 +3279,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRMultiCurveValue' => array(
@@ -3172,7 +3312,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRMultiCurveValue' => array(
@@ -3204,7 +3345,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRMultiCurveZValue' => array(
@@ -3214,7 +3356,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000f0bf000000000000f03f00000000000000000000000000000000000000000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTICURVE Z',
+                    'type'  => 'MULTICURVE',
                     'value' => array(
                         array(
                             'type'  => 'COMPOUNDCURVE',
@@ -3237,7 +3379,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRMultiCurveZValue' => array(
@@ -3247,7 +3390,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000003ff0000000000000000000000000000000000000000000003ff0000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTICURVE Z',
+                    'type'  => 'MULTICURVE',
                     'value' => array(
                         array(
                             'type'  => 'COMPOUNDCURVE',
@@ -3270,7 +3413,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRMultiCurveMValue' => array(
@@ -3280,7 +3424,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000f0bf000000000000f03f00000000000000000000000000000000000000000000f03f',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTICURVE M',
+                    'type'  => 'MULTICURVE',
                     'value' => array(
                         array(
                             'type'  => 'COMPOUNDCURVE',
@@ -3303,7 +3447,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRMultiCurveMValue' => array(
@@ -3313,7 +3458,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000000000003ff0000000000000000000000000000000000000000000003ff0000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTICURVE M',
+                    'type'  => 'MULTICURVE',
                     'value' => array(
                         array(
                             'type'  => 'COMPOUNDCURVE',
@@ -3336,7 +3481,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRMultiCurveZMValue' => array(
@@ -3347,7 +3493,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000f03f00000000000000000000000000000000000000000000f03f0000000000000040',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTICURVE ZM',
+                    'type'  => 'MULTICURVE',
                     'value' => array(
                         array(
                             'type'  => 'COMPOUNDCURVE',
@@ -3370,7 +3516,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRMultiCurveZMValue' => array(
@@ -3381,7 +3528,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000000000000000000000000000000000000000003ff00000000000004000000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTICURVE ZM',
+                    'type'  => 'MULTICURVE',
                     'value' => array(
                         array(
                             'type'  => 'COMPOUNDCURVE',
@@ -3404,7 +3551,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRMultiSurfaceValue' => array(
@@ -3455,7 +3603,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingXDRMultiSurfaceValue' => array(
@@ -3506,7 +3655,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => null
                 )
             ),
             'testParsingNDRMultiSurfaceZValue' => array(
@@ -3519,7 +3669,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000024400000000000002440000000000000244000000000000024400000000000002440',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTISURFACE Z',
+                    'type'  => 'MULTISURFACE',
                     'value' => array(
                         array(
                             'type'  => 'CURVEPOLYGON',
@@ -3559,7 +3709,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingXDRMultiSurfaceZValue' => array(
@@ -3572,7 +3723,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000004024000000000000402400000000000040240000000000004024000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTISURFACE Z',
+                    'type'  => 'MULTISURFACE',
                     'value' => array(
                         array(
                             'type'  => 'CURVEPOLYGON',
@@ -3612,7 +3763,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRMultiSurfaceMValue' => array(
@@ -3625,7 +3777,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000024400000000000002440000000000000244000000000000024400000000000002440',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTISURFACE M',
+                    'type'  => 'MULTISURFACE',
                     'value' => array(
                         array(
                             'type'  => 'CURVEPOLYGON',
@@ -3665,7 +3817,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingXDRMultiSurfaceMValue' => array(
@@ -3678,7 +3831,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '0000000004024000000000000402400000000000040240000000000004024000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTISURFACE M',
+                    'type'  => 'MULTISURFACE',
                     'value' => array(
                         array(
                             'type'  => 'CURVEPOLYGON',
@@ -3718,7 +3871,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             ),
             'testParsingNDRMultiSurfaceZMValue' => array(
@@ -3733,7 +3887,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000002440000000000000244000000000000024400000000000002440',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTISURFACE ZM',
+                    'type'  => 'MULTISURFACE',
                     'value' => array(
                         array(
                             'type'  => 'CURVEPOLYGON',
@@ -3773,7 +3927,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingXDRMultiSurfaceZMValue' => array(
@@ -3788,7 +3943,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '000000000402400000000000040240000000000004024000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'MULTISURFACE ZM',
+                    'type'  => 'MULTISURFACE',
                     'value' => array(
                         array(
                             'type'  => 'CURVEPOLYGON',
@@ -3828,7 +3983,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'ZM'
                 )
             ),
             'testParsingNDRPolyhedralSurfaceZValue' => array(
@@ -3848,7 +4004,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000144000000000000024400000000000002e40000000000000000000000000000000000000000000002e400000000'
                     . '000000000',
                 'expected' => array(
-                    'type' => 'POLYHEDRALSURFACE Z',
+                    'type' => 'POLYHEDRALSURFACE',
                     'srid' => null,
                     'value' => array(
                         array(
@@ -3911,7 +4067,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'Z'
                 )
             ),
             'testParsingNDRPolyhedralSurfaceMValue' => array(
@@ -3931,7 +4088,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     . '00000144000000000000024400000000000002e40000000000000000000000000000000000000000000002e400000000'
                     . '000000000',
                 'expected' => array(
-                    'type' => 'POLYHEDRALSURFACE M',
+                    'type' => 'POLYHEDRALSURFACE',
                     'srid' => null,
                     'value' => array(
                         array(
@@ -3994,7 +4151,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                                 )
                             )
                         )
-                    )
+                    ),
+                    'dimension' => 'M'
                 )
             )
         );
