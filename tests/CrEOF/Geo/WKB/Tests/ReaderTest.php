@@ -136,7 +136,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $result);
     }
 
-    public function testReadingNDRBinaryDouble()
+    public function testReadingNDRBinaryFloat()
     {
         $value  = '013D0AD7A3701D4140';
         $value  = pack('H*', $value);
@@ -144,12 +144,12 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
         $reader->readByteOrder();
 
-        $result = $reader->readDouble();
+        $result = $reader->readFloat();
 
         $this->assertEquals(34.23, $result);
     }
 
-    public function testReadingXDRBinaryDouble()
+    public function testReadingXDRBinaryFloat()
     {
         $value  = '0040411D70A3D70A3D';
         $value  = pack('H*', $value);
@@ -157,31 +157,31 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
         $reader->readByteOrder();
 
-        $result = $reader->readDouble();
+        $result = $reader->readFloat();
 
         $this->assertEquals(34.23, $result);
     }
 
-    public function testReadingNDRHexDouble()
+    public function testReadingNDRHexFloat()
     {
         $value  = '013D0AD7A3701D4140';
         $reader = new Reader($value);
 
         $reader->readByteOrder();
 
-        $result = $reader->readDouble();
+        $result = $reader->readFloat();
 
         $this->assertEquals(34.23, $result);
     }
 
-    public function testReadingXDRHexDouble()
+    public function testReadingXDRHexFloat()
     {
         $value  = '0040411D70A3D70A3D';
         $reader = new Reader($value);
 
         $reader->readByteOrder();
 
-        $result = $reader->readDouble();
+        $result = $reader->readFloat();
 
         $this->assertEquals(34.23, $result);
     }
@@ -222,7 +222,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
         $reader->readByteOrder();
 
-        $result = $reader->readDouble();
+        $result = $reader->readFloat();
 
         $this->assertEquals(34.23, $result);
     }

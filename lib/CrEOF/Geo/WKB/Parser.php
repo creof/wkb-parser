@@ -335,7 +335,7 @@ class Parser
      */
     private function point()
     {
-        return $this->reader->readDoubles($this->pointSize);
+        return $this->reader->readFloats($this->pointSize);
     }
 
     /**

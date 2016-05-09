@@ -30,7 +30,7 @@ $value2 = $parser->parse($input2);
 
 The parser will return an array with the keys ```type```, ```value```, ```srid```, and ```dimension```.
 - ```type``` string, the spatial object type (POINT, LINESTRING, etc.) without any dimension.
-- ```value``` array, contains integer or float values for points, or nested arrays containing these based on spatial object type.
+- ```value``` array, contains integer or float values for points, nested arrays containing these based on spatial object type, or empty array for EMPTY geometry.
 - ```srid``` integer, the SRID if EWKT value was parsed, ```null``` otherwise.
 - ```dimension``` string, will contain ```Z```, ```M```, or ```ZM``` for the respective 3D and 4D objects, ```null``` otherwise.
 

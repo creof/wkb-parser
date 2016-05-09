@@ -4,7 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Tests for empty geometry objects.
+
 ### Changed
+- NaN coordinates are not returned in point value array, empty point value now array().
+- Reader::readDouble() now deprecated and calls Reader::readFloat().
+- Reader::readDoubles() now deprecated and calls Reader::readFloats().
+
+### Removed
 
 ## [2.2.0] - 2016-05-03
 ### Added
