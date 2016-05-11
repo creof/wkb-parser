@@ -94,6 +94,11 @@ class Parser
     private $byteOrder;
 
     /**
+     * @var int
+     */
+    private $dimensions;
+
+    /**
      * @var Reader
      */
     private $reader;
@@ -138,11 +143,13 @@ class Parser
         $this->srid      = null;
         $this->byteOrder = $this->readByteOrder();
         $this->type      = $this->readType();
-        $this->pointSize = $this->getPointSize($this->type);
 
         if ($this->hasFlag($this->type, self::WKB_FLAG_SRID)) {
             $this->srid = $this->readSrid();
         }
+
+        $this->dimensions = $this->getDimensions($this->type);
+        $this->pointSize  = $this->getPointSize($this->dimensions);
 
         $typeName = $this->getTypeName($this->type);
 
@@ -150,7 +157,7 @@ class Parser
             'type'      => $typeName,
             'srid'      => $this->srid,
             'value'     => $this->$typeName(),
-            'dimension' => $this->getDimension($this->type)
+            'dimension' => $this->getDimensionType($this->dimensions)
         );
     }
 
@@ -165,6 +172,99 @@ class Parser
     private function hasFlag($type, $flag)
     {
         return ($type & $flag) === $flag;
+    }
+
+    /**
+     * @param int $type
+     *
+     * @return bool
+     */
+    private function is2D($type)
+    {
+        return $type < 32;
+    }
+
+    /**
+     * @param int $type
+     *
+     * @return int|null
+     */
+    private function getDimensions($type)
+    {
+        if ($this->is2D($type)) {
+            return null;
+        }
+
+        if ($type & (self::WKB_FLAG_SRID | self::WKB_FLAG_M | self::WKB_FLAG_Z)) {
+            return $type & (self::WKB_FLAG_M | self::WKB_FLAG_Z);
+        }
+
+        return ($type % 1000) * 1000;
+    }
+
+    /**
+     * @param int $dimensions
+     *
+     * @return string
+     */
+    private function getDimensionType($dimensions)
+    {
+        if ($this->is2D($dimensions)) {
+            return null;
+        }
+
+        switch ($dimensions) {
+            case (1000):
+                //no break
+            case (self::WKB_FLAG_Z):
+                return 'Z';
+            case (2000):
+                //no break
+            case (self::WKB_FLAG_M):
+                return 'M';
+            case (3000):
+                //no break
+            case (self::WKB_FLAG_M | self::WKB_FLAG_Z):
+                return 'ZM';
+        }
+
+        return null;
+    }
+
+    /**
+     * @param int $type
+     *
+     * @return int
+     */
+    private function getDimensionedPrimitive($type)
+    {
+        if (null === $this->dimensions) {
+            return $type;
+        }
+
+        if ($this->dimensions & (self::WKB_FLAG_Z | self::WKB_FLAG_M)) {
+            return $type | $this->dimensions;
+        }
+
+        return $type + $this->dimensions;
+    }
+
+    /**
+     * @param int $type
+     *
+     * @return int
+     */
+    private function getTypePrimitive($type)
+    {
+        if ($this->is2D($type)) {
+            return $type;
+        }
+
+        if ($type > 0xFFFF) {
+            return $type & 0xFF;
+        }
+
+        return $type % 1000;
     }
 
     /**
@@ -226,25 +326,6 @@ class Parser
     }
 
     /**
-     * @param int $type
-     *
-     * @return string
-     * @throws UnexpectedValueException
-     */
-    private function getDimension($type)
-    {
-        switch ($type & (self::WKB_FLAG_Z | self::WKB_FLAG_M)) {
-            case (self::WKB_FLAG_Z):
-                return 'Z';
-            case (self::WKB_FLAG_M):
-                return 'M';
-            case (self::WKB_FLAG_Z | self::WKB_FLAG_M):
-                return 'ZM';
-        }
-
-        return null;
-    }
-    /**
      * Parse data byte order
      *
      * @throws UnexpectedValueException
@@ -284,13 +365,31 @@ class Parser
     }
 
     /**
-     * @param int $type
+     * @param null|int $dimensions
      *
      * @return int
+     * @throws UnexpectedValueException
      */
-    private function getPointSize($type)
+    private function getPointSize($dimensions)
     {
-        return 2 + $this->hasTypeFlag($type, self::WKB_FLAG_M) + $this->hasTypeFlag($type, self::WKB_FLAG_Z);
+        switch ($dimensions) {
+            case null:
+                return 2;
+            case (1000):
+                //no break
+            case (self::WKB_FLAG_Z):
+                return 3;
+            case (2000):
+                //no break
+            case (self::WKB_FLAG_M):
+                return 3;
+            case (3000):
+                //no break
+            case (self::WKB_FLAG_M | self::WKB_FLAG_Z):
+                return 4;
+        }
+
+        throw new UnexpectedValueException();
     }
 
     /**
