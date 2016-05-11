@@ -199,6 +199,22 @@ class Reader
 
     /**
      * @return int
+     */
+    public function getCurrentPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLastPosition()
+    {
+        return $this->position - $this->previous;
+    }
+
+    /**
+     * @return int
      * @throws UnexpectedValueException
      */
     private function getByteOrder()
