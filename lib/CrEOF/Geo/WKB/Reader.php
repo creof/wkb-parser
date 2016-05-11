@@ -23,6 +23,7 @@
 
 namespace CrEOF\Geo\WKB;
 
+use CrEOF\Geo\WKB\Exception\RangeException;
 use CrEOF\Geo\WKB\Exception\UnexpectedValueException;
 
 /**
@@ -118,6 +119,7 @@ class Reader
     /**
      * @return float
      * @throws UnexpectedValueException
+     * @throws RangeException
      *
      * @deprecated use readFloat()
      */
@@ -129,6 +131,7 @@ class Reader
     /**
      * @return float
      * @throws UnexpectedValueException
+     * @throws RangeException
      */
     public function readFloat()
     {
@@ -162,6 +165,7 @@ class Reader
      * @param int $count
      *
      * @return float[]
+     * @throws RangeException
      * @throws UnexpectedValueException
      */
     public function readFloats($count)
@@ -181,6 +185,7 @@ class Reader
 
     /**
      * @return int
+     * @throws RangeException
      * @throws UnexpectedValueException
      */
     public function readByteOrder()
@@ -230,11 +235,18 @@ class Reader
      * @param string $format
      *
      * @return array
+     * @throws RangeException
      */
     private function unpackInput($format)
     {
-        $code        = version_compare(PHP_VERSION, '5.5.0-dev', '>=') ? 'a' : 'A';
-        $result      = unpack($format . 'result/' . $code . '*input', $this->input);
+        $code = version_compare(PHP_VERSION, '5.5.0-dev', '>=') ? 'a' : 'A';
+
+        try {
+            $result = unpack($format . 'result/' . $code . '*input', $this->input);
+        } catch (\Exception $e) {
+            throw new RangeException($e->getMessage() . ' at byte ' . $this->getLastPosition() . ' of ' . $this->length);
+        }
+
         $this->input = $result['input'];
 
         return $result['result'];
