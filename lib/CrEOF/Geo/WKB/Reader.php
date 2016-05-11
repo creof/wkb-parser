@@ -166,7 +166,7 @@ class Reader
     {
         $byteOrder = $this->unpackInput('C');
 
-        if ($byteOrder !== self::WKB_XDR && $byteOrder !== self::WKB_NDR) {
+        if ($byteOrder & 0xFE) {
             throw new UnexpectedValueException(sprintf('Invalid byte order "%s"', $byteOrder));
         }
 
