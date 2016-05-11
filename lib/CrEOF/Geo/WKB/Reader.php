@@ -49,6 +49,21 @@ class Reader
     /**
      * @var int
      */
+    private $position;
+
+    /**
+     * @var int
+     */
+    private $previous;
+
+    /**
+     * @var int
+     */
+    private $length;
+
+    /**
+     * @var int
+     */
     private static $machineByteOrder;
 
     /**
@@ -68,6 +83,10 @@ class Reader
      */
     public function load($input)
     {
+        $this->position = 0;
+        $this->previous = 0;
+        $this->length   = strlen($input);
+
         if (ord($input) < 32) {
             $this->input = $input;
 
@@ -89,11 +108,11 @@ class Reader
      */
     public function readLong()
     {
-        if (self::WKB_NDR === $this->getByteOrder()) {
-            return $this->unpackInput('V');
-        }
+        $value           = self::WKB_NDR === $this->getByteOrder() ? $this->unpackInput('V') : $this->unpackInput('N');
+        $this->previous  = 4;
+        $this->position += $this->previous;
 
-        return $this->unpackInput('N');
+        return $value;
     }
 
     /**
@@ -115,13 +134,15 @@ class Reader
     {
         $double = $this->unpackInput('d');
 
-        if ($this->getMachineByteOrder() === $this->getByteOrder()) {
-            return $double;
+        if ($this->getMachineByteOrder() !== $this->getByteOrder()) {
+            $double = unpack('dvalue', strrev(pack('d', $double)));
+            $double = $double['value'];
         }
 
-        $double = unpack('dvalue', strrev(pack('d', $double)));
+        $this->previous  = 8;
+        $this->position += $this->previous;
 
-        return $double['value'];
+        return $double;
     }
 
     /**
@@ -165,6 +186,9 @@ class Reader
     public function readByteOrder()
     {
         $byteOrder = $this->unpackInput('C');
+
+        $this->previous  = 1;
+        $this->position += $this->previous;
 
         if ($byteOrder & 0xFE) {
             throw new UnexpectedValueException(sprintf('Invalid byte order "%s"', $byteOrder));
