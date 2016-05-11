@@ -140,7 +140,7 @@ class Parser
         $this->type      = $this->readType();
         $this->pointSize = $this->getPointSize($this->type);
 
-        if ($this->hasTypeFlag($this->type, self::WKB_FLAG_SRID)) {
+        if ($this->hasFlag($this->type, self::WKB_FLAG_SRID)) {
             $this->srid = $this->readSrid();
         }
 
@@ -155,14 +155,14 @@ class Parser
     }
 
     /**
-     * Check presence flags
+     * Check type for flag
      *
      * @param int $type
      * @param int $flag
      *
      * @return bool
      */
-    private function hasTypeFlag($type, $flag)
+    private function hasFlag($type, $flag)
     {
         return ($type & $flag) === $flag;
     }
