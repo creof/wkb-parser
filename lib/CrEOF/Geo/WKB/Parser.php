@@ -486,7 +486,7 @@ class Parser
 
             $type = $this->readType();
 
-            if (self::WKB_TYPE_POINT !== ($type & 0xFFFF)) {
+            if ($this->getDimensionedPrimitive(self::WKB_TYPE_POINT) !== $type) {
                 throw new UnexpectedValueException();
             }
 
@@ -512,7 +512,7 @@ class Parser
 
             $type = $this->readType();
 
-            if (self::WKB_TYPE_LINESTRING !== ($type & 0xFFFF)) {
+            if ($this->getDimensionedPrimitive(self::WKB_TYPE_LINESTRING) !== $type) {
                 throw new UnexpectedValueException();
             }
 
@@ -538,7 +538,7 @@ class Parser
 
             $type = $this->readType();
 
-            if (self::WKB_TYPE_POLYGON !== ($type & 0xFFFF)) {
+            if ($this->getDimensionedPrimitive(self::WKB_TYPE_POLYGON) !== $type) {
                 throw new UnexpectedValueException();
             }
 
@@ -564,10 +564,10 @@ class Parser
 
             $type = $this->readType();
 
-            switch ($type & 0xFFFF) {
-                case (self::WKB_TYPE_LINESTRING):
+            switch ($type) {
+                case ($this->getDimensionedPrimitive(self::WKB_TYPE_LINESTRING)):
                     // no break
-                case (self::WKB_TYPE_CIRCULARSTRING):
+                case ($this->getDimensionedPrimitive(self::WKB_TYPE_CIRCULARSTRING)):
                     $value = $this->readPoints($this->readCount());
                     break;
                 default:
@@ -599,13 +599,13 @@ class Parser
 
             $type = $this->readType();
 
-            switch ($type & 0xFFFF) {
-                case (self::WKB_TYPE_LINESTRING):
+            switch ($type) {
+                case ($this->getDimensionedPrimitive(self::WKB_TYPE_LINESTRING)):
                     // no break
-                case (self::WKB_TYPE_CIRCULARSTRING):
+                case ($this->getDimensionedPrimitive(self::WKB_TYPE_CIRCULARSTRING)):
                     $value = $this->readPoints($this->readCount());
                     break;
-                case (self::WKB_TYPE_COMPOUNDCURVE):
+                case ($this->getDimensionedPrimitive(self::WKB_TYPE_COMPOUNDCURVE)):
                     $value = $this->compoundCurve();
                     break;
                 default:
@@ -637,13 +637,13 @@ class Parser
 
             $type = $this->readType();
 
-            switch ($type & 0xFFFF) {
-                case (self::WKB_TYPE_LINESTRING):
+            switch ($type) {
+                case ($this->getDimensionedPrimitive(self::WKB_TYPE_LINESTRING)):
                     // no break
-                case (self::WKB_TYPE_CIRCULARSTRING):
+                case ($this->getDimensionedPrimitive(self::WKB_TYPE_CIRCULARSTRING)):
                     $value = $this->readPoints($this->readCount());
                     break;
-                case (self::WKB_TYPE_COMPOUNDCURVE):
+                case ($this->getDimensionedPrimitive(self::WKB_TYPE_COMPOUNDCURVE)):
                     $value = $this->compoundCurve();
                     break;
                 default:
@@ -675,11 +675,11 @@ class Parser
 
             $type = $this->readType();
 
-            switch ($type & 0xFFFF) {
-                case (self::WKB_TYPE_POLYGON):
+            switch ($type) {
+                case ($this->getDimensionedPrimitive(self::WKB_TYPE_POLYGON)):
                     $value = $this->polygon();
                     break;
-                case (self::WKB_TYPE_CURVEPOLYGON):
+                case ($this->getDimensionedPrimitive(self::WKB_TYPE_CURVEPOLYGON)):
                     $value = $this->curvePolygon();
                     break;
                 default:
@@ -711,8 +711,8 @@ class Parser
 
             $type = $this->readType();
 
-            switch ($type & 0xFFFF) {
-                case (self::WKB_TYPE_POLYGON):
+            switch ($type) {
+                case ($this->getDimensionedPrimitive(self::WKB_TYPE_POLYGON)):
                     $value = $this->polygon();
                     break;
                 // is polygon the only one?
