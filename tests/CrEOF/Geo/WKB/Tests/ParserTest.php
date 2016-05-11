@@ -200,6 +200,15 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'Z'
                 )
             ),
+            'xdrPointZOGCValue' => array(
+                'value' => '00000003E94117C89F84189375411014361BA5E3540000000000000000',
+                'expected' => array(
+                    'srid'  => null,
+                    'type'  => 'Point',
+                    'value' => array(389671.879, 263437.527, 0),
+                    'dimension' => 'Z'
+                )
+            ),
             'ndrPointMValue' => array(
                 'value' => '0101000040000000000000F03F00000000000000400000000000000840',
                 'expected' => array(
