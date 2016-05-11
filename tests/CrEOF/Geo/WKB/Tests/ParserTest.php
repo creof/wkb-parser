@@ -87,8 +87,32 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testParser($value, array $expected)
     {
-        $value  = pack('H*', $value);
         $parser = new Parser($value);
+        $actual = $parser->parse();
+
+        $this->assertEquals($expected, $actual);
+
+        $parser = new Parser('x' . $value);
+        $actual = $parser->parse();
+
+        $this->assertEquals($expected, $actual);
+
+        $parser = new Parser('X' . $value);
+        $actual = $parser->parse();
+
+        $this->assertEquals($expected, $actual);
+
+        $parser = new Parser('0x' . $value);
+        $actual = $parser->parse();
+
+        $this->assertEquals($expected, $actual);
+
+        $parser = new Parser('0X' . $value);
+        $actual = $parser->parse();
+
+        $this->assertEquals($expected, $actual);
+
+        $parser = new Parser(pack('H*', $value));
         $actual = $parser->parse();
 
         $this->assertEquals($expected, $actual);
@@ -99,8 +123,27 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $parser = new Parser();
 
         foreach ($this->goodBinaryData() as $testData) {
-            $value  = pack('H*', $testData['value']);
-            $actual = $parser->parse($value);
+            $actual = $parser->parse($testData['value']);
+
+            $this->assertEquals($testData['expected'], $actual);
+
+            $actual = $parser->parse('x' . $testData['value']);
+
+            $this->assertEquals($testData['expected'], $actual);
+
+            $actual = $parser->parse('X' . $testData['value']);
+
+            $this->assertEquals($testData['expected'], $actual);
+
+            $actual = $parser->parse('0x' . $testData['value']);
+
+            $this->assertEquals($testData['expected'], $actual);
+
+            $actual = $parser->parse('0X' . $testData['value']);
+
+            $this->assertEquals($testData['expected'], $actual);
+
+            $actual = $parser->parse(pack('H*', $testData['value']));
 
             $this->assertEquals($testData['expected'], $actual);
         }
