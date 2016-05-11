@@ -277,7 +277,7 @@ class Parser
      */
     private function getTypeName($type)
     {
-        switch ($type & 0xFFFF) {
+        switch ($this->getTypePrimitive($type)) {
             case (self::WKB_TYPE_POINT):
                 $typeName = self::TYPE_POINT;
                 break;
