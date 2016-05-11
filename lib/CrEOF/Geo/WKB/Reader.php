@@ -96,7 +96,7 @@ class Reader
             return;
         }
 
-        $position = strpos($input, 'x');
+        $position = stripos($input, 'x');
 
         if (false !== $position) {
             $input = substr($input, $position + 1);
