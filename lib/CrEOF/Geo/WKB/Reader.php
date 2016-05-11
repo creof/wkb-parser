@@ -191,7 +191,7 @@ class Reader
         $this->position += $this->previous;
 
         if ($byteOrder & 0xFE) {
-            throw new UnexpectedValueException(sprintf('Invalid byte order "%s"', $byteOrder));
+            throw new UnexpectedValueException('Invalid byte order "' . $byteOrder . '"');
         }
 
         return $this->byteOrder = $byteOrder;
