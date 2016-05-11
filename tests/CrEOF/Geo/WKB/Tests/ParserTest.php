@@ -60,8 +60,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        \CrEOF\Geo\WKB\Exception\RangeException
-     * @expectedExceptionMessage unpack(): Type d: not enough input, need 8, have 4 at byte 5 of 17
+     * @expectedException              \CrEOF\Geo\WKB\Exception\RangeException
+     * @expectedExceptionMessageRegExp /Type d: not enough input, need 8, have 4 at byte 5 of 17$/
      */
     public function testParsingNDRShortPointValue()
     {
