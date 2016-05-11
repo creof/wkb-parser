@@ -105,6 +105,8 @@ class Parser
 
     /**
      * @param string $input
+     *
+     * @throws UnexpectedValueException
      */
     public function __construct($input = null)
     {
