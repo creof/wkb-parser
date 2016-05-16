@@ -247,7 +247,7 @@ class Reader
         try {
             $result = unpack($format . 'result/' . $code . '*input', $this->input);
         } catch (\Exception $e) {
-            throw new RangeException($e->getMessage() . ' at byte ' . $this->getLastPosition() . ' of ' . $this->length);
+            throw new RangeException($e->getMessage(), $e->getCode(), $e->getPrevious());
         }
 
         $this->input = $result['input'];
