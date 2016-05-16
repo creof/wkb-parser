@@ -397,7 +397,7 @@ class Parser
                 return 4;
         }
 
-        throw new UnexpectedValueException();
+        throw new UnexpectedValueException(sprintf('%s with unsupported dimensions 0x%2$X (%2$d)', $this->getTypeName($this->type), $dimensions));
     }
 
     /**
