@@ -250,7 +250,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                 'value' => '00000003E94117C89F84189375411014361BA5E3540000000000000000',
                 'expected' => array(
                     'srid'  => null,
-                    'type'  => 'Point',
+                    'type'  => 'POINT',
                     'value' => array(389671.879, 263437.527, 0),
                     'dimension' => 'Z'
                 )
