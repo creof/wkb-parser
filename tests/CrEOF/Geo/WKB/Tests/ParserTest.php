@@ -85,33 +85,79 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider goodBinaryData
      */
-    public function testParser($value, array $expected)
+    public function testParserRawHex($value, array $expected)
     {
         $parser = new Parser($value);
         $actual = $parser->parse();
 
         $this->assertEquals($expected, $actual);
+    }
 
+    /**
+     * @param       $value
+     * @param array $expected
+     *
+     * @dataProvider goodBinaryData
+     */
+    public function testParserPrependLowerXHex($value, array $expected)
+    {
         $parser = new Parser('x' . $value);
         $actual = $parser->parse();
 
         $this->assertEquals($expected, $actual);
+    }
 
+    /**
+     * @param       $value
+     * @param array $expected
+     *
+     * @dataProvider goodBinaryData
+     */
+    public function testParserPrependUpperXHex($value, array $expected)
+    {
         $parser = new Parser('X' . $value);
         $actual = $parser->parse();
 
         $this->assertEquals($expected, $actual);
+    }
 
+
+    /**
+     * @param       $value
+     * @param array $expected
+     *
+     * @dataProvider goodBinaryData
+     */
+    public function testParserPrependLower0XHex($value, array $expected)
+    {
         $parser = new Parser('0x' . $value);
         $actual = $parser->parse();
 
         $this->assertEquals($expected, $actual);
+    }
 
+    /**
+     * @param       $value
+     * @param array $expected
+     *
+     * @dataProvider goodBinaryData
+     */
+    public function testParserPrependUpper0XHex($value, array $expected)
+    {
         $parser = new Parser('0X' . $value);
         $actual = $parser->parse();
 
         $this->assertEquals($expected, $actual);
+    }
 
+    /**
+     * @param       $value
+     * @param array $expected
+     *
+     * @dataProvider goodBinaryData
+     */
+    public function testParserBinary($value, array $expected)
+    {
         $parser = new Parser(pack('H*', $value));
         $actual = $parser->parse();
 
