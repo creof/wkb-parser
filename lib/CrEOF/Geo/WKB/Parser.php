@@ -201,7 +201,7 @@ class Parser
             return $type & (self::WKB_FLAG_M | self::WKB_FLAG_Z);
         }
 
-        return ($type % 1000) * 1000;
+        return $type - ($type % 1000);
     }
 
     /**
