@@ -326,7 +326,7 @@ class Parser
                 $typeName = self::TYPE_POLYHEDRALSURFACE;
                 break;
             default:
-                throw new UnexpectedValueException('Unsupported WKB type "' . $this->type . '" at byte ' . $this->reader->getLastPosition());
+                throw new UnexpectedValueException('Unsupported WKB type "' . $this->type . '"');
                 break;
         }
 
