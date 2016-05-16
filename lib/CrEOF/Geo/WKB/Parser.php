@@ -23,6 +23,7 @@
 
 namespace CrEOF\Geo\WKB;
 
+use CrEOF\Geo\WKB\Exception\ExceptionInterface;
 use CrEOF\Geo\WKB\Exception\UnexpectedValueException;
 
 /**
@@ -143,24 +144,29 @@ class Parser
     private function readGeometry()
     {
         $this->srid      = null;
-        $this->byteOrder = $this->readByteOrder();
-        $this->type      = $this->readType();
 
-        if ($this->hasFlag($this->type, self::WKB_FLAG_SRID)) {
-            $this->srid = $this->readSrid();
+        try {
+            $this->byteOrder = $this->readByteOrder();
+            $this->type      = $this->readType();
+
+            if ($this->hasFlag($this->type, self::WKB_FLAG_SRID)) {
+                $this->srid = $this->readSrid();
+            }
+
+            $this->dimensions = $this->getDimensions($this->type);
+            $this->pointSize  = $this->getPointSize($this->dimensions);
+
+            $typeName = $this->getTypeName($this->type);
+
+            return array(
+                'type'      => $typeName,
+                'srid'      => $this->srid,
+                'value'     => $this->$typeName(),
+                'dimension' => $this->getDimensionType($this->dimensions)
+            );
+        } catch (ExceptionInterface $e) {
+            throw new $e($e->getMessage() . ' at byte ' . $this->reader->getLastPosition(), $e->getCode(), $e->getPrevious());
         }
-
-        $this->dimensions = $this->getDimensions($this->type);
-        $this->pointSize  = $this->getPointSize($this->dimensions);
-
-        $typeName = $this->getTypeName($this->type);
-
-        return array(
-            'type'      => $typeName,
-            'srid'      => $this->srid,
-            'value'     => $this->$typeName(),
-            'dimension' => $this->getDimensionType($this->dimensions)
-        );
     }
 
     /**
