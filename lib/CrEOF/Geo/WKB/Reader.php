@@ -88,10 +88,10 @@ class Reader
     {
         $this->position = 0;
         $this->previous = 0;
-        $this->length   = strlen($input);
 
         if (ord($input) < 32) {
-            $this->input = $input;
+            $this->input  = $input;
+            $this->length = strlen($input);
 
             return;
         }
@@ -102,7 +102,8 @@ class Reader
             $input = substr($input, $position + 1);
         }
 
-        $this->input = pack('H*', $input);
+        $this->input  = pack('H*', $input);
+        $this->length = strlen($this->input);
     }
 
     /**
