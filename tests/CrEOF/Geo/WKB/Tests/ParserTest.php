@@ -48,7 +48,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             $this->expectException($exception);
 
             if ('/' === $message[0]) {
-                $this->setExpectedExceptionRegExp($message);
+                $this->expectExceptionMessageRegExp($message);
             } else {
                 $this->expectExceptionMessage($message);
             }
