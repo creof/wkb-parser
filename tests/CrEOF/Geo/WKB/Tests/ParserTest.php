@@ -30,6 +30,8 @@ use CrEOF\Geo\WKB\Parser;
  *
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
+ *
+ * @covers \CrEOF\Geo\WKB\Parser
  */
 class ParserTest extends \PHPUnit_Framework_TestCase
 {
