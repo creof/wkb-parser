@@ -3342,7 +3342,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => null
                 )
             ),
-            'xdrCurvePolygonValue' => array(
+            'xdrCurvePolygonCompoundCurveValue' => array(
                 'value' => '000000000a00000001000000000900000002000000000800000003000000000000000000000000000000003ff00'
                     . '000000000003ff0000000000000400000000000000000000000000000000000000002000000034000000000000000000'
                     . '00000000000003ff0000000000000bff000000000000000000000000000000000000000000000',
@@ -3375,7 +3375,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => null
                 )
             ),
-            'ndrCurvePolygonZValue' => array(
+            'ndrCurvePolygonZCompoundCurveValue' => array(
                 'value' => '010a000080010000000109000080020000000108000080030000000000000000000000000000000000000000000'
                     . '0000000f03f000000000000f03f000000000000f03f000000000000f03f0000000000000040000000000000000000000'
                     . '0000000f03f01020000800300000000000000000000400000000000000000000000000000f03f000000000000f03f000'
@@ -3409,7 +3409,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'Z'
                 )
             ),
-            'xdrCurvePolygonZValue' => array(
+            'xdrCurvePolygonZCompoundCurveValue' => array(
                 'value' => '008000000a00000001008000000900000002008000000800000003000000000000000000000000000000003ff00'
                     . '000000000003ff00000000000003ff00000000000003ff0000000000000400000000000000000000000000000003ff00'
                     . '00000000000008000000200000003400000000000000000000000000000003ff00000000000003ff0000000000000bff'
@@ -3443,7 +3443,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'Z'
                 )
             ),
-            'ndrCurvePolygonMValue' => array(
+            'ndrCurvePolygonMCompoundCurveValue' => array(
                 'value' => '010a000040010000000109000040020000000108000040030000000000000000000000000000000000000000000'
                     . '0000000f03f000000000000f03f000000000000f03f000000000000f03f0000000000000040000000000000000000000'
                     . '0000000f03f01020000400300000000000000000000400000000000000000000000000000f03f000000000000f03f000'
@@ -3477,7 +3477,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'M'
                 )
             ),
-            'xdrCurvePolygonMValue' => array(
+            'xdrCurvePolygonMCompoundCurveValue' => array(
                 'value' => '004000000a00000001004000000900000002004000000800000003000000000000000000000000000000003ff00'
                     . '000000000003ff00000000000003ff00000000000003ff0000000000000400000000000000000000000000000003ff00'
                     . '00000000000004000000200000003400000000000000000000000000000003ff00000000000003ff0000000000000bff'
@@ -3511,7 +3511,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'M'
                 )
             ),
-            'ndrCurvePolygonZMValue' => array(
+            'ndrCurvePolygonZMCompoundCurveValue' => array(
                 'value' => '010a0000c00100000001090000c00200000001080000c0030000000000000000000000000000000000000000000'
                     . '0000000f03f0000000000000040000000000000f03f000000000000f03f000000000000f03f000000000000004000000'
                     . '000000000400000000000000000000000000000f03f000000000000004001020000c0030000000000000000000040000'
@@ -3546,7 +3546,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'ZM'
                 )
             ),
-            'xdrCurvePolygonZMValue' => array(
+            'xdrCurvePolygonZMVCompoundCurvealue' => array(
                 'value' => '00c000000a0000000100c00000090000000200c000000800000003000000000000000000000000000000003ff00'
                     . '0000000000040000000000000003ff00000000000003ff00000000000003ff0000000000000400000000000000040000'
                     . '0000000000000000000000000003ff0000000000000400000000000000000c0000002000000034000000000000000000'
@@ -3642,7 +3642,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => null
                 )
             ),
-            'xdrMultiCurveValue' => array(
+            'xdrMultiCurveCompoundCurveValue' => array(
                 'value' => '000000000b00000001000000000900000002000000000800000003000000000000000000000000000000003ff00'
                     . '000000000003ff0000000000000400000000000000000000000000000000000000002000000034000000000000000000'
                     . '00000000000003ff0000000000000bff000000000000000000000000000000000000000000000',
@@ -3675,7 +3675,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => null
                 )
             ),
-            'ndrMultiCurveZValue' => array(
+            'ndrMultiCurveZCompoundCurveValue' => array(
                 'value' => '010b000080010000000109000080020000000108000080030000000000000000000000000000000000000000000'
                     . '0000000f03f000000000000f03f000000000000f03f000000000000f03f0000000000000040000000000000000000000'
                     . '0000000f03f01020000800300000000000000000000400000000000000000000000000000f03f000000000000f03f000'
@@ -3709,7 +3709,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'Z'
                 )
             ),
-            'xdrMultiCurveZValue' => array(
+            'xdrMultiCurveZCompoundCurveValue' => array(
                 'value' => '008000000b00000001008000000900000002008000000800000003000000000000000000000000000000003ff00'
                     . '000000000003ff00000000000003ff00000000000003ff0000000000000400000000000000000000000000000003ff00'
                     . '00000000000008000000200000003400000000000000000000000000000003ff00000000000003ff0000000000000bff'
@@ -3743,7 +3743,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'Z'
                 )
             ),
-            'ndrMultiCurveMValue' => array(
+            'ndrMultiCurveMCompoundCurveValue' => array(
                 'value' => '010b000040010000000109000040020000000108000040030000000000000000000000000000000000000000000'
                     . '0000000f03f000000000000f03f000000000000f03f000000000000f03f0000000000000040000000000000000000000'
                     . '0000000f03f01020000400300000000000000000000400000000000000000000000000000f03f000000000000f03f000'
@@ -3777,7 +3777,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'M'
                 )
             ),
-            'xdrMultiCurveMValue' => array(
+            'xdrMultiCurveMCompoundCurveValue' => array(
                 'value' => '004000000b00000001004000000900000002004000000800000003000000000000000000000000000000003ff00'
                     . '000000000003ff00000000000003ff00000000000003ff0000000000000400000000000000000000000000000003ff00'
                     . '00000000000004000000200000003400000000000000000000000000000003ff00000000000003ff0000000000000bff'
@@ -3811,7 +3811,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'M'
                 )
             ),
-            'ndrMultiCurveZMValue' => array(
+            'ndrMultiCurveZMCompoundCurveValue' => array(
                 'value' => '010b0000c00100000001090000c00200000001080000c0030000000000000000000000000000000000000000000'
                     . '0000000f03f0000000000000040000000000000f03f000000000000f03f000000000000f03f000000000000004000000'
                     . '000000000400000000000000000000000000000f03f000000000000004001020000c0030000000000000000000040000'
@@ -3846,7 +3846,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     'dimension' => 'ZM'
                 )
             ),
-            'xdrMultiCurveZMValue' => array(
+            'xdrMultiCurveZMCompoundCurveValue' => array(
                 'value' => '00c000000b0000000100c00000090000000200c000000800000003000000000000000000000000000000003ff00'
                     . '0000000000040000000000000003ff00000000000003ff00000000000003ff0000000000000400000000000000040000'
                     . '0000000000000000000000000003ff0000000000000400000000000000000c0000002000000034000000000000000000'
