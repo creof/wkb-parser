@@ -154,7 +154,7 @@ class Parser
             }
 
             $this->dimensions = $this->getDimensions($this->type);
-            $this->pointSize  = $this->getPointSize($this->dimensions);
+            $this->pointSize  = 2 + strlen($this->getDimensionType($this->dimensions));
 
             $typeName = $this->getTypeName($this->type);
 
@@ -214,6 +214,7 @@ class Parser
      * @param int $dimensions
      *
      * @return string
+     * @throws UnexpectedValueException
      */
     private function getDimensionType($dimensions)
     {
@@ -236,7 +237,7 @@ class Parser
                 return 'ZM';
         }
 
-        return null;
+        throw new UnexpectedValueException(sprintf('%s with unsupported dimensions 0x%2$X (%2$d)', $this->getTypeName($this->type), $dimensions));
     }
 
     /**
@@ -370,34 +371,6 @@ class Parser
     private function readCount()
     {
         return $this->reader->readLong();
-    }
-
-    /**
-     * @param null|int $dimensions
-     *
-     * @return int
-     * @throws UnexpectedValueException
-     */
-    private function getPointSize($dimensions)
-    {
-        switch ($dimensions) {
-            case null:
-                return 2;
-            case (1000):
-                //no break
-            case (self::WKB_FLAG_Z):
-                return 3;
-            case (2000):
-                //no break
-            case (self::WKB_FLAG_M):
-                return 3;
-            case (3000):
-                //no break
-            case (self::WKB_FLAG_M | self::WKB_FLAG_Z):
-                return 4;
-        }
-
-        throw new UnexpectedValueException(sprintf('%s with unsupported dimensions 0x%2$X (%2$d)', $this->getTypeName($this->type), $dimensions));
     }
 
     /**
