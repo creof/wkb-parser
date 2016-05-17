@@ -36,9 +36,9 @@ use CrEOF\Geo\WKB\Parser;
 class ParserTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @param $value
-     * @param $exception
-     * @param $message
+     * @param mixed  $value
+     * @param string $exception
+     * @param string $message
      *
      * @dataProvider badBinaryData
      */

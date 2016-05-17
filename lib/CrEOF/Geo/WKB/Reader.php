@@ -133,8 +133,8 @@ class Reader
 
     /**
      * @return float
-     * @throws UnexpectedValueException
      * @throws RangeException
+     * @throws UnexpectedValueException
      */
     public function readFloat()
     {
@@ -155,6 +155,7 @@ class Reader
      * @param int $count
      *
      * @return float[]
+     * @throws RangeException
      * @throws UnexpectedValueException
      *
      * @deprecated use readFloats()
