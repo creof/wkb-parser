@@ -468,7 +468,7 @@ class Parser
             $type = $this->readType();
 
             if ($this->getDimensionedPrimitive(self::WKB_TYPE_POINT) !== $type) {
-                throw new UnexpectedValueException();
+                throw new UnexpectedValueException($this->getBadTypeInTypeMessage($type, self::WKB_TYPE_MULTIPOINT, array(self::WKB_TYPE_POINT)));
             }
 
             $values[] = $this->point();
@@ -494,7 +494,7 @@ class Parser
             $type = $this->readType();
 
             if ($this->getDimensionedPrimitive(self::WKB_TYPE_LINESTRING) !== $type) {
-                throw new UnexpectedValueException();
+                throw new UnexpectedValueException($this->getBadTypeInTypeMessage($type, self::WKB_TYPE_MULTILINESTRING, array(self::WKB_TYPE_LINESTRING)));
             }
 
             $values[] = $this->readPoints($this->readCount());
@@ -520,7 +520,7 @@ class Parser
             $type = $this->readType();
 
             if ($this->getDimensionedPrimitive(self::WKB_TYPE_POLYGON) !== $type) {
-                throw new UnexpectedValueException();
+                throw new UnexpectedValueException($this->getBadTypeInTypeMessage($type, self::WKB_TYPE_MULTIPOLYGON, array(self::WKB_TYPE_POLYGON)));
             }
 
             $values[] = $this->readLinearRings($this->readCount());
@@ -552,7 +552,7 @@ class Parser
                     $value = $this->readPoints($this->readCount());
                     break;
                 default:
-                    throw new UnexpectedValueException();
+                    throw new UnexpectedValueException($this->getBadTypeInTypeMessage($type, self::WKB_TYPE_COMPOUNDCURVE, array(self::WKB_TYPE_LINESTRING, self::WKB_TYPE_CIRCULARSTRING)));
             }
 
             $values[] = array(
@@ -590,7 +590,7 @@ class Parser
                     $value = $this->compoundCurve();
                     break;
                 default:
-                    throw new UnexpectedValueException();
+                    throw new UnexpectedValueException($this->getBadTypeInTypeMessage($type, self::WKB_TYPE_CURVEPOLYGON, array(self::WKB_TYPE_LINESTRING, self::WKB_TYPE_CIRCULARSTRING, self::WKB_TYPE_COMPOUNDCURVE)));
             }
 
             $values[] = array(
@@ -628,7 +628,7 @@ class Parser
                     $value = $this->compoundCurve();
                     break;
                 default:
-                    throw new UnexpectedValueException();
+                    throw new UnexpectedValueException($this->getBadTypeInTypeMessage($type, self::WKB_TYPE_MULTICURVE, array(self::WKB_TYPE_LINESTRING, self::WKB_TYPE_CIRCULARSTRING, self::WKB_TYPE_COMPOUNDCURVE)));
             }
 
             $values[] = array(
@@ -664,7 +664,7 @@ class Parser
                     $value = $this->curvePolygon();
                     break;
                 default:
-                    throw new UnexpectedValueException();
+                    throw new UnexpectedValueException($this->getBadTypeInTypeMessage($type, self::WKB_TYPE_MULTISURFACE, array(self::WKB_TYPE_POLYGON, self::WKB_TYPE_CURVEPOLYGON)));
             }
 
             $values[] = array(
@@ -698,7 +698,7 @@ class Parser
                     break;
                 // is polygon the only one?
                 default:
-                    throw new UnexpectedValueException();
+                    throw new UnexpectedValueException($this->getBadTypeInTypeMessage($type, self::WKB_TYPE_POLYHEDRALSURFACE, array(self::WKB_TYPE_POLYGON)));
             }
 
             $values[] = array(
@@ -734,5 +734,41 @@ class Parser
         }
 
         return $values;
+    }
+
+    /**
+     * @param int   $childType
+     * @param int   $parentType
+     * @param int[] $expectedTypes
+     *
+     * @return string
+     */
+    private function getBadTypeInTypeMessage($childType, $parentType, array $expectedTypes)
+    {
+        if ($this->type !== $parentType) {
+            $parentType = $this->type;
+        }
+
+        $message = sprintf(
+            ' %s with dimensions 0x%X (%2$d) in %3$s, expected ',
+            $this->getTypeName($childType),
+            $this->getDimensions($childType),
+            $this->getTypeName($parentType)
+        );
+
+        if (! in_array($this->getTypePrimitive($childType), $expectedTypes, true)) {
+            if (1 === count($expectedTypes)) {
+                $message .= $this->getTypeName($expectedTypes[0]);
+            } else {
+                $last = $this->getTypeName(array_pop($expectedTypes));
+                $message .= implode(array_map(array($this, 'getTypeName'), $expectedTypes), ', ') . ' or ' . $last;
+            }
+
+            $message = 'Unexpected' . $message . ' with ';
+        } else {
+            $message = 'Bad' . $message;
+        }
+
+        return $message . sprintf('dimensions 0x%X (%1$d)', $this->dimensions);
     }
 }
