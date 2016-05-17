@@ -34,49 +34,117 @@ use CrEOF\Geo\WKB\Parser;
 class ParserTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException        \CrEOF\Geo\WKB\Exception\UnexpectedValueException
-     * @expectedExceptionMessage Invalid byte order "3"
+     * @param $value
+     * @param $exception
+     * @param $message
+     *
+     * @dataProvider badBinaryData
      */
-    public function testParsingBadByteOrder()
+    public function testBadBinaryData($value, $exception, $message)
     {
-        $value    = '03010000003D0AD7A3701D41400000000000C055C0';
-        $value    = pack('H*', $value);
-        $parser   = new Parser($value);
+        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0', '>=')) {
+            $this->expectException($exception);
+
+            if ('/' === $message[0]) {
+                $this->setExpectedExceptionRegExp($message);
+            } else {
+                $this->expectExceptionMessage($message);
+            }
+        } else {
+            if ('/' === $message[0]) {
+                $this->setExpectedExceptionRegExp($exception, $message);
+            } else {
+                $this->setExpectedException($exception, $message);
+            }
+        }
+
+        $parser = new Parser($value);
 
         $parser->parse();
     }
 
     /**
-     * @expectedException        \CrEOF\Geo\WKB\Exception\UnexpectedValueException
-     * @expectedExceptionMessage Unsupported WKB type "21"
+     * @return array[]
      */
-    public function testParsingBadType()
+    public function badBinaryData()
     {
-        $value    = '01150000003D0AD7A3701D41400000000000C055C0';
-        $value    = pack('H*', $value);
-        $parser   = new Parser($value);
-
-        $parser->parse();
-    }
-
-    /**
-     * @expectedException              \CrEOF\Geo\WKB\Exception\RangeException
-     * @expectedExceptionMessageRegExp /Type d: not enough input, need 8, have 4 at byte 5 of 17$/
-     */
-    public function testParsingNDRShortPointValue()
-    {
-        $value    = '01010000003D0AD7A3701D414000000000';
-        $value    = pack('H*', $value);
-        $parser   = new Parser($value);
-        $expected = array(
-            'srid'  => null,
-            'type'  => 'POINT',
-            'value' => array(34.23, -87)
+        return array(
+            'badByteOrder' => array(
+                'value'     => pack('H*', '03010000003D0AD7A3701D41400000000000C055C0'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Invalid byte order "3" at byte 0'
+            ),
+            'badSimpleType' => array(
+                'value'     => pack('H*', '01150000003D0AD7A3701D41400000000000C055C0'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Unsupported WKB type "21" at byte 1'
+            ),
+            'shortNDRPoint' => array(
+                'value'     => pack('H*', '01010000003D0AD7A3701D414000000000'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\RangeException',
+                'message'   => '/Type d: not enough input, need 8, have 4 at byte 5$/'
+            ),
+            'badPointSize' => array(
+                'value'     => pack('H*', '0000000FA1'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'POINT with unsupported dimensions 0xFA0 (4000) at byte 1'
+            ),
+            'badPointInMultiPoint' => array(
+                'value'     => pack('H*', '0080000004000000020000000001'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Bad POINT with dimensions 0x0 (0) in MULTIPOINT, expected dimensions 0x80000000 (2147483648) at byte 10'
+            ),
+            'unexpectedLineStringInMultiPoint' => array(
+                'value'     => pack('H*', '0080000004000000020000000002'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Unexpected LINESTRING with dimensions 0x0 (0) in MULTIPOINT, expected POINT with dimensions 0x80000000 (2147483648) at byte 10'
+            ),
+            'badLineStringInMultiLineString' => array(
+                'value'     => pack('H*', '0000000005000000020080000002'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Bad LINESTRING with dimensions 0x80000000 (2147483648) in MULTILINESTRING, expected dimensions 0x0 (0) at byte 10'
+            ),
+            'badPolygonInMultiPolygon' => array(
+                'value'     => pack('H*', '0080000006000000020000000003'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Bad POLYGON with dimensions 0x0 (0) in MULTIPOLYGON, expected dimensions 0x80000000 (2147483648) at byte 10'
+            ),
+            'badCircularStringInCompoundCurve' => array(
+                'value'     => pack('H*', '0080000009000000020000000008'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Bad CIRCULARSTRING with dimensions 0x0 (0) in COMPOUNDCURVE, expected dimensions 0x80000000 (2147483648) at byte 10'
+            ),
+            'unexpectedPointInCompoundCurve' => array(
+                'value'     => pack('H*', '0080000009000000020000000001'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Unexpected POINT with dimensions 0x0 (0) in COMPOUNDCURVE, expected LINESTRING or CIRCULARSTRING with dimensions 0x80000000 (2147483648) at byte 10'
+            ),
+            'badCompoundCurveInCurvePolygon' => array(
+                'value'     => pack('H*', '000000000a000000010080000009'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Bad COMPOUNDCURVE with dimensions 0x80000000 (2147483648) in CURVEPOLYGON, expected dimensions 0x0 (0) at byte 10'
+            ),
+            'badCircularStringInCurvePolygon' => array(
+                'value'     => pack('H*', '008000000a000000010080000009000000020000000008'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Bad CIRCULARSTRING with dimensions 0x0 (0) in CURVEPOLYGON, expected dimensions 0x80000000 (2147483648) at byte 19'
+            ),
+            'unexpectedPolygonInMultiCurve' => array(
+                'value'     => pack('H*', '004000000b000000010040000003'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Unexpected POLYGON with dimensions 0x40000000 (1073741824) in MULTICURVE, expected LINESTRING, CIRCULARSTRING or COMPOUNDCURVE with dimensions 0x40000000 (1073741824) at byte 10'
+            ),
+            'unexpectedPointInMultiSurface' => array(
+                'value'     => pack('H*', '008000000c000000020080000001'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Unexpected POINT with dimensions 0x80000000 (2147483648) in MULTISURFACE, expected POLYGON or CURVEPOLYGON with dimensions 0x80000000 (2147483648) at byte 10'
+            ),
+            'unexpectedPointInPolyhedralSurface' => array(
+                'value'     => pack('H*', '010f000080050000000101000080'),
+                'exception' => 'CrEOF\Geo\WKB\Exception\UnexpectedValueException',
+                'message'   => 'Unexpected POINT with dimensions 0x80000000 (2147483648) in POLYHEDRALSURFACE, expected POLYGON with dimensions 0x80000000 (2147483648) at byte 10'
+            ),
         );
-
-        $actual = $parser->parse();
-
-        $this->assertEquals($expected, $actual);
     }
 
     /**
