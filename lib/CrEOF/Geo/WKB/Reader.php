@@ -260,13 +260,11 @@ class Reader
      */
     private function getMachineByteOrder()
     {
-        if (null !== self::$machineByteOrder) {
-            return self::$machineByteOrder;
+        if (null === self::$machineByteOrder) {
+            $result = unpack('S', "\x01\x00");
+
+            self::$machineByteOrder = $result[1] === 1 ? self::WKB_NDR : self::WKB_XDR;
         }
-
-        $result = unpack('S', "\x01\x00");
-
-        self::$machineByteOrder = $result[1] === 1 ? self::WKB_NDR : self::WKB_XDR;
 
         return self::$machineByteOrder;
     }
