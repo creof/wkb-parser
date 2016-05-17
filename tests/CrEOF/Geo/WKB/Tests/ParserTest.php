@@ -189,7 +189,6 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-
     /**
      * @param       $value
      * @param array $expected
