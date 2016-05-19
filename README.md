@@ -47,7 +47,7 @@ The parser supports a number of input formats:
 ## Return
 
 The parser will return an array with the keys ```type```, ```value```, ```srid```, and ```dimension```.
-- ```type``` string, the spatial object type (```Point```, ```LineString```, etc.) without any dimension.
+- ```type``` string, the uppercase spatial object type (```POINT```, ```LINESTRING```, etc.) without any dimension.
 - ```value``` array, contains integer or float values for points, nested arrays containing these based on spatial object type, or empty array for EMPTY geometry.
 - ```srid``` integer, the SRID if present in EWKB value, ```null``` otherwise.
 - ```dimension``` string, will contain ```Z```, ```M```, or ```ZM``` for the respective 3D and 4D objects, ```null``` otherwise.
