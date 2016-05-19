@@ -5,11 +5,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Tests for empty geometry objects.
+- getCurrentPosition() and getLastPosition methods in Reader to get position in byte stream.
+- Support for OCG 1.2 encoding of 3D and 4D geometry.
+- Method getBadTypeInTypeMessage() in Parser to generate helpful and descriptive exception message.
 
 ### Changed
 - NaN coordinates are not returned in point value array, empty point value now array().
 - Reader::readDouble() now deprecated and calls Reader::readFloat().
 - Reader::readDoubles() now deprecated and calls Reader::readFloats().
+- unpack() errors are now caught in unpackInput() and a library exception thrown.
+- Inner types (points in multipoint, etc.) are now checked for same dimensions of parent object.
+- The search for 'x' in hex values beginning with 'x' or '0x' is now case-insensitive.
+- Supported encoding and input formats added to documentation.
+- References for encodings added to documentation.
+- Lots of additional test data and cases, and cleanup.
+- Library exceptions now caught in readGeometry() and rethrown appending Reader position in message.
+- All thrown exceptions now have a message.
+- Now a single return for all code paths in Parser::getMachineByteOrder().
 
 ### Removed
 
