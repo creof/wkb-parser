@@ -4,10 +4,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Removed
+
+## [2.3.0] - 2016-05-20
+### Added
 - Tests for empty geometry objects.
 - getCurrentPosition() and getLastPosition methods in Reader to get position in byte stream.
 - Support for OCG 1.2 encoding of 3D and 4D geometry.
 - Method getBadTypeInTypeMessage() in Parser to generate helpful and descriptive exception message.
+- Badge and configuration for Coveralls.
 
 ### Changed
 - NaN coordinates are not returned in point value array, empty point value now array().
@@ -22,14 +30,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Library exceptions now caught in readGeometry() and rethrown appending Reader position in message.
 - All thrown exceptions now have a message.
 - Now a single return for all code paths in Parser::getMachineByteOrder().
-
-### Removed
+- Tweaked tests and code for 100% coverage.
+- Updated travis config for coveralls.
 
 ## [2.2.0] - 2016-05-03
 ### Added
 - Added Tests namespace to Composer PSR-0 dev autoload.
 - Added 'dimension' key to returned array containing object dimensions (Z, M, or ZM).
 - Reader::getMachineByteOrder method to detect running platform endianness.
+
 ### Changed
 - Parser property with Reader instance no longer static.
 - Replaced sprintf function call in Reader::unpackInput() with string concatenation.
@@ -38,6 +47,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Updated documentation with new usage pattern.
 - Type name in returned array now contains only base type without dimensions (Z, M, and ZM).
 - Reader::readDouble() now checks running platform endianness before byte-swapping values instead of assuming little-endian.
+
 ### Removed
 - Removed now unused TestInit
 
