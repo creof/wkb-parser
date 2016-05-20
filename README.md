@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/creof/wkb-parser.svg?branch=master)](https://travis-ci.org/creof/wkb-parser)
 [![Code Climate](https://codeclimate.com/github/creof/wkb-parser/badges/gpa.svg)](https://codeclimate.com/github/creof/wkb-parser)
 [![Test Coverage](https://codeclimate.com/github/creof/wkb-parser/badges/coverage.svg)](https://codeclimate.com/github/creof/wkb-parser/coverage)
+[![Coverage Status](https://coveralls.io/repos/github/creof/wkb-parser/badge.svg?branch=master)](https://coveralls.io/github/creof/wkb-parser?branch=master)
 
 Parser library for 2D, 3D, and 4D Open Geospatial Consortium (OGC) WKB or PostGIS EWKB spatial object data.
 
