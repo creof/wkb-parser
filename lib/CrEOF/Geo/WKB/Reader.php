@@ -23,6 +23,7 @@
 
 namespace CrEOF\Geo\WKB;
 
+use CrEOF\Geo\WKB\Exception\RangeException;
 use CrEOF\Geo\WKB\Exception\UnexpectedValueException;
 
 /**
@@ -49,10 +50,27 @@ class Reader
     /**
      * @var int
      */
+    private $position;
+
+    /**
+     * @var int
+     */
+    private $previous;
+
+    /**
+     * @var int
+     */
+    private $length;
+
+    /**
+     * @var int
+     */
     private static $machineByteOrder;
 
     /**
      * @param string $input
+     *
+     * @throws UnexpectedValueException
      */
     public function __construct($input = null)
     {
@@ -68,19 +86,24 @@ class Reader
      */
     public function load($input)
     {
+        $this->position = 0;
+        $this->previous = 0;
+
         if (ord($input) < 32) {
-            $this->input = $input;
+            $this->input  = $input;
+            $this->length = strlen($input);
 
             return;
         }
 
-        $position = strpos($input, 'x');
+        $position = stripos($input, 'x');
 
         if (false !== $position) {
             $input = substr($input, $position + 1);
         }
 
-        $this->input = pack('H*', $input);
+        $this->input  = pack('H*', $input);
+        $this->length = strlen($this->input);
     }
 
     /**
@@ -89,16 +112,17 @@ class Reader
      */
     public function readLong()
     {
-        if (self::WKB_NDR === $this->getByteOrder()) {
-            return $this->unpackInput('V');
-        }
+        $value           = self::WKB_NDR === $this->getByteOrder() ? $this->unpackInput('V') : $this->unpackInput('N');
+        $this->previous  = 4;
+        $this->position += $this->previous;
 
-        return $this->unpackInput('N');
+        return $value;
     }
 
     /**
      * @return float
      * @throws UnexpectedValueException
+     * @throws RangeException
      *
      * @deprecated use readFloat()
      */
@@ -109,25 +133,29 @@ class Reader
 
     /**
      * @return float
+     * @throws RangeException
      * @throws UnexpectedValueException
      */
     public function readFloat()
     {
         $double = $this->unpackInput('d');
 
-        if ($this->getMachineByteOrder() === $this->getByteOrder()) {
-            return $double;
+        if ($this->getMachineByteOrder() !== $this->getByteOrder()) {
+            $double = unpack('dvalue', strrev(pack('d', $double)));
+            $double = $double['value'];
         }
 
-        $double = unpack('dvalue', strrev(pack('d', $double)));
+        $this->previous  = 8;
+        $this->position += $this->previous;
 
-        return $double['value'];
+        return $double;
     }
 
     /**
      * @param int $count
      *
      * @return float[]
+     * @throws RangeException
      * @throws UnexpectedValueException
      *
      * @deprecated use readFloats()
@@ -141,6 +169,7 @@ class Reader
      * @param int $count
      *
      * @return float[]
+     * @throws RangeException
      * @throws UnexpectedValueException
      */
     public function readFloats($count)
@@ -160,17 +189,37 @@ class Reader
 
     /**
      * @return int
+     * @throws RangeException
      * @throws UnexpectedValueException
      */
     public function readByteOrder()
     {
         $byteOrder = $this->unpackInput('C');
 
-        if ($byteOrder !== self::WKB_XDR && $byteOrder !== self::WKB_NDR) {
-            throw new UnexpectedValueException(sprintf('Invalid byte order "%s"', $byteOrder));
+        $this->previous  = 1;
+        $this->position += $this->previous;
+
+        if ($byteOrder >> 1) {
+            throw new UnexpectedValueException('Invalid byte order "' . $byteOrder . '"');
         }
 
         return $this->byteOrder = $byteOrder;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCurrentPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLastPosition()
+    {
+        return $this->position - $this->previous;
     }
 
     /**
@@ -190,11 +239,18 @@ class Reader
      * @param string $format
      *
      * @return array
+     * @throws RangeException
      */
     private function unpackInput($format)
     {
-        $code        = version_compare(PHP_VERSION, '5.5.0-dev', '>=') ? 'a' : 'A';
-        $result      = unpack($format . 'result/' . $code . '*input', $this->input);
+        $code = version_compare(PHP_VERSION, '5.5.0-dev', '>=') ? 'a' : 'A';
+
+        try {
+            $result = unpack($format . 'result/' . $code . '*input', $this->input);
+        } catch (\Exception $e) {
+            throw new RangeException($e->getMessage(), $e->getCode(), $e->getPrevious());
+        }
+
         $this->input = $result['input'];
 
         return $result['result'];
@@ -205,13 +261,11 @@ class Reader
      */
     private function getMachineByteOrder()
     {
-        if (null !== self::$machineByteOrder) {
-            return self::$machineByteOrder;
+        if (null === self::$machineByteOrder) {
+            $result = unpack('S', "\x01\x00");
+
+            self::$machineByteOrder = $result[1] === 1 ? self::WKB_NDR : self::WKB_XDR;
         }
-
-        $result = unpack('S', "\x01\x00");
-
-        self::$machineByteOrder = $result[1] === 1 ? self::WKB_NDR : self::WKB_XDR;
 
         return self::$machineByteOrder;
     }
