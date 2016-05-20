@@ -179,6 +179,13 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
                     array('readFloat', null, 34.23)
                 )
             ),
+            'readNDRBinaryDouble' => array(
+                'value'   => pack('H*', '013D0AD7A3701D4140'),
+                'methods' => array(
+                    array('readByteOrder', null, 1),
+                    array('readDouble', null, 34.23)
+                )
+            ),
             'readXDRBinaryFloat' => array(
                 'value'   => pack('H*', '0040411D70A3D70A3D'),
                 'methods' => array(
@@ -205,6 +212,13 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
                 'methods' => array(
                     array('readByteOrder', null, 0),
                     array('readFloats', 2, array(34.23, 34.23))
+                )
+            ),
+            'readXDRBinaryDoubles' => array(
+                'value'   => pack('H*', '0040411D70A3D70A3D40411D70A3D70A3D'),
+                'methods' => array(
+                    array('readByteOrder', null, 0),
+                    array('readDoubles', 2, array(34.23, 34.23))
                 )
             ),
             'readXDRPosition' => array(
