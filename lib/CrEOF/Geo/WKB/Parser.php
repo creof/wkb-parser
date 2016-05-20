@@ -328,7 +328,6 @@ class Parser
                 break;
             default:
                 throw new UnexpectedValueException('Unsupported WKB type "' . $this->type . '"');
-                break;
         }
 
         return strtoupper($typeName);
