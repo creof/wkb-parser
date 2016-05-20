@@ -16,7 +16,8 @@
     },
     "require-dev": {
         "phpunit/phpunit":               ">=4.8",
-        "codeclimate/php-test-reporter": "dev-master"
+        "codeclimate/php-test-reporter": "dev-master",
+        "satooshi/php-coveralls":        "~1.0"
     },
     "autoload": {
         "psr-0": {

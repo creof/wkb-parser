@@ -9,6 +9,7 @@ php:
   - hhvm
 
 before_script:
+  - composer self-update
   - composer --prefer-source install
 
 script:
@@ -16,3 +17,6 @@ script:
 
 after_script:
   - ./vendor/bin/test-reporter --coverage-report ./build/logs/clover.xml
+
+after_success:
+  - ./vendor/bin/coveralls -v --exclude-no-stmt
