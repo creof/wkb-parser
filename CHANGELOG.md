@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-## [2.3.0] - 2016-05-20
+## [2.3.0] - 2016-05-22
 ### Added
 - Tests for empty geometry objects.
 - getCurrentPosition() and getLastPosition methods in Reader to get position in byte stream.
