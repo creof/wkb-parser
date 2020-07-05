@@ -24,6 +24,7 @@
 namespace CrEOF\Geo\WKB\Tests;
 
 use CrEOF\Geo\WKB\Reader;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Reader tests
@@ -33,32 +34,24 @@ use CrEOF\Geo\WKB\Reader;
  *
  * @covers \CrEOF\Geo\WKB\Reader
  */
-class ReaderTest extends \PHPUnit_Framework_TestCase
+class ReaderTest extends TestCase
 {
     /**
-     * @param mixed  $value
-     * @param array  $methods
+     * @param mixed $value
+     * @param array $methods
      * @param string $exception
      * @param string $message
      *
      * @dataProvider badTestData
      */
-    public function testBad($value, array $methods, $exception, $message)
+    public function testBad($value, array $methods, string $exception, string $message)
     {
-        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0', '>=')) {
-            $this->expectException($exception);
+        $this->expectException($exception);
 
-            if ('/' === $message[0]) {
-                $this->expectExceptionMessageRegExp($message);
-            } else {
-                $this->expectExceptionMessage($message);
-            }
+        if ('/' === $message[0]) {
+            $this->expectExceptionMessageMatches($message);
         } else {
-            if ('/' === $message[0]) {
-                $this->setExpectedExceptionRegExp($exception, $message);
-            } else {
-                $this->setExpectedException($exception, $message);
-            }
+            $this->expectExceptionMessage($message);
         }
 
         $reader = new Reader($value);
