@@ -24,6 +24,8 @@
 namespace CrEOF\Geo\WKB\Tests;
 
 use CrEOF\Geo\WKB\Parser;
+use PHPUnit\Framework\TestCase;
+
 
 /**
  * Parser tests
@@ -33,31 +35,23 @@ use CrEOF\Geo\WKB\Parser;
  *
  * @covers \CrEOF\Geo\WKB\Parser
  */
-class ParserTest extends \PHPUnit_Framework_TestCase
+class ParserTest extends TestCase
 {
     /**
-     * @param mixed  $value
+     * @param mixed $value
      * @param string $exception
      * @param string $message
      *
      * @dataProvider badBinaryData
      */
-    public function testBadBinaryData($value, $exception, $message)
+    public function testBadBinaryData($value, string $exception, string $message)
     {
-        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0', '>=')) {
-            $this->expectException($exception);
+        $this->expectException($exception);
 
-            if ('/' === $message[0]) {
-                $this->expectExceptionMessageRegExp($message);
-            } else {
-                $this->expectExceptionMessage($message);
-            }
+        if ('/' === $message[0]) {
+            $this->expectExceptionMessageMatches($message);
         } else {
-            if ('/' === $message[0]) {
-                $this->setExpectedExceptionRegExp($exception, $message);
-            } else {
-                $this->setExpectedException($exception, $message);
-            }
+            $this->expectExceptionMessage($message);
         }
 
         $parser = new Parser($value);

@@ -238,7 +238,7 @@ class Reader
     /**
      * @param string $format
      *
-     * @return array
+     * @return int
      * @throws RangeException
      */
     private function unpackInput($format)
