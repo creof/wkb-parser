@@ -154,7 +154,9 @@ class Parser
             }
 
             $this->dimensions = $this->getDimensions($this->type);
-            $this->pointSize  = 2 + strlen($this->getDimensionType($this->dimensions));
+            $dimensionType = this->getDimensionType($this->dimensions);
+            if($dimensionType === null) $dimensionType = '';
+            $this->pointSize  = 2 + strlen($dimensionType);
 
             $typeName = $this->getTypeName($this->type);
 
